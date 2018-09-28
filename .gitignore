@@ -129,6 +129,21 @@ Temporary Items
 .idea/**/dictionaries
 .idea/**/shelf
 
+# User-specific stuff backend
+backend/.idea/**/workspace.xml
+backend/.idea/**/tasks.xml
+backend/.idea/**/usage.statistics.xml
+backend/.idea/**/dictionaries
+backend/.idea/**/shelf
+
+# User-specific stuff frontend
+frontend/.idea/**/workspace.xml
+frontend/.idea/**/tasks.xml
+frontend/.idea/**/usage.statistics.xml
+frontend/.idea/**/dictionaries
+frontend/.idea/**/shelf
+
+
 # Generated files
 .idea/**/contentModel.xml
 
