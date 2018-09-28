@@ -1,6 +1,10 @@
 <mat-form-field>
-  <input matInput placeholder="Create list" [(ngModel)]="todoList.name" name="name">
+  <input matInput placeholder="Enter title" [(ngModel)]="joblisting.title" name="title">
 </mat-form-field>
-<button mat-button (click)="onTodoListCreate()">create</button>
-<app-todo-list [todoList]="todoList" (destroy)="onTodoListDestroy($event)"
-               *ngFor="let todoList of todoLists"></app-todo-list>
+<mat-form-field>
+  <input matInput placeholder="Enter description" [(ngModel)]="joblisting.description" name="description">
+</mat-form-field>
+<button mat-button (click)="onJobListingCreate()">create</button>
+<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
+                *ngFor="let jobListing of jobListingList"></app-joblisting>
+

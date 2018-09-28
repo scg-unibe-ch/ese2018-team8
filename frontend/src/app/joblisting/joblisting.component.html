@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="joblisting.title" name="title" (ngModelChange)="onSave()">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" [(ngModel)]="joblisting.description" name="description" (ngModelChange)="onSave()">
+  </mat-form-field>
+  <button mat-button (click)="onDestroy()">destroy</button>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="Add Skill" [(ngModel)]="skill.name" name="name">
+  </mat-form-field>
+  <button mat-button (click)="onNecessarySkillCreate()">add</button>
+  <mat-list>
+    <mat-list-item *ngFor="let skill of necessarySkillList">
+      <app-skill [skill]="skill" (destroy)="onNecessarySkillDestroy($event)"></app-skill>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
