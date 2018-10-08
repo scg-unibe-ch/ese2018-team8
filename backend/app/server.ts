@@ -2,10 +2,12 @@
 import express from 'express';
 
 // import all the controllers. If you add a new controller, make sure to import it here as well.
-import {TodoListController, TodoItemController} from './controllers';
+import {TodoListController, TodoItemController, JobListingController, SkillController} from './controllers';
 import {Sequelize} from 'sequelize-typescript';
 import {TodoList} from './models/todolist.model';
 import {TodoItem} from './models/todoitem.model';
+import {JobListing} from './models/joblisting.model';
+import {Skill} from './models/skill.model';
 
 const sequelize =  new Sequelize({
   database: 'development',
@@ -14,7 +16,7 @@ const sequelize =  new Sequelize({
   password: '',
   storage: 'db.sqlite'
 });
-sequelize.addModels([TodoList, TodoItem]);
+sequelize.addModels([TodoList, TodoItem, JobListing, Skill]);
 
 // create a new express application instance
 const app: express.Application = express();
@@ -28,14 +30,15 @@ if (process.env.PORT !== undefined) {
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
 app.use('/todolist', TodoListController);
 app.use('/todoitem', TodoItemController);
-
+app.use('/joblisting', JobListingController);
+app.use('/skill', SkillController);
 
 sequelize.sync().then(() => {
 // start serving the application on the given port

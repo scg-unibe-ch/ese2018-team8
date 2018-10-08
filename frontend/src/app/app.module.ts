@@ -9,7 +9,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule} from '@angular/material';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { JoblistingComponent } from './joblisting/joblisting.component';
+import { SkillComponent } from './skill/skill.component';
 import {FormsModule} from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -17,6 +21,8 @@ import {FormsModule} from '@angular/forms';
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
+    JoblistingComponent,
+    SkillComponent,
   ],
   imports: [
     BrowserModule,
