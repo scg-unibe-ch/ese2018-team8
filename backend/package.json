@@ -4,7 +4,9 @@
   "description": "## Setup 1. Install [Node.js](https://nodejs.org/en/)  1. (project folder) 1. Open bash and `cd` into the project folder (if you're on Windows, you can for example use [Git Bash](https://git-scm.com/download/win) as a shell) 1. run `npm install -D typescript`",
   "main": "build/server.js",
   "scripts": {
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +14,10 @@
   "dependencies": {
     "@types/es6-shim": "^0.31.37",
     "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.5",
     "express": "^4.16.3",
+    "jest": "^23.6.0",
+    "jest-preset-angular": "^6.0.1",
     "reflect-metadata": "^0.1.12",
     "sequelize": "^4.39.0",
     "sequelize-typescript": "^0.6.6",
@@ -21,5 +26,9 @@
   },
   "devDependencies": {
     "tslint": "^5.9.1"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts"
   }
 }
