@@ -1,7 +1,8 @@
-# ESE 2018 Scaffolding
-Welcome to the 2018 ESE course. You can use this scaffolding as a starting point for your group projects. It contains the following components:
-- [frontend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/frontend): an Angular application
-- [backend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/backend): a Node.js application written in TypeScript, using the express.js web framework 
+# ESE 2018 Team 8
+
+Heroku links:
+[frontend](https://morning-peak-96987.herokuapp.com/)
+[backend](https://obscure-waters-56880.herokuapp.com)
 
 ## Prerequisites
 - You should have [Node.js](https://nodejs.org/en/) and NPM installed (NPM is installed automatically with latest versions of Node.js) which are needed by both [frontend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/frontend) and [backend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/backend) projects. You can verify whether you have both by running `node -v` and `npm -v` in terminal or command prompt.
