@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+    baseUrl: 'https://obscure-waters-56880.herokuapp.com'
 };

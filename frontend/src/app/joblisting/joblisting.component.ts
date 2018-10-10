@@ -2,8 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../joblisting';
 import {Skill} from '../skill';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {TodoItem} from '../todo-item';
-
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -12,6 +11,8 @@ import {TodoItem} from '../todo-item';
   styleUrls: ['./joblisting.component.css']
 })
 export class JoblistingComponent implements OnInit {
+
+    baseUrl;
 
     @Input()
     joblisting: JobListing;
@@ -22,10 +23,11 @@ export class JoblistingComponent implements OnInit {
     destroy = new EventEmitter<JobListing>();
 
     constructor(private httpClient: HttpClient) {
+        this.baseUrl = environment.baseUrl;
     }
 
     ngOnInit() {
-        this.httpClient.get('http://localhost:3000/skill', {
+        this.httpClient.get(this.baseUrl + '/skill', {
             params:  new HttpParams().set('jobListingId', '' + this.joblisting.id)
         }).subscribe((instances: any) => {
             this.necessarySkillList = instances.map((instance) => new Skill(instance.id, instance.jobListingId, instance.name));
