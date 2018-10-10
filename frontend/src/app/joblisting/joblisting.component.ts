@@ -35,14 +35,14 @@ export class JoblistingComponent implements OnInit {
     }
 
     onSave() {
-        this.httpClient.put('http://localhost:3000/joblisting/' + this.joblisting.id, {
+        this.httpClient.put(this.baseUrl + '/joblisting/' + this.joblisting.id, {
             'title': this.joblisting.title,
             'description': this.joblisting.description
         }).subscribe();
     }
 
     onDestroy() {
-        this.httpClient.delete('http://localhost:3000/joblisting/' + this.joblisting.id).subscribe(() => {
+        this.httpClient.delete(this.baseUrl + '/joblisting/' + this.joblisting.id).subscribe(() => {
             this.destroy.emit(this.joblisting);
         });
     }

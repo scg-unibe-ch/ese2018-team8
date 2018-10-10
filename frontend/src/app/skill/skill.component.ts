@@ -30,7 +30,7 @@ export class SkillComponent implements OnInit {
     }
 
     onDestroy() {
-        this.httpClient.delete(this.baseUrl + 'skill/' + this.skill.id).subscribe(() => {
+        this.httpClient.delete(this.baseUrl + '/skill/' + this.skill.id).subscribe(() => {
             this.destroy.emit(this.skill);
         });
     }
