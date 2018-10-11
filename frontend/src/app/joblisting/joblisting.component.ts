@@ -48,7 +48,7 @@ export class JoblistingComponent implements OnInit {
     }
 
     onNecessarySkillCreate() {
-        this.httpClient.post('http://localhost:3000/skill', {
+        this.httpClient.post(this.baseUrl + '/skill', {
             'name': this.skill.name,
             'jobListingId': this.joblisting.id
         }).subscribe((instance: any) => {
