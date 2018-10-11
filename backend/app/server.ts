@@ -2,10 +2,8 @@
 import express from 'express';
 
 // import all the controllers. If you add a new controller, make sure to import it here as well.
-import {TodoListController, TodoItemController, JobListingController, SkillController} from './controllers';
+import {JobListingController, SkillController} from './controllers';
 import {Sequelize} from 'sequelize-typescript';
-import {TodoList} from './models/todolist.model';
-import {TodoItem} from './models/todoitem.model';
 import {JobListing} from './models/joblisting.model';
 import {Skill} from './models/skill.model';
 
@@ -16,7 +14,7 @@ const sequelize =  new Sequelize({
   password: '',
   storage: 'db.sqlite'
 });
-sequelize.addModels([TodoList, TodoItem, JobListing, Skill]);
+sequelize.addModels([JobListing, Skill]);
 
 // create a new express application instance
 const app: express.Application = express();
@@ -35,8 +33,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/todolist', TodoListController);
-app.use('/todoitem', TodoItemController);
 app.use('/joblisting', JobListingController);
 app.use('/skill', SkillController);
 
