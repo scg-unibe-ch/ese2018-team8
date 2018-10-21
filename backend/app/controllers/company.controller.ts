@@ -1,16 +1,16 @@
 import {Router, Request, Response} from 'express';
-import {Contact} from '../models/contact.model';
+import {Company} from '../models/company.model';
 
 const router: Router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
-    const instances = await Contact.findAll();
+    const instances = await Company.findAll();
     res.statusCode = 200;
     res.send(instances.map(e => e.toSimplification()));
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    const instance = new Contact();
+    const instance = new Company();
     instance.fromSimplification(req.body);
     await instance.save();
     res.statusCode = 201;
@@ -18,7 +18,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 router.get('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await Contact.findById(id);
+    const instance = await Company.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -31,7 +31,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 router.put('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await Contact.findById(id);
+    const instance = await Company.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -46,7 +46,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 router.delete('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await Contact.findById(id);
+    const instance = await Company.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -60,4 +60,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
     res.send();
 });
 
-export const ContactController: Router = router;
+export const CompanyController: Router = router;

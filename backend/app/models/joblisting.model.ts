@@ -1,6 +1,7 @@
 import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKey} from 'sequelize-typescript';
 import {Skill} from './skill.model';
-import {Branche} from './branche.model';
+import {Sector} from './sector.model';
+import {Company} from './company.model';
 
 
 @Table
@@ -26,7 +27,7 @@ export class JobListing extends Model<JobListing> {
     @HasMany(() => Skill)
     necessarySkills!: Skill[];
 
-    @ForeignKey(() => Branche)
+    @ForeignKey(() => Sector)
     @Column
     brancheId!: number;
 
@@ -37,22 +38,20 @@ export class JobListing extends Model<JobListing> {
     jobPensumTo!: number;
 
     @Column
-    ContactCompanyName!: string;
+    payment!: number;
+
+    @ForeignKey(() => Company)
+    @Column
+    companyId!: number;
 
     @Column
-    ContactStreet!: string;
+    contactPerson!: string;
 
     @Column
-    ContactZIP!: string;
+    contactPhone!: string;
 
     @Column
-    ContactCity!: string;
-
-    @Column
-    ContactPhone!: string;
-
-    @Column
-    ContactPerson!: string;
+    contactEmail!: string;
 
     toSimplification(): any {
         return {
@@ -61,18 +60,17 @@ export class JobListing extends Model<JobListing> {
             'description': this.description,
             'creationDate': this.creationDate.toISOString(),
             'updateDate': this.updateDate.toISOString(),
+            'payment': this.payment,
             'isVerified': this.isVerified,
             'brancheId': this.brancheId,
-            'jobPensum': {'pensumFrom': this.jobPensumFrom,
-                'pensumTo': this.jobPensumTo,
+            'jobPensum': {
+                'pensumFrom': this.jobPensumFrom,
+                'pensumTo': this.jobPensumTo
             },
-            'contact': {'companyName': this.ContactCompanyName,
-                'street': this.ContactStreet,
-                'zip': this.ContactZIP,
-                'city': this.ContactCity,
-                'phone': this.ContactPhone,
-                'person': this.ContactPerson
-            }
+            'companyId': this.companyId,
+            'contactPerson': this.contactPerson,
+            'contactPhone': this.contactPhone,
+            'contactEmail': this.contactEmail,
         };
     }
 
@@ -83,12 +81,11 @@ export class JobListing extends Model<JobListing> {
         this.brancheId = simplification['brancheId'];
         this.jobPensumFrom = simplification['jobPensum']['pensumFrom'];
         this.jobPensumTo = simplification['jobPensum']['pensumTo'];
-        this.ContactCompanyName = simplification['contact']['companyName'];
-        this.ContactStreet = simplification['contact']['street'];
-        this.ContactZIP = simplification['contact']['zip'];
-        this.ContactCity = simplification['contact']['city'];
-        this.ContactPhone = simplification['contact']['phone'];
-        this.ContactPerson = simplification['contact']['person'];
+        this.payment = simplification['payment'];
+        this.companyId = simplification['companyId'];
+        this.contactPerson = simplification['contactPerson'];
+        this.contactPhone = simplification['contactPhone'];
+        this.contactEmail = simplification['contactEmail'];
     }
 
 }

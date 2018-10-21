@@ -1,5 +1,5 @@
 export * from './joblisting.controller';
 export * from './skill.controller';
-export * from './contact.controller';
+export * from './company.controller';
 export * from './jobPensum.controller';
-export * from './branche.controller';
+export * from './sector.controller';

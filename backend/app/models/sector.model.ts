@@ -1,21 +1,21 @@
 import {Table, Column, Model} from 'sequelize-typescript';
 
 @Table
-export class Branche extends Model<Branche> {
+export class Sector extends Model<Sector> {
 
     @Column
-    brancheName!: string;
+    sectorName!: string;
 
 
     toSimplification(): any {
         return {
             'id': this.id,
-            'brancheName': this.brancheName,
+            'sectorName': this.sectorName,
         };
     }
 
     fromSimplification(simplification: any): void {
-        this.brancheName = simplification['brancheName'];
+        this.sectorName = simplification['sectorName'];
     }
 
 }
