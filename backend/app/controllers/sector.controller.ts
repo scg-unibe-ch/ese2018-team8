@@ -1,16 +1,16 @@
 import {Router, Request, Response} from 'express';
-import {JobListing} from '../models/joblisting.model';
+import {Sector} from '../models/sector.model';
 
 const router: Router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
-    const instances = await JobListing.findAll();
+    const instances = await Sector.findAll();
     res.statusCode = 200;
     res.send(instances.map(e => e.toSimplification()));
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    const instance = new JobListing();
+    const instance = new Sector();
     instance.fromSimplification(req.body);
     await instance.save();
     res.statusCode = 201;
@@ -18,7 +18,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 router.get('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await JobListing.findById(id);
+    const instance = await Sector.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -31,7 +31,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 router.put('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await JobListing.findById(id);
+    const instance = await Sector.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -46,7 +46,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 router.delete('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await JobListing.findById(id);
+    const instance = await Sector.findById(id);
     if (instance == null) {
         res.statusCode = 404;
         res.json({
@@ -60,4 +60,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
     res.send();
 });
 
-export const JobListingController: Router = router;
+export const SectorController: Router = router;

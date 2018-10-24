@@ -2,10 +2,13 @@
 import express from 'express';
 
 // import all the controllers. If you add a new controller, make sure to import it here as well.
-import {JobListingController, SkillController} from './controllers';
+import {JobListingController, SkillController, CompanyController, JobPensumController, SectorController} from './controllers';
 import {Sequelize} from 'sequelize-typescript';
 import {JobListing} from './models/joblisting.model';
 import {Skill} from './models/skill.model';
+import {Company} from './models/company.model';
+import {JobPensum} from './models/jobPensum.model';
+import {Sector} from './models/sector.model';
 
 const sequelize =  new Sequelize({
   database: 'development',
@@ -14,7 +17,7 @@ const sequelize =  new Sequelize({
   password: '',
   storage: 'db.sqlite'
 });
-sequelize.addModels([JobListing, Skill]);
+sequelize.addModels([JobListing, Skill, Company, JobPensum, Sector]);
 
 // create a new express application instance
 const app: express.Application = express();
@@ -35,6 +38,9 @@ app.use(function (req, res, next) {
 
 app.use('/joblisting', JobListingController);
 app.use('/skill', SkillController);
+app.use('/company', CompanyController);
+app.use('/jobPensum', JobPensumController);
+app.use('/sector', SectorController);
 
 sequelize.sync().then(() => {
 // start serving the application on the given port
