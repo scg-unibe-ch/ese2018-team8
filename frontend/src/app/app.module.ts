@@ -15,6 +15,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { JoblistdetailComponent } from './joblistdetail/joblistdetail.component';
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CreatejoblistComponent } from './createjoblist/createjoblist.component'
     DashboardComponent,
     JoblistdetailComponent,
     CreatejoblistComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
