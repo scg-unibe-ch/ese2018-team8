@@ -1,6 +1,6 @@
 // auth.controller.ts
 
-import {Request, Response, Router} from 'express';
+import {NextFunction, Request, Response, Router} from 'express';
 import {User} from '../models/user.model';
 
 const express = require('express');
@@ -9,6 +9,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('../config');
+const verifyToken = require('../middleware/verifyToken.middleware');
 
 router.post('/register', async (req: Request, res: Response) => {
     const instance = new User();
@@ -27,19 +28,9 @@ router.post('/register', async (req: Request, res: Response) => {
 
 });
 
-router.get('/me', async (req: Request, res: Response) => {
+router.get('/me', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
 
-
-    if (!req.headers.authorization || !(req.headers.authorization.split(' ')[0] === 'Bearer')) {
-        return res.status(401).send({ auth: false, message: 'No token provided.' });
-    }
-    const token = req.headers.authorization.split(' ')[1];
-    const isValid = jwt.verify(token, config.secret);
-        if (!isValid) {
-            return res.status(500).send({ auth: false, message: 'Failed to authenticate token.'});
-        }
-        const decoded = jwt.decode(token, {complete: true});
-        res.status(200).send(decoded);
+    res.status(200).send(res.locals.verifiedToken);
 });
 
 router.post('/login', async function (req: Request, res: Response) {
