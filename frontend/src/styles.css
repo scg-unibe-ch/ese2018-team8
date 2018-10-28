@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
 
 html, body {
   height: 100%;
@@ -6,5 +8,11 @@ html, body {
 
 body {
   margin: 0;
+  color: #323232;
   font-family: 'Roboto', sans-serif;
+  background-color: #fafafa;
+}
+/*everywhere else*/
+*{
+  font-family: Arial, Helvetica, sans-serif;
 }

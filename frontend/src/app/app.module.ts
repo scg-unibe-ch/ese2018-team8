@@ -10,8 +10,11 @@ import {MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatLi
 import { JoblistingComponent } from './joblisting/joblisting.component';
 import { SkillComponent } from './skill/skill.component';
 import {FormsModule} from '@angular/forms';
-
-
+import { UiModule } from './ui/ui.module';
+import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { JoblistdetailComponent } from './joblistdetail/joblistdetail.component';
+import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 
 
 @NgModule({
@@ -19,6 +22,9 @@ import {FormsModule} from '@angular/forms';
     AppComponent,
     JoblistingComponent,
     SkillComponent,
+    DashboardComponent,
+    JoblistdetailComponent,
+    CreatejoblistComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,9 @@ import {FormsModule} from '@angular/forms';
     MatListModule,
     MatInputModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    UiModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

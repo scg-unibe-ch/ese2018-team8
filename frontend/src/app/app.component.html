@@ -1,10 +1,15 @@
-<mat-form-field>
-  <input matInput placeholder="Enter title" [(ngModel)]="joblisting.title" name="title">
-</mat-form-field>
-<mat-form-field>
-  <input matInput placeholder="Enter description" [(ngModel)]="joblisting.description" name="description">
-</mat-form-field>
-<button mat-button (click)="onJobListingCreate()">create</button>
-<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
-                *ngFor="let jobListing of jobListingList"></app-joblisting>
+<!--Website Layout with links-->
+<app-layout>
+  <div >
+<nav>
+  <a routerLink="/joblistdetail">Joblist Details! </a>
+  <a routerLink="/createjoblist">Create Job! </a>
+</nav>
+  </div>
+</app-layout>
 
+
+
+
+
+<router-outlet></router-outlet><!-- Where to display Component-->
