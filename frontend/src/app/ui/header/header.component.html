@@ -1,10 +1,20 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
-  <a class="navbar-brand" href="/">Jobportal</a>
+  <!--logo-->
+  <img alt="img" class="img-responsive smaller" src="assets/image/MIB_logo.jpg">
   <div class="navbar-expand mr-auto">
-    <div class="navbar-nav">
-      <li class="nav-item nav-link active"><a  routerLinkActive="active" routerLink="/joblisting">Dashboard</a></li>
-      <a class="nav-item nav-link active" routerLinkActive="active" routerLink="/joblistdetail">Inserate</a>
-      <a class="nav-item nav-link active" routerLinkActive="active" routerLink="/createjoblist">Create Inserate</a>
-    </div>
+      <div class="navbar-nav">
+          <li routerLinkActive="active">
+              <a class="nav-item nav-link active" routerLink="/joblisting">Dashboard</a>
+          </li>
+          <li routerLinkActive="active">
+              <a class="nav-item nav-link active"  routerLink="/joblistdetail">Jobs</a>
+          </li>
+          <li routerLinkActive="active">
+              <a class="nav-item nav-link active"  routerLink="/createjoblist">Create Job</a>
+          </li>
+          <li routerLinkActive="active">
+              <a class="nav-item nav-link active"  routerLink="/login">Login</a>
+          </li>
+      </div>
   </div>
 </nav>
