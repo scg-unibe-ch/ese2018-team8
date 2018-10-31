@@ -7,11 +7,15 @@ html, body {
 }
 
 body {
-  margin: 0;
   color: #323232;
   font-family: 'Roboto', sans-serif;
   background-color: #fafafa;
 }
+
+input {
+  width: 25%;
+}
+
 /*everywhere else*/
 *{
   font-family: Arial, Helvetica, sans-serif;
