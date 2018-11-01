@@ -9,8 +9,9 @@ import {AuthGuard} from './login/login.authguard';
 
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  {path: 'createjoblist', component: CreatejoblistComponent},
+  {path: '', component: JoblistingComponent },
+  {path: 'joblisting', component: JoblistingComponent },
+  {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
   {path: 'joblistdetail', component: JoblistdetailComponent},
   {path: 'login', component: LoginComponent },
 
