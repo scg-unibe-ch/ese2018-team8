@@ -1,25 +1,34 @@
-import {Router, Request, Response} from 'express';
+import {Router, Request, Response, NextFunction} from 'express';
 import {User} from '../models/user.model';
 
 const bcrypt = require('bcryptjs');
 const router: Router = Router();
 
-// admin only controller
+const verifyToken = require('../middleware/verifyToken.middleware');
 
-router.get('/', async (req: Request, res: Response) => {
-    const instances = await User.findAll();
-    res.statusCode = 200;
-    res.send(instances.map(e => e.toSimplification()));
+router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+    if (res.locals.verifiedToken.role === 'admin'){
+        const instances = await User.findAll();
+        res.statusCode = 200;
+        res.send(instances.map(e => e.toSimplification()));
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
+    }
 });
 
-router.post('/', async (req: Request, res: Response) => {
-    const instance = new User();
-    instance.fromSimplification(req.body);
-    instance.password = bcrypt.hashSync(instance.password, 8);
-    await instance.save();
-    res.statusCode = 201;
-    res.send(instance.toSimplification());
+router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+    if (res.locals.verifiedToken.role === 'admin'){
+        const instance = new User();
+        instance.fromSimplification(req.body);
+        instance.password = bcrypt.hashSync(instance.password, 8);
+        await instance.save();
+        res.statusCode = 201;
+        res.send(instance.toSimplification());
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
+    }
 });
+
 router.get('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const instance = await User.findById(id);
@@ -35,33 +44,46 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 router.put('/:id', async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    const instance = await User.findById(id);
-    if (instance == null) {
-        res.statusCode = 404;
-        res.json({
-            'message': 'not found'
-        });
-        return;
+    if (res.locals.verifiedToken.role === 'admin') {
+
+        const instance = await User.findById(id);
+        if (instance == null) {
+            res.statusCode = 404;
+            res.json({
+                'message': 'not found'
+            });
+            return;
+        }
+        instance.fromSimplification(req.body);
+        await instance.save();
+        res.statusCode = 200;
+        res.send(instance.toSimplification());
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
-    instance.fromSimplification(req.body);
-    await instance.save();
-    res.statusCode = 200;
-    res.send(instance.toSimplification());
+
 });
 router.delete('/:id', async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    const instance = await User.findById(id);
-    if (instance == null) {
-        res.statusCode = 404;
-        res.json({
-            'message': 'not found'
-        });
-        return;
+    if (res.locals.verifiedToken.role === 'admin') {
+
+        const id = parseInt(req.params.id);
+        const instance = await User.findById(id);
+        if (instance == null) {
+            res.statusCode = 404;
+            res.json({
+                'message': 'not found'
+            });
+            return;
+        }
+        instance.fromSimplification(req.body);
+        await instance.destroy();
+        res.statusCode = 204;
+        res.send();
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
-    instance.fromSimplification(req.body);
-    await instance.destroy();
-    res.statusCode = 204;
-    res.send();
+
+
 });
 
 export const UserController: Router = router;
