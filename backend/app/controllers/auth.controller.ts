@@ -20,7 +20,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
     await instance.save().then( () => {
         res.statusCode = 201;
-        res.send('Account registration sucessful');
+        res.send('Account registration successful');
     }).catch( () => {
         res.statusCode = 500;
         res.send('There was a problem registering the user.');
