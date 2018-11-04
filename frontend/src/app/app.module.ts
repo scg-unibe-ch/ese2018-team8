@@ -24,6 +24,7 @@ import {AuthGuard} from './login/login.authguard';
 import {AlertService} from './alert/alert.alertservice';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ErrorInterceptor} from './helpers/error.interceptor';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     JoblistdetailComponent,
     CreatejoblistComponent,
     LoginComponent,
-    AlertComponent
+    AlertComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
