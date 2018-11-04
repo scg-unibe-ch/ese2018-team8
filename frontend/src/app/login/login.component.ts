@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
 
     // login().pipe(first()) takes the first value returned from server
     this.authenticationService.login(this.f.username.value, this.f.password.value)
+        .pipe(first())
         .subscribe( (instance: any) => {
               this.router.navigate([this.returnUrl]);
             },

@@ -10,7 +10,6 @@ import {RegisterComponent} from './register/register.component';
 
 
 const routes: Routes = [
-  {path: '', component: JoblistingComponent },
   {path: 'joblisting', component: JoblistingComponent },
   {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
   {path: 'joblistdetail', component: JoblistdetailComponent},
