@@ -1,11 +1,13 @@
 
 <!--Joblisting-->
 <mat-form-field>
+  <input matInput placeholder="Enter id" [(ngModel)]="joblisting.id" name="id">
+<mat-form-field>
   <input matInput placeholder="Enter title" [(ngModel)]="joblisting.title" name="title">
 </mat-form-field>
 <mat-form-field>
   <input matInput placeholder="Enter description" [(ngModel)]="joblisting.description" name="description">
 </mat-form-field>
 <button mat-button (click)="onJobListingCreate()">create</button>
-<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
-                *ngFor="let jobListing of jobListingList"></app-joblisting>
+<!--<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
+                *ngFor="let jobListing of jobListingList"></app-joblisting>-->
