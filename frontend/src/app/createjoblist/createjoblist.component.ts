@@ -26,7 +26,16 @@ export class CreatejoblistComponent implements OnInit {
     this.httpClient.post(this.baseUrl + '/joblisting', {
       'id': this.joblisting.id,
       'title': this.joblisting.title,
-      'description': this.joblisting.description
+      'description': this.joblisting.description,
+      'isVerified': this.joblisting.isVerified,
+      'brancheId': this.joblisting.brancheId,
+      'jobPensum': this.joblisting.jobPensum {jobPensumFrom, jobPensumTo},
+      /*'jobPensumTo': this.joblisting.jobPensumTo,*/
+      'payment': this.joblisting.payment,
+      'companyId': this.joblisting.companyId,
+      'contactPerson': this.joblisting.contactPerson,
+      'contactPhone': this.joblisting.contactPhone,
+      'contactEmail': this.joblisting.contactEmail
     }).subscribe((instance: any) => {/*
       this.joblisting.id = instance.id;
       this.jobListingList.push(this.joblisting);
