@@ -10,7 +10,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CreatejoblistComponent implements OnInit {
   title = 'Jobportal';
-  joblisting: JobListing = new JobListing(null, '', '');
+  joblisting: JobListing = new JobListing(null, '', '', false, null,
+      0, 0, 0,null, '', '', '');
   jobListingList: JobListing[] = [];
   baseUrl = environment.baseUrl;
 
@@ -29,7 +30,7 @@ export class CreatejoblistComponent implements OnInit {
       'description': this.joblisting.description,
       'isVerified': this.joblisting.isVerified,
       'brancheId': this.joblisting.brancheId,
-      'jobPensum': this.joblisting.jobPensum {jobPensumFrom, jobPensumTo},
+      // 'jobPensum': this.joblisting.jobPensum {jobPensumFrom, jobPensumTo},
       /*'jobPensumTo': this.joblisting.jobPensumTo,*/
       'payment': this.joblisting.payment,
       'companyId': this.joblisting.companyId,
