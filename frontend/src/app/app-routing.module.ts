@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'joblisting', component: JoblistingComponent },
   {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
   {path: 'joblistdetail', component: JoblistdetailComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
 

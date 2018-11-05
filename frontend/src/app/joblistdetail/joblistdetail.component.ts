@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../login/login.authservice';
 
 @Component({
   selector: 'app-joblistdetail',
