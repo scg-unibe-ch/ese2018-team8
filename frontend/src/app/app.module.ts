@@ -26,6 +26,7 @@ import { AlertService } from './alert/alert.alertservice';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './login/user.service';
 import { httpInterceptorProviders } from './helpers/interceptors.index';
+import { AdminComponent } from './adminpage/admin.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
     JoblistdetailComponent,
     CreatejoblistComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   providers: [
     httpInterceptorProviders,
