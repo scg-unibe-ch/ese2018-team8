@@ -9,10 +9,10 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./createjoblist.component.css']
 })
 export class CreatejoblistComponent implements OnInit {
-  title = 'Jobportal';
+  // title = 'Jobportal';
   joblisting: JobListing = new JobListing(null, '', '', false, null,
-      0, 0, 0,null, '', '', '');
-  jobListingList: JobListing[] = [];
+      0, 0, 0, null, '', '', '');
+  // jobListingList: JobListing[] = [];
   baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {}
@@ -25,15 +25,12 @@ export class CreatejoblistComponent implements OnInit {
 
   onJobListingCreate() {
     this.httpClient.post(this.baseUrl + '/joblisting', {
-      'id': this.joblisting.id,
       'title': this.joblisting.title,
       'description': this.joblisting.description,
-      'isVerified': this.joblisting.isVerified,
-      'brancheId': this.joblisting.brancheId,
-      // 'jobPensum': this.joblisting.jobPensum {jobPensumFrom, jobPensumTo},
-      /*'jobPensumTo': this.joblisting.jobPensumTo,*/
+      // 'brancheId': this.joblisting.brancheId,
+      'jobPensum': {'jobPensumFrom': this.joblisting.jobPensumFrom, 'jobPensumTo': this.joblisting.jobPensumTo},
       'payment': this.joblisting.payment,
-      'companyId': this.joblisting.companyId,
+      // 'companyId': this.joblisting.companyId,
       'contactPerson': this.joblisting.contactPerson,
       'contactPhone': this.joblisting.contactPhone,
       'contactEmail': this.joblisting.contactEmail
@@ -43,8 +40,8 @@ export class CreatejoblistComponent implements OnInit {
       this.joblisting = new JobListing(null, '', '');
     */});
   }
-
+  /*
   onJobListingDestroy(jobListing: JobListing) {
     this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
-  }
+  }*/
 }
