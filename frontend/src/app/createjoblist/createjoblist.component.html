@@ -1,11 +1,40 @@
 
 <!--Joblisting-->
 <mat-form-field>
+  <input matInput placeholder="Enter id" [(ngModel)]="joblisting.id" name="id">
+<mat-form-field>
   <input matInput placeholder="Enter title" [(ngModel)]="joblisting.title" name="title">
 </mat-form-field>
 <mat-form-field>
   <input matInput placeholder="Enter description" [(ngModel)]="joblisting.description" name="description">
 </mat-form-field>
+<!--<mat-form-field>
+  <input matInput placeholder="Enter isVerified" [(ngModel)]="joblisting.isVerified" name="isVerified">
+</mat-form-field>-->
+<mat-form-field>
+  <input matInput placeholder="Enter brancheId" [(ngModel)]="joblisting.brancheId" name="brancheId">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Enter jobPensumFrom & jobPensumTo" [(ngModel)]="joblisting.jobPensum.jobPensumFrom" name="jobPensumFrom">
+</mat-form-field>
+  <!--<mat-form-field>
+    <input matInput placeholder="Enter jobPensumTo" [(ngModel)]="joblisting.jobPensum.jobPensumTo" name="jobPensumTo">
+  </mat-form-field>-->
+<mat-form-field>
+  <input matInput placeholder="Enter payment" [(ngModel)]="joblisting.payment" name="payment">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Enter companyId" [(ngModel)]="joblisting.companyId" name="companyId">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Enter contactPerson" [(ngModel)]="joblisting.contactPerson" name="contactPerson">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Enter contactPhone" [(ngModel)]="joblisting.contactPhone" name="contactPhone">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Enter contactEmail" [(ngModel)]="joblisting.contactEmail" name="contactEmail">
+</mat-form-field>
 <button mat-button (click)="onJobListingCreate()">create</button>
-<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
-                *ngFor="let jobListing of jobListingList"></app-joblisting>
+<!--<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
+                *ngFor="let jobListing of jobListingList"></app-joblisting>-->
