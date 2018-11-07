@@ -7,6 +7,7 @@ import {JoblistdetailComponent} from './joblistdetail/joblistdetail.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './login/login.authguard';
 import {RegisterComponent} from './register/register.component';
+import {AdminComponent} from './adminpage/admin.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
-
+  {path: 'admin', component: AdminComponent}
 ];
 
 @NgModule({
