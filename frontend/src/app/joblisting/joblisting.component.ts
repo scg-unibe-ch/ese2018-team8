@@ -30,7 +30,7 @@ export class JoblistingComponent implements OnInit {
         // this.httpClient.get(this.baseUrl + '/skill', {
         //    params:  new HttpParams().set('jobListingId', '' + this.joblisting.id)
         // })
-            this.httpClient.get(this.baseUrl + '/joblisting')
+            this.httpClient.get(this.baseUrl + '/joblisting', {withCredentials: true})
                 .subscribe((instances: any) => {
             this.necessarySkillList = instances.map((instance) => new Skill(instance.id, instance.jobListingId, instance.name));
         });

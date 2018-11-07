@@ -4,6 +4,9 @@ import { PasswordValidation } from './register.password.validator';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {AlertService} from '../alert/alert.alertservice';
+import {first} from 'rxjs/operators';
+
 
 
 @Component({
@@ -14,10 +17,13 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   baseUrl: string;
+  loading = false;
+
 
   constructor(private formBuilder: FormBuilder,
               private httpClient: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
       this.baseUrl = environment.baseUrl;
   }
 
@@ -27,14 +33,15 @@ export class RegisterComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required],
             passwordConfirm: ['', Validators.required]
-        }, {
-            validator: PasswordValidation.MatchPassword // your validation method
+        // }, {
+        //    validator: PasswordValidation.MatchPassword // your validation method
         });
     }
 
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
+        // this.registerForm = this.formBuilder.group( {validator: PasswordValidation.MatchPassword});
 
         // stop here if form is invalid
         if (this.registerForm.invalid) {
@@ -44,7 +51,16 @@ export class RegisterComponent implements OnInit {
             'name': this.f.username.value,
             'email': this.f.email.value,
             'password': this.f.password.value
-        });
+        }).pipe(first()).subscribe(
+            data => {
+              this.alertService.success('Registration successful', true);
+              this.router.navigate(['/login']);
+            },
+            error => {
+              this.alertService.error(error);
+              this.loading = false;
+            });
+
         this.router.navigate(['']);
     }
 
