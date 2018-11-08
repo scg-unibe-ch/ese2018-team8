@@ -2,6 +2,7 @@ import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKe
 import {Skill} from './skill.model';
 import {Sector} from './sector.model';
 import {Company} from './company.model';
+import {User} from './user.model';
 
 
 @Table
