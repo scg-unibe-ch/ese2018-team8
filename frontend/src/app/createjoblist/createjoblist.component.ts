@@ -10,28 +10,28 @@ import {Skill} from '../skill';
   styleUrls: ['./createjoblist.component.css']
 })
 export class CreatejoblistComponent implements OnInit {
-  title = 'Jobportal';
+ // title = 'Jobportal';
   joblisting: JobListing = new JobListing(
     null,
     '',
     '',
-    true,
+    false,
     null,
-    null,
-    null,
-    null,
+    0,
+    0,
+    0,
     null,
     '',
     '',
-    '',
+    ''
     );
-  jobListingList: JobListing[] = [];
+  //jobListingList: JobListing[] = [];
   baseUrl = environment.baseUrl;
 
 
   constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {
+  ngOnInit() {/*
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
       this.jobListingList = instances.map((instance) => new JobListing(
         instance.id,
@@ -47,13 +47,20 @@ export class CreatejoblistComponent implements OnInit {
         instance.contactPhone,
         instance.contactEmail));
     });
-  }
+  */}
 
   onJobListingCreate() {
     this.httpClient.post(this.baseUrl + '/joblisting', {
       'title': this.joblisting.title,
-      'description': this.joblisting.description
-    }).subscribe((instance: any) => {
+      'description': this.joblisting.description,
+      // 'brancheId': this.joblisting.brancheId,
+      'jobPensum': {'jobPensumFrom': this.joblisting.jobPensumFrom, 'jobPensumTo': this.joblisting.jobPensumTo},
+      'payment': this.joblisting.payment,
+      // 'companyId': this.joblisting.companyId,
+      'contactPerson': this.joblisting.contactPerson,
+      'contactPhone': this.joblisting.contactPhone,
+      'contactEmail': this.joblisting.contactEmail
+    }).subscribe((instance: any) => {/*
       this.joblisting.id = instance.id;
       this.jobListingList.push(this.joblisting);
       this.joblisting = new JobListing(
@@ -69,11 +76,10 @@ export class CreatejoblistComponent implements OnInit {
         '',
         '',
         '');
-    });
+    */});
   }
-
+  /*
   onJobListingDestroy(jobListing: JobListing) {
     this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
-  }
-
+  }*/
 }

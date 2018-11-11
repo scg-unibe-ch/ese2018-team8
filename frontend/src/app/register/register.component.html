@@ -1,0 +1,47 @@
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h3>Account information</h3>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" type="text" formControlName="username" class="form-control"  />
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" type="text" formControlName="email" class="form-control"  />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="passwordConfirm">Confirm Password</label>
+    <input id="passwordConfirm" type="password" formControlName="passwordConfirm" class="form-control" />
+  </div>
+  <div class="form-group">
+    <h3>Company information</h3>
+    <div class="form-group">
+      <label for="companyName">Name</label>
+      <input id="companyName" type="text" formControlName="companyName" class="form-control"  />
+    </div>
+    <div class="form-group">
+      <label for="companyStreet">Street</label>
+      <input id="companyStreet" type="text" formControlName="companyStreet" class="form-control"  />
+    </div>
+    <div class="form-group">
+      <label for="companyCity">City</label>
+      <input id="companyCity" type="text" formControlName="companyCity" class="form-control"  />
+
+      <label for="companyZIP">ZIP</label>
+      <input id="companyZIP" type="text" formControlName="companyZIP" class="form-control"  />
+    </div>
+    <div class="form-group">
+      <label for="companyPhone">Phone</label>
+      <input id="companyPhone" type="text" formControlName="companyPhone" class="form-control"  />
+    </div>
+    <div class="form-group">
+      <label for="companyPerson">Person</label>
+      <input id="companyPerson" type="text" formControlName="companyPerson" class="form-control"  />
+    </div>
+    <button  class="btn btn-primary">Register</button>
+  </div>
+</form>

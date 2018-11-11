@@ -14,14 +14,14 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
+    this.httpClient.get(this.baseUrl, { withCredentials: true });
+
     return this.httpClient.post<any>(this.baseUrl + '/auth/login', {email: username, password: password})
           .pipe(map( user => {
           // login successful if there's a jwt token in the response
-            console.log(user);
-            if (user && user.token) {
+            if (user.auth && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-              localStorage.setItem('currentUser', JSON.stringify(user));
-              console.log(user);
+              sessionStorage.setItem('currentUser', JSON.stringify(user));
               return user;
           }
         }));
@@ -31,6 +31,6 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
   }
 }

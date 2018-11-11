@@ -29,20 +29,30 @@ router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunc
     }
 });
 
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+
     const id = parseInt(req.params.id);
-    const instance = await User.findById(id);
-    if (instance == null) {
-        res.statusCode = 404;
-        res.json({
-            'message': 'not found'
-        });
-        return;
+
+    if (res.locals.verifiedToken.role === 'admin' ||
+        (res.locals.verifiedToken.role === 'business' && res.locals.verifiedToken.id === id)) {
+
+        const instance = await User.findById(id);
+        if (instance == null) {
+            res.statusCode = 404;
+            res.json({
+                'message': 'not found'
+            });
+            return;
+        }
+        res.statusCode = 200;
+        res.send(instance.toSimplification());
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
-    res.statusCode = 200;
-    res.send(instance.toSimplification());
+
 });
-router.put('/:id', async (req: Request, res: Response) => {
+
+router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     const id = parseInt(req.params.id);
     if (res.locals.verifiedToken.role === 'admin') {
 
@@ -55,7 +65,7 @@ router.put('/:id', async (req: Request, res: Response) => {
             return;
         }
         instance.fromSimplification(req.body);
-        await instance.save();
+        await instance.save({fields: ['isVerified']});
         res.statusCode = 200;
         res.send(instance.toSimplification());
     } else {
@@ -63,7 +73,8 @@ router.put('/:id', async (req: Request, res: Response) => {
     }
 
 });
-router.delete('/:id', async (req: Request, res: Response) => {
+
+router.delete('/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     if (res.locals.verifiedToken.role === 'admin') {
 
         const id = parseInt(req.params.id);
@@ -75,7 +86,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
             });
             return;
         }
-        instance.fromSimplification(req.body);
         await instance.destroy();
         res.statusCode = 204;
         res.send();

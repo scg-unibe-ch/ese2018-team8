@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JoblistingService} from '../joblisting/joblisting.service';
 import { Observable} from 'rxjs';
 import { ActivatedRoute} from '@angular/router';
+import {AuthenticationService} from '../login/login.authservice';
 
 @Component({
   selector: 'app-joblistdetail',
@@ -10,16 +11,9 @@ import { ActivatedRoute} from '@angular/router';
 })
 export class JoblistdetailComponent implements OnInit {
 
-  //job$;
-
-  constructor(/*private job: JoblistingService, private route: ActivatedRoute */) {
-    /*this.route.params.subscribe( params => this.job$ = params.id );*/
-  }
+  constructor() { }
 
   ngOnInit() {
-   /* this.job.getJob(this.job$).subscribe(
-      job => this.job$ = job
-    );*/
   }
 
 }

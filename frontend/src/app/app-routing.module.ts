@@ -6,15 +6,19 @@ import {CreatejoblistComponent} from './createjoblist/createjoblist.component';
 import {JoblistdetailComponent} from './joblistdetail/joblistdetail.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './login/login.authguard';
+import {RegisterComponent} from './register/register.component';
+import {AdminComponent} from './adminpage/admin.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent },
   {path: 'joblisting', component: JoblistingComponent },
-  {path: 'createjoblist', component: CreatejoblistComponent, /*canActivate: [AuthGuard]*/},
+  {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
   {path: 'joblistdetail/:id', component: JoblistdetailComponent},
   {path: 'login', component: LoginComponent },
+  {path: 'register', component: RegisterComponent },
+  {path: 'admin', component: AdminComponent}
 ];
 
 @NgModule({
