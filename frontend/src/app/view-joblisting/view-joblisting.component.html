@@ -1,0 +1,10 @@
+<p>
+  view-joblisting works!
+</p>
+
+<h1>Jobs</h1>
+<div class="card-deck-container">
+  <div *ngFor="let jobListing of jobListingList" class="card-item">
+    <app-joblisting [joblisting]="jobListing"></app-joblisting>>
+  </div>
+</div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../joblisting';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Skill} from '../skill';
 
 @Component({
   selector: 'app-createjoblist',
@@ -10,15 +11,41 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CreatejoblistComponent implements OnInit {
   title = 'Jobportal';
-  joblisting: JobListing = new JobListing(null, '', '');
+  joblisting: JobListing = new JobListing(
+    null,
+    '',
+    '',
+    true,
+    null,
+    null,
+    null,
+    null,
+    null,
+    '',
+    '',
+    '',
+    );
   jobListingList: JobListing[] = [];
   baseUrl = environment.baseUrl;
+
 
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
-      this.jobListingList = instances.map((instance) => new JobListing(instance.id, instance.title, instance.description));
+      this.jobListingList = instances.map((instance) => new JobListing(
+        instance.id,
+        instance.title,
+        instance.description,
+        instance.isVerified,
+        instance.brancheId,
+        instance.jobPensumFrom,
+        instance.jobPensumTo,
+        instance.payment,
+        instance.companyId,
+        instance.contactPerson,
+        instance.contactPhone,
+        instance.contactEmail));
     });
   }
 
@@ -29,11 +56,24 @@ export class CreatejoblistComponent implements OnInit {
     }).subscribe((instance: any) => {
       this.joblisting.id = instance.id;
       this.jobListingList.push(this.joblisting);
-      this.joblisting = new JobListing(null, '', '');
+      this.joblisting = new JobListing(
+        null,
+        '',
+        '',
+        true,
+        null,
+        null,
+        null,
+        null,
+        null,
+        '',
+        '',
+        '');
     });
   }
 
   onJobListingDestroy(jobListing: JobListing) {
     this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
   }
+
 }

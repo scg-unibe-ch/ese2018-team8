@@ -9,12 +9,12 @@ import {AuthGuard} from './login/login.authguard';
 
 
 const routes: Routes = [
-  {path: '', component: JoblistingComponent },
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent },
   {path: 'joblisting', component: JoblistingComponent },
-  {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
-  {path: 'joblistdetail', component: JoblistdetailComponent},
+  {path: 'createjoblist', component: CreatejoblistComponent, /*canActivate: [AuthGuard]*/},
+  {path: 'joblistdetail/:id', component: JoblistdetailComponent},
   {path: 'login', component: LoginComponent },
-
 ];
 
 @NgModule({

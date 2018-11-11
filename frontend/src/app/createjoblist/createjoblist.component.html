@@ -9,3 +9,4 @@
 <button mat-button (click)="onJobListingCreate()">create</button>
 <app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
                 *ngFor="let jobListing of jobListingList"></app-joblisting>
+
