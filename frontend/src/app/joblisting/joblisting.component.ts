@@ -3,7 +3,7 @@ import {JobListing} from '../joblisting';
 import {Skill} from '../skill';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {JoblistingService} from './joblisting.service';
 
 @Component({
   selector: 'app-joblisting',
@@ -29,8 +29,6 @@ export class JoblistingComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.getJob();
 
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
       this.jobListingList = instances.map((instance) => new JobListing(

@@ -25,7 +25,7 @@ export class CreatejoblistComponent implements OnInit {
     '',
     ''
     );
-  //jobListingList: JobListing[] = [];
+  // jobListingList: JobListing[] = [];
   baseUrl = environment.baseUrl;
 
 

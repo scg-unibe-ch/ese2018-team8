@@ -1,7 +1,17 @@
+<h3>Joblistings:</h3>
 
-<h1>Welcome to joblistings!</h1>
-<div class="card-deck-container">
-  <div *ngFor="let jobListing of jobListingList" class="card-item">
-    <app-joblisting [joblisting]="jobListing"></app-joblisting>>
+<div class="col-11">
+  <div *ngFor="let jobs of jobListingList" class="well well-sm">
+    <ul>
+      <li><strong> Title:</strong> {{jobs.title}}</li>
+
+      <li><strong> Description:</strong> {{jobs.description}}</li>
+
+    </ul>
+    <a class="nav-item nav-link active" routerLink="/joblistdetail/{{jobs.id}}">Go to details </a>
   </div>
 </div>
+
+
+
+

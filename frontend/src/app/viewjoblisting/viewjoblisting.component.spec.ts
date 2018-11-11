@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewJoblistingComponent } from './view-joblisting.component';
+import { ViewJoblistingComponent } from './viewjoblisting.component';
 
 describe('ViewJoblistingComponent', () => {
   let component: ViewJoblistingComponent;
