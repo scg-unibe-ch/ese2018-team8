@@ -32,7 +32,13 @@ export class RegisterComponent implements OnInit {
             username: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
-            passwordConfirm: ['', Validators.required]
+            passwordConfirm: ['', Validators.required],
+            companyName: ['', Validators.required],
+            companyStreet: ['', Validators.required],
+            companyZIP: ['', Validators.required],
+            companyCity: ['', Validators.required],
+            companyPhone: ['', Validators.required],
+            companyPerson: ['', Validators.required]
         // }, {
         //    validator: PasswordValidation.MatchPassword // your validation method
         });
@@ -50,7 +56,15 @@ export class RegisterComponent implements OnInit {
         this.httpClient.post(this.baseUrl + '/auth/register', {
             'name': this.f.username.value,
             'email': this.f.email.value,
-            'password': this.f.password.value
+            'password': this.f.password.value,
+            'company': {
+                'companyName': this.f.companyName.value,
+                'companyStreet': this.f.companyStreet.value,
+                'companyZIP': this.f.companyZIP.value,
+                'companyCity': this.f.companyCity.value,
+                'companyPhone': this.f.companyPhone.value,
+                'companyPerson': this.f.companyPerson.value
+            }
         }).pipe(first()).subscribe(
             data => {
               this.alertService.success('Registration successful', true);

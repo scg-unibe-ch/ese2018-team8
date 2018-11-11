@@ -11,7 +11,7 @@ export class Skill extends Model<Skill> {
     @Column
     jobListingId!: number;
 
-    @BelongsTo(() => JobListing)
+    @BelongsTo(() => JobListing, {onDelete: 'cascade'})
     jobListing!: JobListing;
 
     toSimplification(): any {

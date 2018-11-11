@@ -1,8 +1,7 @@
-import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKey} from 'sequelize-typescript';
+import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import {Skill} from './skill.model';
 import {Sector} from './sector.model';
 import {Company} from './company.model';
-import {User} from './user.model';
 
 
 @Table
@@ -44,6 +43,9 @@ export class JobListing extends Model<JobListing> {
     @ForeignKey(() => Company)
     @Column
     companyId!: number;
+
+    @BelongsTo(() => Company, {onDelete: 'cascade'})
+    company!: Company;
 
     @Column
     contactPerson!: string;

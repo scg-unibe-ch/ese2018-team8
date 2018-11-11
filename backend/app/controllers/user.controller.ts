@@ -86,7 +86,6 @@ router.delete('/:id', verifyToken, async (req: Request, res: Response, next: Nex
             });
             return;
         }
-        instance.fromSimplification(req.body);
         await instance.destroy();
         res.statusCode = 204;
         res.send();

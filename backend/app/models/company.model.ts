@@ -1,7 +1,12 @@
-import {Table, Column, Model} from 'sequelize-typescript';
+import {Table, Column, Model, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {User} from './user.model';
 
 @Table
 export class Company extends Model<Company> {
+
+    @ForeignKey(() => User)
+    @Column
+    userId!: number;
 
     @Column
     companyName!: string;
@@ -21,9 +26,13 @@ export class Company extends Model<Company> {
     @Column
     companyPerson!: string;
 
+    @BelongsTo(() => User, {onDelete: 'cascade'})
+    user!: User;
+
     toSimplification(): any {
         return {
             'id': this.id,
+            'userId': this.userId,
             'companyName': this.companyName,
             'companyStreet': this.companyStreet,
             'companyZIP': this.companyZIP,
@@ -34,6 +43,7 @@ export class Company extends Model<Company> {
     }
 
     fromSimplification(simplification: any): void {
+        this.userId = simplification['userId'];
         this.companyName = simplification['companyName'];
         this.companyStreet = simplification['companyStreet'];
         this.companyZIP = simplification['companyZIP'];
