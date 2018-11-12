@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {JobListing} from '../joblisting';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {JoblistdetailComponent} from '../joblistdetail/joblistdetail.component';
 
 @Component({
   selector: 'app-createjoblist',
@@ -9,13 +11,14 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./createjoblist.component.css']
 })
 export class CreatejoblistComponent implements OnInit {
-  title = 'Jobportal';
   joblisting: JobListing = new JobListing(null, '', '', false, null,
-      0, 0, 0,null, '', '', '');
-  jobListingList: JobListing[] = [];
+      0, 0, 0, null, '', '', '');
   baseUrl = environment.baseUrl;
+  joblistDetail;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.joblistDetail = new JoblistdetailComponent();
+  }
 
   ngOnInit() {/*
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
@@ -24,27 +27,26 @@ export class CreatejoblistComponent implements OnInit {
   */}
 
   onJobListingCreate() {
-    this.httpClient.post(this.baseUrl + '/joblisting', {
-      'id': this.joblisting.id,
-      'title': this.joblisting.title,
-      'description': this.joblisting.description,
-      'isVerified': this.joblisting.isVerified,
-      'brancheId': this.joblisting.brancheId,
-      // 'jobPensum': this.joblisting.jobPensum {jobPensumFrom, jobPensumTo},
-      /*'jobPensumTo': this.joblisting.jobPensumTo,*/
-      'payment': this.joblisting.payment,
-      'companyId': this.joblisting.companyId,
-      'contactPerson': this.joblisting.contactPerson,
-      'contactPhone': this.joblisting.contactPhone,
-      'contactEmail': this.joblisting.contactEmail
-    }).subscribe((instance: any) => {/*
-      this.joblisting.id = instance.id;
-      this.jobListingList.push(this.joblisting);
-      this.joblisting = new JobListing(null, '', '');
-    */});
+    this.joblisting = new JobListing(
+        this.joblisting.id,
+        this.joblisting.title,
+        this.joblisting.description,
+        this.joblisting.isVerified,
+        this.joblisting.brancheId,
+        this.joblisting.jobPensumFrom,
+        this.joblisting.jobPensumTo,
+        this.joblisting.payment,
+        this.joblisting.companyId,
+        this.joblisting.contactPerson,
+        this.joblisting.contactPhone,
+        this.joblisting.contactEmail);
+    this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
+        .pipe(map ( joblisting => {
+          this.joblistDetail(this.joblisting);
+        }));
   }
 
   onJobListingDestroy(jobListing: JobListing) {
-    this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
+    // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
   }
 }
