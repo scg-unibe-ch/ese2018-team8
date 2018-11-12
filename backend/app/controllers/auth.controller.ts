@@ -2,6 +2,7 @@
 
 import {NextFunction, Request, Response, Router} from 'express';
 import {User} from '../models/user.model';
+import {Company} from '../models/company.model';
 
 const express = require('express');
 const router = express.Router();
@@ -12,13 +13,18 @@ const config = require('../config');
 const verifyToken = require('../middleware/verifyToken.middleware');
 
 router.post('/register', async (req: Request, res: Response) => {
-    const instance = new User();
-    instance.fromSimplification(req.body);
-    instance.password = bcrypt.hashSync(instance.password, 8);
-    instance.role = 'business';
-    instance.isVerified = false;
+    const instanceUser = new User();
+    const instanceCompany = new Company();
+    instanceUser.fromSimplification(req.body);
+    instanceUser.password = bcrypt.hashSync(instanceUser.password, 8);
+    instanceUser.role = 'business';
+    instanceUser.isVerified = false;
 
-    await instance.save().then( () => {
+    instanceCompany.fromSimplification(req.body['company']);
+
+    await instanceUser.save().then( async () => {
+        instanceCompany.userId = instanceUser.id;
+        await instanceCompany.save();
         res.statusCode = 201;
         res.send('Account registration successful');
     }).catch( () => {

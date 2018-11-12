@@ -54,7 +54,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
         });
         return;
     }
-    instance.fromSimplification(req.body);
     await instance.destroy();
     res.statusCode = 204;
     res.send();

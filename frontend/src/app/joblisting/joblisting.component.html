@@ -1,4 +1,4 @@
-<mat-card>
+<!--<mat-card>
   <mat-form-field>
     <input matInput placeholder="Title" [(ngModel)]="joblisting.title" name="title" (ngModelChange)="onSave()">
   </mat-form-field>
@@ -18,3 +18,26 @@
   </mat-list>
 </mat-card>
 
+-->
+
+<div class="container">
+  <h3>Jobdetails</h3> 
+  <div class="row">
+
+    <div *ngIf="joblisting">
+      <h3>{{ joblisting.title}}</h3>
+      <ul>
+        <li><strong>JobId:</strong> {{ joblisting.id }}</li>
+        <li><strong>Title:</strong> {{ joblisting.title }}</li>
+        <li><strong>Description:</strong> {{ joblisting.description }}</li>
+        <li><strong>Verified:</strong> {{ joblisting.isVerified }}</li>
+        <li><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}}</li>
+        <li><strong>Payment:</strong> {{ joblisting.payment }}</li>
+        <li><strong>Contact person:</strong> {{ joblisting.contactPerson }}</li>
+        <li><strong>Phone:</strong> {{ joblisting.contactPhone }}</li>
+        <li><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
+      </ul>
+    </div>
+  </div>
+  <button class="navbar-brand" (click)="goBack()" mat-button name="button" class="breadcrumb">go back</button>
+</div>

@@ -1,0 +1,23 @@
+<h3>Joblistings:</h3>
+
+<div class="col-11">
+  <div *ngFor="let jobs of jobListingList" class="well well-sm">
+
+    <div class="nav navbar-brand">
+      <a class="nav-item nav-link active" routerLink="/joblisting/{{jobs.id}}">
+        <span class="badge"> {{jobs.title}}</span>
+      </a>
+    </div>
+
+    <ul>
+      <li><strong> Title:</strong> {{jobs.title}}</li>
+
+      <li><strong> Description:</strong> {{jobs.description}}</li>
+    </ul>
+
+  </div>
+</div>
+
+
+
+

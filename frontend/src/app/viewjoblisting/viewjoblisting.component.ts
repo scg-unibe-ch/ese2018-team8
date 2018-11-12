@@ -3,37 +3,33 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {JobListing} from '../joblisting';
 import {JoblistingService} from '../joblisting/joblisting.service';
-import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-joblistdetail',
-  templateUrl: './joblistdetail.component.html',
-  styleUrls: ['./joblistdetail.component.css'],
+  selector: 'app-viewjoblisting',
+  templateUrl: './viewjoblisting.component.html',
+  styleUrls: ['./viewjoblisting.component.css'],
   providers: [JoblistingService]
 })
-export class JoblistdetailComponent implements OnInit {
-  jobListingList: JobListing[] = [];
+export class ViewjoblistingComponent implements OnInit {
+  jobListingList: JobListing[];
   baseUrl;
-
   constructor(private http: HttpClient,
               private joblistingService: JoblistingService,
-              private location: Location) { }
+              private router: Router) { }
 
-  /*getJob(jobId) {
-    this.joblistingService.getJob(jobId)
-      .subscribe( job => {
-        this.jobListingList = job;
+  getJobs() {
+    this.joblistingService.getJobs()
+      .subscribe( jobs => {
+        this.jobListingList = jobs;
         console.log('Data from joblistingService:' + this.jobListingList);
       });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-*/
   ngOnInit(
     baseUrl = environment.baseUrl
   ) {
+    this.getJobs();
   }
 
 }
