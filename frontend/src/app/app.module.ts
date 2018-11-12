@@ -20,7 +20,7 @@ import { CreatejoblistComponent } from './createjoblist/createjoblist.component'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ViewjoblistingComponent} from './viewjoblisting/viewjoblisting.component';
-
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 // Our services
 import {AuthenticationService} from './login/login.authservice';
 import {AlertService} from './alert/alert.alertservice';
@@ -37,6 +37,7 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
 import {AuthGuard} from './login/login.authguard';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import {AuthGuard} from './login/login.authguard';
     RegisterComponent,
     AdminComponent,
     ViewjoblistingComponent,
-    SkillComponent
+    SkillComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

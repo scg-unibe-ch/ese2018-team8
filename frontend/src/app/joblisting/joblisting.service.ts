@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-// Because we want to use service to communicate
-// with a httpClient we import the following
 import {HttpClient} from '@angular/common/http';
 import {JobListing} from '../joblisting';
 import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,20 @@ export class JoblistingService {
 // Here in this class we can create an instance
 // from httpClient
   baseUrl = environment.baseUrl;
-
   constructor(private http: HttpClient) { }
 
-  getJobs() {
-    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting');
+  getJobs(): Observable<JobListing[]> {
+    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
+      .pipe(
+        tap(jobs => console.log('fetched jobs'))
+      );
   }
-  getJob(jobId) {
-    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting' + jobId);
+  getJob(id: number): Observable<JobListing> {
+    const url = `${this.baseUrl}/joblisting/${id}`;
+    return this.http.get<JobListing>(url)
+      .pipe(
+      tap(jobs => console.log(`fetched job id=${id}`))
+    );
   }
 
 }
