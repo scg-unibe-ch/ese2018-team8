@@ -20,7 +20,7 @@ import { CreatejoblistComponent } from './createjoblist/createjoblist.component'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ViewjoblistingComponent} from './viewjoblisting/viewjoblisting.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent} from './alert/page-not-found.component';
 // Our services
 import {AuthenticationService} from './login/login.authservice';
 import {AlertService} from './alert/alert.alertservice';
@@ -51,8 +51,7 @@ import {AuthGuard} from './login/login.authguard';
     RegisterComponent,
     AdminComponent,
     ViewjoblistingComponent,
-    SkillComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './login/login.authguard';
 import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './adminpage/admin.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {PageNotFoundComponent} from './alert/page-not-found.component';
 import {JoblistingComponent} from './joblisting/joblisting.component';
 
 const routes: Routes = [
