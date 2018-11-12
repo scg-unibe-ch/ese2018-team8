@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError, first, map, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {Skill} from '../skill';
-import {JobListing} from '../joblisting';
+import {Skill} from '../models/skill';
+import {JobListing} from '../models/joblisting';
 import {User} from '../login/user.model';
 
 

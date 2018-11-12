@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {JobListing} from '../joblisting';
+import {JobListing} from '../models/joblisting';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {JoblistdetailComponent} from '../joblistdetail/joblistdetail.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Skill} from '../skill';
+import {Skill} from '../models/skill';
 
 @Component({
   selector: 'app-createjoblist',
@@ -32,9 +32,7 @@ export class CreatejoblistComponent implements OnInit {
   baseUrl = environment.baseUrl;
   joblistDetail;
 
-  constructor(private httpClient: HttpClient) {
-    this.joblistDetail = new JoblistdetailComponent();
-  }
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {/*
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
@@ -82,24 +80,13 @@ export class CreatejoblistComponent implements OnInit {
       'contactPerson': this.joblisting.contactPerson,
       'contactPhone': this.joblisting.contactPhone,
       'contactEmail': this.joblisting.contactEmail
-    }).subscribe((instance: any) => {/*
-      this.joblisting.id = instance.id;
-      this.jobListingList.push(this.joblisting);
-      this.joblisting = new JobListing(
-        null,
-        '',
-        '',
-        true,
-        null,
-        null,
-        null,
-        null,
-        null,
-        '',
-        '',
-        '');
-    */});
-  }
+    }).pipe(map ((instance: any) => {
+
+
+    }));
+    }
+
+
   /*
   onJobListingDestroy(jobListing: JobListing) {
     // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);

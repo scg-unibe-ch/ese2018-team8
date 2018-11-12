@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {JobListing} from '../joblisting';
+import {JobListing} from '../models/joblisting';
 import {JoblistingService} from '../joblisting/joblisting.service';
 import {Location} from '@angular/common';
 
