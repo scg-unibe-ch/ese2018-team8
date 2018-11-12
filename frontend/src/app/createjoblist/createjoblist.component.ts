@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../joblisting';
 import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
+import {JoblistdetailComponent} from '../joblistdetail/joblistdetail.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Skill} from '../skill';
 
@@ -26,10 +28,13 @@ export class CreatejoblistComponent implements OnInit {
     ''
     );
   // jobListingList: JobListing[] = [];
+
   baseUrl = environment.baseUrl;
+  joblistDetail;
 
-
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.joblistDetail = new JoblistdetailComponent();
+  }
 
   ngOnInit() {/*
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
@@ -50,6 +55,23 @@ export class CreatejoblistComponent implements OnInit {
   */}
 
   onJobListingCreate() {
+    this.joblisting = new JobListing(
+        this.joblisting.id,
+        this.joblisting.title,
+        this.joblisting.description,
+        this.joblisting.isVerified,
+        this.joblisting.brancheId,
+        this.joblisting.jobPensumFrom,
+        this.joblisting.jobPensumTo,
+        this.joblisting.payment,
+        this.joblisting.companyId,
+        this.joblisting.contactPerson,
+        this.joblisting.contactPhone,
+        this.joblisting.contactEmail);
+    this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
+        .pipe(map ( joblisting => {
+          this.joblistDetail(this.joblisting);
+        }));
     this.httpClient.post(this.baseUrl + '/joblisting', {
       'title': this.joblisting.title,
       'description': this.joblisting.description,
@@ -80,6 +102,8 @@ export class CreatejoblistComponent implements OnInit {
   }
   /*
   onJobListingDestroy(jobListing: JobListing) {
+    // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
+  }
     this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
   }*/
 }

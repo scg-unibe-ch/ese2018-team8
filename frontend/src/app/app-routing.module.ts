@@ -8,21 +8,24 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './login/login.authguard';
 import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './adminpage/admin.component';
-
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {JoblistingComponent} from './joblisting/joblisting.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent },
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'viewjoblisting', component: ViewjoblistingComponent },
   {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
-  {path: 'joblistdetail/:id', component: JoblistdetailComponent},
+  {path: 'joblisting/:id', component: JoblistingComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
-  {path: 'admin', component: AdminComponent}
+  {path: 'admin', component: AdminComponent},
+  {path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes,
+    { enableTracing: true })], // debugging purposes only
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
