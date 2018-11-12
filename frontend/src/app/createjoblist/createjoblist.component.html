@@ -1,3 +1,51 @@
+<<<<<<< HEAD
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form>
+      <div class="form-group">
+        <label for="joblisting.title">Titel</label>
+        <input type="text" class="form-control" id="joblisting.title" placeholder="Titel" [(ngModel)]="joblisting.title">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.description">Beschreibung</label>
+        <input type="text" class="form-control" id="joblisting.description" placeholder="Beschreibung" [(ngModel)]="joblisting.description">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.branche">Branche</label>
+        <input type="text" class="form-control" id="joblisting.branche" placeholder="Branche" [(ngModel)]="joblisting.description">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.jobPensumFrom">Pensum</label>
+        <input type="text" class="form-control" id="joblisting.jobPensumFrom" placeholder="von" [(ngModel)]="joblisting.jobPensumFrom">
+        <input type="text" class="form-control" id="joblisting.jobPensumTo" placeholder="bis" [(ngModel)]="joblisting.jobPensumTo">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.payment">Bezahlung</label>
+        <input type="text" class="form-control" id="joblisting.payment" placeholder="Bezahlung" [(ngModel)]="joblisting.payment">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.companyId">Firma</label>
+        <input type="text" class="form-control" id="joblisting.companyId" placeholder="Firma" [(ngModel)]="joblisting.companyId">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.contactPerson">Firma</label>
+        <input type="text" class="form-control" id="joblisting.contactPerson" placeholder="Kontaktperson" [(ngModel)]="joblisting.contactPerson">
+      </div>
+      <div class="form-group">
+        <label for="joblisting.contactPhone">Telefonnumer</label>
+        <input type="text" class="form-control" id="joblisting.contactPhone" placeholder="Telefon" [(ngModel)]="joblisting.contactPhone">
+      </div>
+        <div class="form-group">
+          <label for="joblisting.contactEmail">Email</label>
+          <input type="text" class="form-control" id="joblisting.contactEmail" placeholder="Email" [(ngModel)]="joblisting.contactEmail">
+        </div>
+      <button type="submit" class="btn btn-default" (click)="onJobListingCreate()">Erstellen</button>
+<!--<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
+                *ngFor="let jobListing of jobListingList"></app-joblisting>-->
+    </form>
+  </div>
+</div>
+=======
 
 <!--Joblisting-->
 <mat-form-field>
@@ -34,3 +82,4 @@
 <!--<app-joblisting [joblisting]="jobListing" (destroy)="onJobListingDestroy($event)"
                 *ngFor="let jobListing of jobListingList"></app-joblisting>-->
 
+>>>>>>> 60fd093c1c723138ff431dc97a58976da416d5ee
