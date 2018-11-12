@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {JobListing} from '../joblisting';
-import {Skill} from '../skill';
+import {JobListing} from '../models/joblisting';
+import {Skill} from '../models/skill';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {JoblistingService} from './joblisting.service';
