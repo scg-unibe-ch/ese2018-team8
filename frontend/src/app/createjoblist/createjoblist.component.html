@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="createJoblistForm">
       <div class="form-group">
         <label for="joblisting.title">Titel</label>
         <input type="text" class="form-control" id="joblisting.title" placeholder="Titel" [(ngModel)]="joblisting.title">

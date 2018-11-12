@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../models/joblisting';
 import {environment} from '../../environments/environment';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {JoblistdetailComponent} from '../joblistdetail/joblistdetail.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Skill} from '../models/skill';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService} from '../alert/alert.alertservice';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-createjoblist',
@@ -12,27 +15,35 @@ import {Skill} from '../models/skill';
   styleUrls: ['./createjoblist.component.css']
 })
 export class CreatejoblistComponent implements OnInit {
- // title = 'Jobportal';
+  createJoblistForm: FormGroup;
+  loading = false;
+  submitted = false;
   joblisting: JobListing = new JobListing(
-    null,
-    '',
-    '',
-    false,
-    null,
-    0,
-    0,
-    0,
-    null,
-    '',
-    '',
-    ''
-    );
+      null,
+      '',
+      '',
+      false,
+      null,
+      0,
+      0,
+      0,
+      null,
+      '',
+      '',
+      ''
+  );
   // jobListingList: JobListing[] = [];
 
   baseUrl = environment.baseUrl;
   joblistDetail;
+  returnUrl: string;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient,
+              private route: ActivatedRoute,
+              private router: Router,
+              private alertService: AlertService) {
+  }
+
 
   ngOnInit() {/*
     this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
@@ -50,9 +61,19 @@ export class CreatejoblistComponent implements OnInit {
         instance.contactPhone,
         instance.contactEmail));
     });
-  */}
+  */
+  }
 
   onJobListingCreate() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.createJoblistForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+
     this.joblisting = new JobListing(
         this.joblisting.id,
         this.joblisting.title,
@@ -67,30 +88,15 @@ export class CreatejoblistComponent implements OnInit {
         this.joblisting.contactPhone,
         this.joblisting.contactEmail);
     this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
-        .pipe(map ( joblisting => {
+        .pipe(map(joblisting => {
           this.joblistDetail(this.joblisting);
         }));
-    this.httpClient.post(this.baseUrl + '/joblisting', {
-      'title': this.joblisting.title,
-      'description': this.joblisting.description,
-      // 'brancheId': this.joblisting.brancheId,
-      'jobPensum': {'jobPensumFrom': this.joblisting.jobPensumFrom, 'jobPensumTo': this.joblisting.jobPensumTo},
-      'payment': this.joblisting.payment,
-      // 'companyId': this.joblisting.companyId,
-      'contactPerson': this.joblisting.contactPerson,
-      'contactPhone': this.joblisting.contactPhone,
-      'contactEmail': this.joblisting.contactEmail
-    }).pipe(map ((instance: any) => {
 
-
-    }));
+    /*
+    onJobListingDestroy(jobListing: JobListing) {
+      // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
     }
-
-
-  /*
-  onJobListingDestroy(jobListing: JobListing) {
-    // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
+      this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
+    }*/
   }
-    this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
-  }*/
 }
