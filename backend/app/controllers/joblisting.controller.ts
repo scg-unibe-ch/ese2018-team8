@@ -1,5 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import {JobListing} from '../models/joblisting.model';
+import {Company} from '../models/company.model';
 
 
 const router: Router = Router();
@@ -10,6 +11,48 @@ router.get('/', async (req: Request, res: Response) => {
     const instances = await JobListing.findAll();
     res.statusCode = 200;
     res.send(instances.map(e => e.toSimplification()));
+});
+
+router.get('/public/', async (req: Request, res: Response) => {
+
+    const options = {
+        where: {
+            isVerified: true
+        }
+    };
+    const instances = await JobListing.findAll(options);
+    if (instances !== null) {
+        res.statusCode = 200;
+        res.send(instances.map(e => e.toSimplification()));
+    } else {
+        res.statusCode = 200;
+        res.send([]);
+    }
+
+});
+
+router.get('/private/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+
+    if (res.locals.verifiedToken.role === 'business') {
+        const options = {
+            where: {
+                companyId: res.locals.verifiedToken.companyId
+            }
+        };
+        const instances = await JobListing.findAll(options);
+        if (instances !== null) {
+            res.statusCode = 200;
+            res.send(instances.map(e => e.toSimplification()));
+        } else {
+            res.statusCode = 200;
+            res.send([]);
+        }
+    } else {
+        res.status(500).send({ auth: false, message: 'Not Authorized!'});
+    }
+
+
+
 });
 
 router.post('/', async (req: Request, res: Response) => {
