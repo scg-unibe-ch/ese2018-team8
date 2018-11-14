@@ -1,10 +1,10 @@
 // Our modules
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 import { UiModule } from './ui/ui.module';
 import { AppRoutingModule } from './/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,16 +19,12 @@ import { JoblistdetailComponent } from './joblistdetail/joblistdetail.component'
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ViewjoblistingComponent} from './viewjoblisting/viewjoblisting.component';
-import { PageNotFoundComponent} from './alert/page-not-found.component';
+import { ViewjoblistingComponent } from './viewjoblisting/viewjoblisting.component';
+import { PageNotFoundComponent } from './alert/page-not-found.component';
 // Our services
-import {AuthenticationService} from './login/login.authservice';
-import {AlertService} from './alert/alert.alertservice';
+import { AuthenticationService } from './login/login.authservice';
+import { AlertService } from './alert/alert.alertservice';
 import { UserService } from './login/user.service';
-
-// Our Interceptors
-import {JwtInterceptor} from './helpers/jwt.interceptor';
-import {ErrorInterceptor} from './helpers/error.interceptor';
 
 // Our providers
 import { httpInterceptorProviders } from './helpers/interceptors.index';
@@ -65,14 +61,14 @@ import {AuthGuard} from './login/login.authguard';
     MatCardModule,
     UiModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     httpInterceptorProviders,
     AuthGuard,
     AlertService,
     AuthenticationService,
-    UserService
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
