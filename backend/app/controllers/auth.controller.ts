@@ -45,10 +45,15 @@ router.post('/login', async function (req: Request, res: Response) {
     const options = {
             where: {
                 email: instance.email
-            }
+            },
+            include: [{
+                model: Company,
+                required: false
+            }]
         };
     await User.findOne(options).then(  user => {
-            if (!user) { return res.status(404).send('No user found.'); }
+
+        if (!user) { return res.status(404).send('No user found.'); }
 
             const passwordIsValid = bcrypt.compareSync(instance.password, user.password);
 
@@ -56,11 +61,18 @@ router.post('/login', async function (req: Request, res: Response) {
                 return res.status(401).send({auth: false, token: null});
             }
 
-            const token = jwt.sign({id: user.id, role: user.role}, config.secret, {
-                expiresIn: 86400 // expires in 24 hours
-            });
+            if (user.role === 'admin') {
+                const token = jwt.sign({id: user.id, role: user.role, companyId: null}, config.secret, {
+                    expiresIn: 86400 // expires in 24 hours
+                });
+                res.status(200).send({auth: true, token: token});
+            } else {
+                const token = jwt.sign({id: user.id, role: user.role, companyId: user.company.id}, config.secret, {
+                    expiresIn: 86400 // expires in 24 hours
+                });
+                res.status(200).send({auth: true, token: token});
+            }
 
-            res.status(200).send({auth: true, token: token});
     }).catch(() => {
         res.status(500).send('Error on the server.');
     });
