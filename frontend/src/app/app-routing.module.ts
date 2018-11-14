@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'joblisting/:id', component: JoblistingComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
-  {path: 'admin', component: AdminComponent},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: '**', component: PageNotFoundComponent }
 ];
 

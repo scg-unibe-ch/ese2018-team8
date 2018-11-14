@@ -5,7 +5,7 @@ export class JobListing {
     public title: string,
     public description: string,
     public isVerified: boolean,
-    public brancheId: number,
+    public branche: string,
     public jobPensumFrom: number,
     public jobPensumTo: number,
     public payment: number,

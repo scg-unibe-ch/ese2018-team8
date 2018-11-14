@@ -1,5 +1,23 @@
 <!--Website Layout with links-->
-<app-layout>
+<!-- <app-layout> -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <img src="assets/images/MIB_logo.jpg" width="30" height="30" alt="">
+                <a class="nav-link active text-light" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
+                <span class="sr-only">(current)</span>
+                <a class="nav-link text-light" routerLinkActive="active" routerLink="/viewjoblisting">Jobs</a>
+                <a class="nav-link text-light" routerLinkActive="active" routerLink="/createjoblist">Create Job</a>
+                <!-- <a class="nav-link text-light" routerLinkActive="active" routerLink="/admin">Admin</a> -->
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link text-light" routerLinkActive="active" routerLink="/login">Login</a>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
         <!-- where to display alert messages -->
@@ -8,4 +26,5 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-</app-layout>
+    </div>
+<!-- </app-layout> -->

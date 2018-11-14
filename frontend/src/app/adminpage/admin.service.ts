@@ -29,10 +29,10 @@ export class AdminService {
   }
 
   setJobVerified(id: number): Observable<JobListing> {
-    const url = `${this.baseUrl}/joblisting/${id}`;
-    return this.http.put<JobListing>(url, sessionStorage.getItem('currentUser'))
+    const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
+    return this.http.put<JobListing>(url, {'isVerified': true})
           .pipe(
-              tap(user => console.log('job' + id + 'is Verified'))
+              tap(user => console.log('job ' + id + ' is Verified'))
           );
   }
 
@@ -42,10 +42,10 @@ export class AdminService {
 
   setUserVerified(id: number): Observable<JobListing> {
     console.log(id);
-    const url = `${this.baseUrl}/user/${id}`;
-    return this.http.put<JobListing>(url, sessionStorage.getItem('currentUser'))
+    const url = `${this.baseUrl}/user/setIsVerified/${id}`;
+    return this.http.put<JobListing>(url, {'isVerified': true})
         .pipe(
-            tap(user => console.log('user' + id + 'is Verified'))
+            tap(user => console.log('user ' + id + ' is Verified'))
         );
   }
 

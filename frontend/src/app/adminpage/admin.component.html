@@ -13,8 +13,8 @@
                     <li> Titel: {{job.title}}</li>
                     <li> Beschreibung: {{job.description}}</li>
                     <div>
-                        <button class="btn btn-success" (click)="setJobVerified(job.id)">Bestätigen</button>
-                        <button class="btn btn-danger" (click)="setJobRefused(job.id)">Ablehnen</button>
+                        <button class="btn btn-success" (click)="setJobVerified(job)">Bestätigen</button>
+                        <button class="btn btn-danger" (click)="setJobRefused(job)">Ablehnen</button>
                     </div>
                 </ul>
             </div>
@@ -26,15 +26,15 @@
             <div *ngFor="let user of userList" class="well well-sm">
                 <div class="nav navbar-brand">
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
-                        <span class="badge"> {{user.name}}</span>
+                        <span class="badge"> {{user.email}}</span>
                     </a>
                 </div>
                 <ul>
-                    <li> Name: {{user.name}}</li>
+                    <li> Name: {{user.email}}</li>
                     <li> Firma:</li>
                     <div>
-                        <button class="btn btn-success" (click)="setUserVerified(user.id)">Bestätigen</button>
-                        <button class="btn btn-danger" (click)="setUserRefused(user.id)">Ablehnen</button>
+                        <button class="btn btn-success" (click)="setUserVerified(user)">Bestätigen</button>
+                        <button class="btn btn-danger" (click)="setUserRefused(user)">Ablehnen</button>
                     </div>
                 </ul>
             </div>

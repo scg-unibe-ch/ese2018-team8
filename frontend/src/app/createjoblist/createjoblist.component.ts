@@ -22,7 +22,7 @@ export class CreatejoblistComponent implements OnInit {
       '',
       '',
       false,
-      null,
+      '',
       0,
       0,
       0,
@@ -31,14 +31,13 @@ export class CreatejoblistComponent implements OnInit {
       '',
       ''
   );
-  // jobListingList: JobListing[] = [];
 
   baseUrl = environment.baseUrl;
-  joblistDetail;
   returnUrl: string;
 
   constructor(private httpClient: HttpClient,
-              private formBuilder: FormBuilder) {}
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) {}
 
 
   ngOnInit() {
@@ -54,6 +53,7 @@ export class CreatejoblistComponent implements OnInit {
       contactEmail: ['', Validators.required]
     });
 
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
   }
 
@@ -76,18 +76,25 @@ export class CreatejoblistComponent implements OnInit {
         this.f.title.value,
         this.f.description.value,
         this.joblisting.isVerified,
-        this.f.brancheId.value,
-        this.f.jobPensumFrom.value,
-        this.f.jobPensumTo.value,
+        this.f.branche.value,
+        this.f.pensumFrom.value,
+        this.f.pensumTo.value,
         this.f.payment.value,
-        this.f.companyId.value,
+        this.joblisting.companyId,
         this.f.contactPerson.value,
         this.f.contactPhone.value,
         this.f.contactEmail.value);
-    this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
-        .pipe(map(joblisting => {
-          this.joblistDetail(this.joblisting);
-        }));
+    console.log(JSON.stringify(this.joblisting));
+    this.httpClient.post<any>(this.baseUrl + '/joblisting', this.joblisting)
+        .subscribe( (instance: any) => {
+                  // this.router.navigate([this.returnUrl]);
+              this.loading = false;
+
+            },
+                error => {
+                  // this.alertService.error(error);
+                  this.loading = false;
+                });
 
     /*
     onJobListingDestroy(jobListing: JobListing) {

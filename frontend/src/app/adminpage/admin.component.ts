@@ -53,24 +53,28 @@ export class AdminComponent implements OnInit {
             this.userList = user.filter(this.isNotVerified));
   }
 
-  setJobVerified(id: number) {
-    this.adminService.setJobVerified(id)
+  setJobVerified(job: JobListing) {
+    this.adminService.setJobVerified(job.id)
         .subscribe(job => this.jobListingList);
+    const index = this.jobListingList.indexOf(job, 0);
+    this.jobListingList.splice(index, 1);
   }
 
-  setJobRefused(id: number) {
-    this.adminService.setJobRefused(id);
+  setJobRefused(job: JobListing) {
+    this.adminService.setJobRefused(job.id);
 
   }
 
-  setUserVerified(id: number) {
-    this.adminService.setUserVerified(id)
+  setUserVerified(user: User) {
+    this.adminService.setUserVerified(user.id)
         .subscribe( user => this.userList);
+    const index = this.userList.indexOf(user, 0);
+    this.userList.splice(index, 1);
 
   }
 
-  setUserRefused(id: number) {
-    this.adminService.setUserRefused(id);
+  setUserRefused(user: User) {
+    this.adminService.setUserRefused(user.id);
 
   }
 
