@@ -7,12 +7,11 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Skill} from '../models/skill';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '../alert/alert.alertservice';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-createjoblist',
-  templateUrl: './createjoblist.component.html',
-  styleUrls: ['./createjoblist.component.css']
+  templateUrl: 'createjoblist.component.html',
 })
 export class CreatejoblistComponent implements OnInit {
   createJoblistForm: FormGroup;
@@ -23,7 +22,7 @@ export class CreatejoblistComponent implements OnInit {
       '',
       '',
       false,
-      null,
+      '',
       0,
       0,
       0,
@@ -32,39 +31,37 @@ export class CreatejoblistComponent implements OnInit {
       '',
       ''
   );
-  // jobListingList: JobListing[] = [];
 
   baseUrl = environment.baseUrl;
-  joblistDetail;
   returnUrl: string;
 
   constructor(private httpClient: HttpClient,
-              private route: ActivatedRoute,
-              private router: Router,
-              private alertService: AlertService) {
-  }
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) {}
 
 
-  ngOnInit() {/*
-    this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
-      this.jobListingList = instances.map((instance) => new JobListing(
-        instance.id,
-        instance.title,
-        instance.description,
-        instance.isVerified,
-        instance.brancheId,
-        instance.jobPensumFrom,
-        instance.jobPensumTo,
-        instance.payment,
-        instance.companyId,
-        instance.contactPerson,
-        instance.contactPhone,
-        instance.contactEmail));
+  ngOnInit() {
+    this.createJoblistForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      branche: ['', Validators.required],
+      pensumFrom: [0, Validators.required],
+      pensumTo: [0, Validators.required],
+      payment: [0, Validators.required],
+      contactPerson: ['', Validators.required],
+      contactPhone: ['', Validators.required],
+      contactEmail: ['', Validators.required]
     });
-  */
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
   }
 
-  onJobListingCreate() {
+  // convenience getter for easy access to form fields
+  get f() { return this.createJoblistForm.controls; }
+
+
+  onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -76,21 +73,28 @@ export class CreatejoblistComponent implements OnInit {
 
     this.joblisting = new JobListing(
         this.joblisting.id,
-        this.joblisting.title,
-        this.joblisting.description,
+        this.f.title.value,
+        this.f.description.value,
         this.joblisting.isVerified,
-        this.joblisting.brancheId,
-        this.joblisting.jobPensumFrom,
-        this.joblisting.jobPensumTo,
-        this.joblisting.payment,
+        this.f.branche.value,
+        this.f.pensumFrom.value,
+        this.f.pensumTo.value,
+        this.f.payment.value,
         this.joblisting.companyId,
-        this.joblisting.contactPerson,
-        this.joblisting.contactPhone,
-        this.joblisting.contactEmail);
-    this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
-        .pipe(map(joblisting => {
-          this.joblistDetail(this.joblisting);
-        }));
+        this.f.contactPerson.value,
+        this.f.contactPhone.value,
+        this.f.contactEmail.value);
+    console.log(JSON.stringify(this.joblisting));
+    this.httpClient.post<any>(this.baseUrl + '/joblisting', this.joblisting)
+        .subscribe( (instance: any) => {
+                  // this.router.navigate([this.returnUrl]);
+              this.loading = false;
+
+            },
+                error => {
+                  // this.alertService.error(error);
+                  this.loading = false;
+                });
 
     /*
     onJobListingDestroy(jobListing: JobListing) {
