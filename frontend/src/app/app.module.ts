@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { UiModule } from './ui/ui.module';
 import { AppRoutingModule } from './/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 // Our components
@@ -31,13 +30,16 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
 
 // Our guards
 import {AuthGuard} from './login/login.authguard';
+import {AdminGuard} from './adminpage/admin.guard';
+import {UiModule} from './ui/ui.module';
+import {LayoutComponent} from './ui/layout/layout.component';
+import {AdminService} from './adminpage/admin.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
     JoblistingComponent,
     SkillComponent,
     DashboardComponent,
@@ -47,11 +49,12 @@ import {AuthGuard} from './login/login.authguard';
     RegisterComponent,
     AdminComponent,
     ViewjoblistingComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    UiModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
@@ -59,16 +62,16 @@ import {AuthGuard} from './login/login.authguard';
     MatInputModule,
     MatCheckboxModule,
     MatCardModule,
-    UiModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     httpInterceptorProviders,
     AuthGuard,
-    AlertService,
-    AuthenticationService,
     UserService,
+    AdminGuard,
+    AuthenticationService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

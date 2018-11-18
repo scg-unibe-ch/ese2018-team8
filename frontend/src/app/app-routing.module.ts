@@ -10,16 +10,18 @@ import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './adminpage/admin.component';
 import {PageNotFoundComponent} from './alert/page-not-found.component';
 import {JoblistingComponent} from './joblisting/joblisting.component';
+import {AdminGuard} from './adminpage/admin.guard';
+import {UserService} from './login/user.service';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'viewjoblisting', component: ViewjoblistingComponent },
-  {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard]},
+  {path: 'createjoblist', component: CreatejoblistComponent, canActivate: [AuthGuard] },
   {path: 'joblisting/:id', component: JoblistingComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  // {path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {path: '**', component: PageNotFoundComponent }
 ];
 

@@ -45,9 +45,9 @@ export class CreatejoblistComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       branche: ['', Validators.required],
-      pensumFrom: [0, Validators.required],
-      pensumTo: [0, Validators.required],
-      payment: [0, Validators.required],
+      pensumFrom: ['', Validators.required],
+      pensumTo: ['', Validators.required],
+      payment: ['', Validators.required],
       contactPerson: ['', Validators.required],
       contactPhone: ['', Validators.required],
       contactEmail: ['', Validators.required]

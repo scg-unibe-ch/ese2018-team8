@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
-// import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
 
   constructor(
-      // private auth: AuthService,
+      private user: User,
       private router: Router
   ) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    // if (this.auth.isAdmin) {
-      // return true;
-    // }
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    if (this.user.role === 'admin') {
+        return true;
+      }
     this.router.navigate(['/']);
     return false;
   }

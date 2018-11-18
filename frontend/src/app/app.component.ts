@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {User} from './models/user';
+import {AdminGuard} from './adminpage/admin.guard';
+import {AdminService} from './adminpage/admin.service';
+import {UserService} from './login/user.service';
 
 
 @Component({
@@ -12,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    if (sessionStorage.getItem('currentUser')) {}
+
   }
 
 
