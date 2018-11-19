@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ViewjoblistingComponent} from './joblisting/viewjoblisting/viewjoblisting.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CreatejoblistComponent} from './createjoblist/createjoblist.component';
+import {JoblistdetailComponent} from './joblistdetail/joblistdetail.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './login/login.authguard';
 import {RegisterComponent} from './register/register.component';

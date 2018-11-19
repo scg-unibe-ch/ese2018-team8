@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {JobListing} from '../../models/joblisting';
-import {JoblistingService} from '../joblisting.service';
+import {JobListing} from '../models/joblisting';
+import {JoblistingService} from '../joblisting/joblisting.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-viewjoblisting',
@@ -14,12 +15,14 @@ export class ViewjoblistingComponent implements OnInit {
   jobListingList: JobListing[];
   baseUrl;
   constructor(private http: HttpClient,
-              private joblistingService: JoblistingService) { }
+              private joblistingService: JoblistingService,
+              private router: Router) { }
 
   getJobs() {
     this.joblistingService.getJobs()
       .subscribe( jobs => {
         this.jobListingList = jobs;
+        console.log('Data from joblistingService:' + this.jobListingList);
       });
   }
 
