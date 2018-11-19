@@ -1,5 +1,6 @@
 import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import {Skill} from './skill.model';
+import {Sector} from './sector.model';
 import {Company} from './company.model';
 
 
@@ -26,8 +27,9 @@ export class JobListing extends Model<JobListing> {
     @HasMany(() => Skill)
     necessarySkills!: Skill[];
 
+    @ForeignKey(() => Sector)
     @Column
-    branche!: number;
+    brancheId!: number;
 
     @Column
     jobPensumFrom!: number;
@@ -63,9 +65,11 @@ export class JobListing extends Model<JobListing> {
             'updateDate': this.updateDate.toISOString(),
             'payment': this.payment,
             'isVerified': this.isVerified,
-            'branche': this.branche,
-            'pensumFrom': this.jobPensumFrom,
-            'pensumTo': this.jobPensumTo,
+            'brancheId': this.brancheId,
+            'jobPensum': {
+                'pensumFrom': this.jobPensumFrom,
+                'pensumTo': this.jobPensumTo
+            },
             'companyId': this.companyId,
             'contactPerson': this.contactPerson,
             'contactPhone': this.contactPhone,
@@ -77,9 +81,9 @@ export class JobListing extends Model<JobListing> {
         this.title = simplification['title'];
         this.description = simplification['description'];
         this.isVerified = simplification['isVerified'];
-        this.branche = simplification['branche'];
-        this.jobPensumFrom = simplification['pensumFrom'];
-        this.jobPensumTo = simplification['pensumTo'];
+        this.brancheId = simplification['brancheId'];
+        this.jobPensumFrom = simplification['jobPensum']['pensumFrom'];
+        this.jobPensumTo = simplification['jobPensum']['pensumTo'];
         this.payment = simplification['payment'];
         this.companyId = simplification['companyId'];
         this.contactPerson = simplification['contactPerson'];

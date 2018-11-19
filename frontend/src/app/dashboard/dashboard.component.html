@@ -1,0 +1,21 @@
+<!--
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  -->
+<h3>Die neusten Inserate</h3>
+<div class="grid grid-pad" *ngFor="let jobs of jobListingList">
+  <div class=breadcrumb>
+    <a class="col-1-4" routerLink="/joblisting/{{jobs.id}}">
+      <h5>{{jobs.title}}</h5>
+    </a>
+  <h5>Beschreibung: {{jobs.description}}</h5>
+  </div>
+</div>

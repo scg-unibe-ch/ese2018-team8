@@ -16,24 +16,24 @@ export class AdminService {
 
   getInValidatedJoblistings(): Observable<JobListing[]> {
     return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
-        .pipe(
-            tap(jobs => console.log('fetched jobs'))
-        );
+      .pipe(
+        tap(jobs => console.log('fetched jobs'))
+      );
   }
 
   getInValidatedUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + '/user')
-        .pipe(
-            tap(users => console.log('fetched users'))
-        );
+      .pipe(
+        tap(users => console.log('fetched users'))
+      );
   }
 
   setJobVerified(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
     return this.http.put<JobListing>(url, {'isVerified': true})
-          .pipe(
-              tap(user => console.log('job ' + id + ' is Verified'))
-          );
+      .pipe(
+        tap(user => console.log('job ' + id + ' is Verified'))
+      );
   }
 
   setJobRefused(id: number) {
@@ -44,9 +44,9 @@ export class AdminService {
     console.log(id);
     const url = `${this.baseUrl}/user/setIsVerified/${id}`;
     return this.http.put<JobListing>(url, {'isVerified': true})
-        .pipe(
-            tap(user => console.log('user ' + id + ' is Verified'))
-        );
+      .pipe(
+        tap(user => console.log('user ' + id + ' is Verified'))
+      );
   }
 
   setUserRefused(id: number) {

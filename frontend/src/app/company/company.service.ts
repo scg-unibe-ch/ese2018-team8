@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {JobListing} from '../models/joblisting';
-import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import { JobListing} from '../models/joblisting';
+import { environment} from '../../environments/environment';
+import { Observable} from 'rxjs';
 import { tap} from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
-export class JoblistingService {
-// Here in this class we can create an instance
-// from httpClient
-  baseUrl = environment.baseUrl;
+export class CompanyService {
 
-  constructor(private http: HttpClient) {
-  }
+  baseUrl = environment.baseUrl;
+  constructor(private http: HttpClient) { }
 
   getJobs(): Observable<JobListing[]> {
     return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
@@ -22,7 +23,6 @@ export class JoblistingService {
         tap(jobs => console.log('fetched jobs'))
       );
   }
-
   getJob(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/${id}`;
     return this.http.get<JobListing>(url)
@@ -30,4 +30,11 @@ export class JoblistingService {
         tap(jobs => console.log(`fetched job id=${id}`))
       );
   }
+
+  updateJob(job: JobListing): Observable<any> {
+    return this.http.put(this.baseUrl, job, httpOptions).pipe(
+      tap(_ => console.log(`updated hero id=${job.id}`)),
+    );
+  }
+
 }

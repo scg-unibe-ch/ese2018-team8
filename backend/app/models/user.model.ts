@@ -1,10 +1,13 @@
-import {Table, Column, Model, Unique, HasOne} from 'sequelize-typescript';
-import {Company} from './company.model';
+import {Table, Column, Model, Unique} from 'sequelize-typescript';
 
 
 
 @Table
 export class User extends Model<User> {
+
+    @Unique
+    @Column
+    name!: string;
 
     @Unique
     @Column
@@ -19,12 +22,10 @@ export class User extends Model<User> {
     @Column
     isVerified!: boolean;
 
-    @HasOne(() => Company)
-    company!: Company;
-
     toSimplification(): any {
         return {
             'id': this.id,
+            'name': this.name,
             'email': this.email,
             'role': this.role,
             'isVerified': this.isVerified
@@ -32,6 +33,7 @@ export class User extends Model<User> {
     }
 
     fromSimplification(simplification: any): void {
+        this.name = simplification['name'];
         this.email = simplification['email'];
         this.password = simplification['password'];
         this.role = simplification['role'];
