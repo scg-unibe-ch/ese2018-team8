@@ -27,14 +27,12 @@
     <div *ngIf="joblisting">
       <h3>{{ joblisting.title}}</h3>
       <ul>
-        <li><strong>JobId:</strong> {{ joblisting.id }}</li>
-        <li><strong>Title:</strong> {{ joblisting.title }}</li>
-        <li><strong>Description:</strong> {{ joblisting.description }}</li>
-        <li><strong>Verified:</strong> {{ joblisting.isVerified }}</li>
+        <li><strong>Titel:</strong> {{ joblisting.title }}</li>
+        <li><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
         <li><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}}</li>
-        <li><strong>Payment:</strong> {{ joblisting.payment }}</li>
-        <li><strong>Contact person:</strong> {{ joblisting.contactPerson }}</li>
-        <li><strong>Phone:</strong> {{ joblisting.contactPhone }}</li>
+        <li><strong>Lohn:</strong> {{ joblisting.payment }}</li>
+        <li><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
+        <li><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>
         <li><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
       </ul>
     </div>

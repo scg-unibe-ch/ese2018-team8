@@ -6,6 +6,7 @@
             <span class="sr-only">(current)</span>
             <a class="nav-link text-light" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
             <a class="nav-link text-light" routerLinkActive="active" routerLink="/createjoblist">Neues Inserat</a>
+<<<<<<< HEAD
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" *ngIf="(isAdmin | async)">Admin</a>
@@ -14,6 +15,11 @@
                     <a class="dropdown-item" routerLinkActive="active" routerLink="/adminall">Inserate/Benutzer bearbeiten</a>
                 </div>
             </div>
+=======
+          <a class="nav-link text-light" routerLinkActive="active" routerLink="/company-joblist">Eigene Inserate</a>
+          <a class="nav-link text-light" routerLinkActive="active" routerLink="/admin"
+                *ngIf="isAdmin">Admin</a>
+>>>>>>> 3edefb89d927db9efcf6d44f8c420a2a7382f139
         </ul>
     </div>
     <!-- show 'login' link if user is logged out, and 'logout' link otherwise -->

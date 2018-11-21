@@ -17,8 +17,11 @@ import { JoblistdetailComponent } from './joblistdetail/joblistdetail.component'
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ViewjoblistingComponent } from './viewjoblisting/viewjoblisting.component';
+import { ViewjoblistingComponent } from './joblisting/viewjoblisting/viewjoblisting.component';
 import { PageNotFoundComponent } from './alert/page-not-found.component';
+import { CompanyJoblistComponent} from './company/company-joblist.component';
+import { CompanyEditJobComponent} from './company/company-edit-job.component';
+import { CompanyComponent} from './company/company.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
 import { AlertService } from './alert/alert.alertservice';
@@ -51,7 +54,10 @@ import {UpdateJobComponent} from './adminpage/updatejob.component';
     PageNotFoundComponent,
     AdminVerifyComponent,
     AdminAllComponent,
-    UpdateJobComponent
+    UpdateJobComponent,
+    CompanyComponent,
+    CompanyJoblistComponent,
+    CompanyEditJobComponent,
   ],
   imports: [
     BrowserModule,

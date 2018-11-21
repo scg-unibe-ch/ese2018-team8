@@ -15,7 +15,7 @@ export class JoblistingService {
   constructor(private http: HttpClient) { }
 
   getJobs(): Observable<JobListing[]> {
-    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
+    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting/public')
       .pipe(
         tap(jobs => console.log('fetched jobs'))
       );

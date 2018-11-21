@@ -1,0 +1,26 @@
+<div *ngIf="joblisting">
+  <h2>{{joblisting.title}} Bearbeitung</h2>
+  <div><span>id: </span>{{joblisting.id}}</div>
+  <div>
+    <label>Titel:
+      <input [(ngModel)]="joblisting.title" placeholder="title"/>
+    </label>
+    <label>Beschreibung:
+      <input [(ngModel)]="joblisting.description" placeholder="title"/>
+    </label>
+    <label>Titel:
+      <input [(ngModel)]="joblisting.title" placeholder="title"/>
+    </label>
+    <label>Titel:
+      <input [(ngModel)]="joblisting.title" placeholder="title"/>
+    </label>
+    <label>Titel:
+      <input [(ngModel)]="joblisting.title" placeholder="title"/>
+    </label>
+    <label>Titel:
+      <input [(ngModel)]="joblisting.title" placeholder="title"/>
+    </label>
+  </div>
+  <button (click)="goBack()">Geh zurück</button>
+  <button (click)="save()">Speichern</button>
+</div>
