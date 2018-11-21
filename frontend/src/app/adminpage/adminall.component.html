@@ -1,0 +1,42 @@
+<div class="container">
+    <h3>Stellen</h3>
+    <div class="table-bordered">
+        <div>
+            <div *ngFor="let job of jobListingList" class="well well-sm">
+                <div class="nav navbar-brand">
+                    <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
+                        <span class="badge"> {{job.title}}</span>
+                    </a>
+                </div>
+                <ul>
+                    <li> Titel: {{job.title}}</li>
+                    <li> Beschreibung: {{job.description}}</li>
+                    <div>
+                        <button class="btn btn-info" (click)="updateJob(job)">Bearbeiten</button>
+                        <button class="btn btn-danger" (click)="deleteJob(job)">Löschen</button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h3>Benutzer</h3>
+    <div class="table-bordered">
+        <div>
+            <div *ngFor="let user of userList" class="well well-sm">
+                <div class="nav navbar-brand">
+                    <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
+                        <span class="badge"> {{user.email}}</span>
+                    </a>
+                </div>
+                <ul>
+                    <li> Name: {{user.email}}</li>
+                    <li> Firma:</li>
+                    <div>
+                        <button class="btn btn-info" (click)="updateUser(user)">Bearbeiten</button>
+                        <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

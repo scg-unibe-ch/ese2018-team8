@@ -7,14 +7,15 @@ import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {AdminService} from './admin.service';
 import {UserService} from '../login/user.service';
+import {JoblistingService} from '../joblisting/joblisting.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
+  selector: 'app-adminall',
+  templateUrl: './adminall.component.html',
   styleUrls: ['./admin.component.css'],
   providers: [AdminService]
 })
-export class AdminComponent implements OnInit {
+export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
 
@@ -29,6 +30,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private adminService: AdminService,
               private userService: UserService,
+              private joblistingService: JoblistingService,
               private httpClient: HttpClient,
               private location: Location,
               private route: ActivatedRoute) {
@@ -42,45 +44,38 @@ export class AdminComponent implements OnInit {
   }
 
   getJobs() {
-    this.adminService.getInValidatedJoblistings()
-        .subscribe(job =>
-            this.jobListingList = job.filter(this.isNotVerified));
+    this.adminService.getAllJoblistings()
+        .subscribe(jobs =>
+            this.jobListingList = jobs);
   }
 
   getUsers() {
-    this.adminService.getInValidatedUsers()
-        .subscribe(user =>
-            this.userList = user.filter(this.isNotVerified));
+    this.adminService.getAllUsers()
+        .subscribe(users =>
+            this.userList = users);
   }
 
-  setJobVerified(job: JobListing) {
-    this.adminService.setJobVerified(job.id)
-        .subscribe(job => this.jobListingList);
+  updateJob(job: JobListing) {
+    this.joblistingService.getJob(job.id)
+        .subscribe(job =>
+            this.jobListingList);
+  }
+
+  deleteJob(job: JobListing) {
+    this.adminService.setJobRefused(job.id);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
 
-  setJobRefused(job: JobListing) {
-    this.adminService.setJobRefused(job.id);
-
+  updateUser(user: User) {
+    this.userService.getById(user.id)
+        .subscribe(job => this.userList);
   }
 
-  setUserVerified(user: User) {
-    this.adminService.setUserVerified(user.id)
-        .subscribe( user => this.userList);
+  deleteUser(user: User) {
+    this.adminService.setJobRefused(user.id);
     const index = this.userList.indexOf(user, 0);
-    this.userList.splice(index, 1);
-
+    this.jobListingList.splice(index, 1);
   }
 
-  setUserRefused(user: User) {
-    this.adminService.setUserRefused(user.id);
-
-  }
-
-  isNotVerified(job, index, array) {
-    if (! job.isVerified) {
-      return job;
-    }
-  }
 }
