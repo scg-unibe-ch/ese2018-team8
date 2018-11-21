@@ -3,7 +3,7 @@
     <div class="table-bordered">
         <div>
             <div *ngFor="let job of jobListingList" class="well well-sm">
-                <div class="nav navbar-brand">
+                <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
                         <span class="badge"> {{job.title}}</span>
                     </a>
@@ -23,7 +23,7 @@
     <div class="table-bordered">
         <div>
             <div *ngFor="let user of userList" class="well well-sm">
-                <div class="nav navbar-brand">
+                <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
                         <span class="badge"> {{user.email}}</span>
                     </a>
