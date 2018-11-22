@@ -18,9 +18,7 @@ export class CompanyJoblistComponent implements OnInit {
   baseUrl;
 
   constructor(private companyService: CompanyService,
-              private http: HttpClient,
-              private location: Location,
-              private route: ActivatedRoute) {}
+              private location: Location) {}
 
   getJobs() {
     this.companyService.getJobs()
@@ -35,4 +33,13 @@ export class CompanyJoblistComponent implements OnInit {
     this.getJobs();
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
+  delete(job: JobListing): void {
+    this.jobListingList = this.jobListingList.filter(h => h !== job);
+    this.companyService.deleteJob(this.job.id).subscribe();
+
+  }
 }

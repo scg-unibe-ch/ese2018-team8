@@ -1,26 +1,50 @@
-<div *ngIf="joblisting">
-  <h2>{{joblisting.title}} Bearbeitung</h2>
-  <div><span>id: </span>{{joblisting.id}}</div>
+
+<div class="container">
+  <h3>Jobdetails</h3>
   <div>
-    <label>Titel:
-      <input [(ngModel)]="joblisting.title" placeholder="title"/>
-    </label>
-    <label>Beschreibung:
-      <input [(ngModel)]="joblisting.description" placeholder="title"/>
-    </label>
-    <label>Titel:
-      <input [(ngModel)]="joblisting.title" placeholder="title"/>
-    </label>
-    <label>Titel:
-      <input [(ngModel)]="joblisting.title" placeholder="title"/>
-    </label>
-    <label>Titel:
-      <input [(ngModel)]="joblisting.title" placeholder="title"/>
-    </label>
-    <label>Titel:
-      <input [(ngModel)]="joblisting.title" placeholder="title"/>
-    </label>
+
+    <div *ngFor="let jobs of jobListingList" class="well well-sm">
+        <h5 class="badge"> {{jobs.title}}</h5>
+      <div>
+
+        <label>Titel:
+          <input [(ngModel)]="jobs.title" placeholder="title"/>
+        </label>
+      </div>
+      <div>
+        <label>Beschreibung:
+          <input [(ngModel)]="jobs.description" placeholder="description"/>
+        </label>
+      </div>
+      <div>
+        <label>Pensum:
+          <input [(ngModel)]="jobs.jobPensumTo" placeholder="pensum"/>
+        </label>
+      </div>
+      <div>
+        <label>Bezahlung:
+          <input [(ngModel)]="jobs.payment" placeholder="payment"/>
+        </label>
+      </div>
+      <div>
+        <label>Kontakt Person:
+          <input [(ngModel)]="jobs.contactPerson" placeholder="contactPerson"/>
+        </label>
+      </div>
+      <div>
+        <label>Telefon:
+          <input [(ngModel)]="jobs.contactPhone" placeholder="contactPhone"/>
+        </label>
+      </div>
+      <div>
+        <label>Email: <input [(ngModel)]="jobs.contactEmail" placeholder="contactEmail"/></label>
+      </div>
+    </div>
   </div>
-  <button (click)="goBack()">Geh zurück</button>
-  <button (click)="save()">Speichern</button>
+  <!--Buttons-->
+  <p>
+    <button (click)="save()">Speichern</button>
+    <button (click)="goBack()">Abbrechen</button>
+  </p>
 </div>
+

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { JobListing} from '../models/joblisting';
+import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService} from './company.service';
-import {ActivatedRoute} from '@angular/router';
+import { HttpClient} from '@angular/common/http';
 import { Location} from '@angular/common';
-
+import { ActivatedRoute} from '@angular/router';
+import { JobListing} from '../models/joblisting';
+import { environment} from '../../environments/environment';
 
 
 @Component({
@@ -12,20 +13,28 @@ import { Location} from '@angular/common';
   styleUrls: ['./company-edit-job.component.css']
 })
 export class CompanyEditJobComponent implements OnInit {
-
-  joblisting: JobListing;
+  jobListingList: JobListing[];
+  baseUrl;
+  @Input() joblisting: JobListing;
 
   constructor(private companyService: CompanyService,
               private route: ActivatedRoute,
-              private location: Location) { }
-
-  ngOnInit() {
+              private location: Location,
+              private httpClient: HttpClient) {
   }
 
-  getJob(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.companyService.getJob(id)
-      .subscribe(job => this.joblisting = job);
+  getJobs() {
+    this.companyService.getJobs()
+      .subscribe(jobs => {
+        this.jobListingList = jobs;
+        console.log('Data from companyService:' + this.jobListingList);
+      });
+  }
+
+  ngOnInit(
+    baseUrl = environment.baseUrl
+  ) {
+    this.getJobs();
   }
 
   goBack(): void {
@@ -36,4 +45,5 @@ export class CompanyEditJobComponent implements OnInit {
     this.companyService.updateJob(this.joblisting)
       .subscribe(() => this.goBack());
   }
+
 }

@@ -1,24 +1,27 @@
 
 <div class="container">
   <h3>Jobdetails</h3>
-  <div class="row">
-
+  <div>
     <div *ngFor="let jobs of jobListingList" class="well well-sm">
 
-      <a class="nav-item nav-link active" routerLink="/company-edit-job/{{jobs.id}}">
-        <span class="badge"> {{jobs.title}}</span>
-      </a>
+      <h4> {{jobs.title}}</h4>
 
       <ul>
         <li><strong>Titel:</strong> {{ jobs.title }}</li>
         <li><strong>Beschreibung:</strong> {{ jobs.description }}</li>
         <li><strong>Pensum:</strong> {{ jobs.jobPensumFrom }} - {{jobs.jobPensumTo}}</li>
+        <li><strong>Verifiziert:</strong> {{ jobs.isVerified }}</li>
         <li><strong>Lohn:</strong> {{ jobs.payment }}</li>
         <li><strong>Kontaktperson:</strong> {{ jobs.contactPerson }}</li>
         <li><strong>Telefon:</strong> {{ jobs.contactPhone }}</li>
         <li><strong>Email:</strong> {{ jobs.contactEmail }}</li>
       </ul>
+      <p>
+        <button class="nav-item nav-link active" routerLink="/company-edit-job">Inserat bearbeiten</button>
+        <button class="nav-item nav-link active" (click)="delete()" >Inserat löschen</button>
+
+      </p>
     </div>
   </div>
- <!-- <button class="navbar-brand" (click)="goBack()" mat-button-name="button" class="breadcrumb">go back</button>-->
+  <button class="nav-item nav-link active" (click)="goBack()">Zurück</button>
 </div>

@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../models/joblisting';
 import {environment} from '../../environments/environment';
 import {first, map} from 'rxjs/operators';
-import {JoblistdetailComponent} from '../joblistdetail/joblistdetail.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Skill} from '../models/skill';
 import {ActivatedRoute, Router} from '@angular/router';

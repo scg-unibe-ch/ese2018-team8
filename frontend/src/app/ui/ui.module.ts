@@ -5,7 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule} from '../app-routing.module';
 import { AlertService } from '../alert/alert.alertservice';
 import { AlertComponent } from '../alert/alert.component';
-import {CommonModule} from '@angular/common';
+import { CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
