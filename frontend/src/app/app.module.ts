@@ -34,6 +34,7 @@ import {UiModule} from './ui/ui.module';
 import {LayoutComponent} from './ui/layout/layout.component';
 import {AdminAllComponent} from './adminpage/adminall.component';
 import {UpdateJobComponent} from './adminpage/updatejob.component';
+import { UpdateuserComponent } from './adminpage/updateuser.component';
 
 
 
@@ -54,6 +55,7 @@ import {UpdateJobComponent} from './adminpage/updatejob.component';
     CompanyComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
+    UpdateuserComponent
   ],
   imports: [
     BrowserModule,

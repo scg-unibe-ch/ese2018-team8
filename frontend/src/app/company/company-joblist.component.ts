@@ -17,6 +17,7 @@ export class CompanyJoblistComponent implements OnInit {
   jobListingList: JobListing[];
   baseUrl;
 
+  @Input() joblisting: JobListing;
   constructor(private companyService: CompanyService,
               private location: Location) {}
 
@@ -39,7 +40,7 @@ export class CompanyJoblistComponent implements OnInit {
 
   delete(job: JobListing): void {
     this.jobListingList = this.jobListingList.filter(h => h !== job);
-    this.companyService.deleteJob(this.job.id).subscribe();
+    this.companyService.deleteJob(this.joblisting.id).subscribe();
 
   }
 }
