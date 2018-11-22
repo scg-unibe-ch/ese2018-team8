@@ -1,7 +1,7 @@
 
 <!--Navigation Links on Header-->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <div class="navbar-collapse w-100 order-1 order-md-0 dual-collapse2">
 
       <ul class="navbar-nav mr-auto">
         <!--Logo-->
@@ -22,6 +22,14 @@
 
         <a class="nav-link text-light" routerLinkActive="active" routerLink="/admin"
                 *ngIf="isAdmin">Admin</a>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false" *ngIf="(isAdmin | async)">Admin</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/adminverify">Inserate/Benutzer validieren</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/adminall">Inserate/Benutzer bearbeiten</a>
+          </div>
+        </div>
       </ul>
     </div>
     <!-- show 'login' link if user is logged out, and 'logout' link otherwise -->

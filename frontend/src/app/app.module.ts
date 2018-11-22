@@ -9,10 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 // Our components
 import { AppComponent} from './app.component';
-import { AdminComponent} from './adminpage/admin.component';
+import { AdminVerifyComponent} from './adminpage/adminverify.component';
 import { JoblistingComponent } from './joblisting/joblisting.component';
 import { SkillComponent } from './skill/skill.component';
-import { AlertComponent} from './alert/alert.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 import { LoginComponent } from './login/login.component';
@@ -31,9 +30,11 @@ import {AdminService} from './adminpage/admin.service';
 import { httpInterceptorProviders } from './helpers/interceptors.index';
 // Our guards
 import {AuthGuard} from './login/login.authguard';
-import {AdminGuard} from './adminpage/admin.guard';
 import {UiModule} from './ui/ui.module';
 import {LayoutComponent} from './ui/layout/layout.component';
+import {AdminAllComponent} from './adminpage/adminall.component';
+import {UpdateJobComponent} from './adminpage/updatejob.component';
+
 
 
 @NgModule({
@@ -45,9 +46,11 @@ import {LayoutComponent} from './ui/layout/layout.component';
     CreatejoblistComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent,
     ViewjoblistingComponent,
     PageNotFoundComponent,
+    AdminVerifyComponent,
+    AdminAllComponent,
+    UpdateJobComponent,
     CompanyComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
@@ -70,7 +73,6 @@ import {LayoutComponent} from './ui/layout/layout.component';
     httpInterceptorProviders,
     AuthGuard,
     UserService,
-    AdminGuard,
     AuthenticationService,
     AdminService
   ],
