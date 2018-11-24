@@ -38,6 +38,12 @@ export class JobListing extends Model<JobListing> {
     @Column
     payment!: number;
 
+    @Column
+    skills!: string;
+
+    @Column(DataType.DATE)
+    deadline!: Date;
+
     @ForeignKey(() => Company)
     @Column
     companyId!: number;
@@ -62,6 +68,8 @@ export class JobListing extends Model<JobListing> {
             'creationDate': this.creationDate.toISOString(),
             'updateDate': this.updateDate.toISOString(),
             'payment': this.payment,
+            'skills': this.skills,
+            'deadline': this.deadline.toISOString(),
             'isVerified': this.isVerified,
             'branche': this.branche,
             'pensumFrom': this.jobPensumFrom,
@@ -78,9 +86,11 @@ export class JobListing extends Model<JobListing> {
         this.description = simplification['description'];
         this.isVerified = simplification['isVerified'];
         this.branche = simplification['branche'];
-        this.jobPensumFrom = simplification['pensumFrom'];
-        this.jobPensumTo = simplification['pensumTo'];
+        this.jobPensumFrom = simplification['jobPensumFrom'];
+        this.jobPensumTo = simplification['jobPensumTo'];
         this.payment = simplification['payment'];
+        this.skills = simplification['skills'];
+        this.deadline =  new Date (simplification['deadline']);
         this.companyId = simplification['companyId'];
         this.contactPerson = simplification['contactPerson'];
         this.contactPhone = simplification['contactPhone'];
