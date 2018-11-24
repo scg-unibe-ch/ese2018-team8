@@ -39,8 +39,10 @@ export class CompanyJoblistComponent implements OnInit {
   }
 
   delete(job: JobListing): void {
-    this.jobListingList = this.jobListingList.filter(h => h !== job);
-    this.companyService.deleteJob(this.joblisting.id).subscribe();
+    this.companyService.deleteJob(job.id).subscribe(() => {
+        const index = this.jobListingList.indexOf(job, 0);
+        this.jobListingList.splice(index, 1);
+    });
 
   }
 }

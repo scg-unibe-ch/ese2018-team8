@@ -17,8 +17,8 @@
         <li><strong>Email:</strong> {{ jobs.contactEmail }}</li>
       </ul>
       <p>
-        <button class="nav-item nav-link active" routerLink="/company-edit-job">Inserat bearbeiten</button>
-        <button class="nav-item nav-link active" (click)="delete()" >Inserat löschen</button>
+        <button class="nav-item nav-link active" routerLink="/company-edit-job/{{jobs.id}}">Inserat bearbeiten</button>
+        <button class="nav-item nav-link active" (click)="delete(jobs)" >Inserat löschen</button>
 
       </p>
     </div>

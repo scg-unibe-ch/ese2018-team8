@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'adminverify', component: AdminVerifyComponent },
   {path: 'adminall', component: AdminAllComponent},
   {path: 'company-joblist', component: CompanyJoblistComponent},
-  {path: 'company-edit-job', component: CompanyEditJobComponent},
+  {path: 'company-edit-job/:id', component: CompanyEditJobComponent},
   {path: 'company.component', component: CompanyComponent},
   {path: '**', component: PageNotFoundComponent }
 

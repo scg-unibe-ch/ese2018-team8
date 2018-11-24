@@ -17,6 +17,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="skills">Erforderliche Fähigkeiten</label>
+            <textarea class="form-control" formControlName="skills"  id="skills"
+                      [ngClass]="{ 'is-invalid': submitted && f.skills.errors }"></textarea>
+            <div *ngIf="submitted && f.skills.errors" class="invalid-feedback">
+                <div *ngIf="f.skills.errors.required">Bitte beschreiben Sie die erforderlichen Fähigkeiten</div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="branche">Branche</label>
             <input type="text" class="form-control" formControlName="branche" id="branche"
                    [ngClass]="{ 'is-invalid': submitted && f.branche.errors }">
@@ -41,6 +49,14 @@
                    [ngClass]="{ 'is-invalid': submitted && f.payment.errors }">
             <div *ngIf="submitted && f.payment.errors" class="invalid-feedback">
                 <div *ngIf="f.payment.errors.required">Bitte geben Sie eine Lohnbasis an</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deadline">Bewerbungsfrist</label>
+            <input type="date" class="form-control-range" formControlName="deadline" id="deadline"
+                   [ngClass]="{ 'is-invalid': submitted && f.deadline.errors }">
+            <div *ngIf="submitted && f.deadline.errors" class="invalid-feedback">
+                <div *ngIf="f.deadline.errors.required">Bitte geben Sie eine Bewerbungsfrist an</div>
             </div>
         </div>
         <div class="form-group">

@@ -23,19 +23,16 @@ export class CompanyEditJobComponent implements OnInit {
               private httpClient: HttpClient) {
   }
 
-  getJobs() {
-    this.companyService.getJobs()
-      .subscribe(jobs => {
-        this.jobListingList = jobs;
-        console.log('Data from companyService:' + this.jobListingList);
-      });
-  }
+  ngOnInit(): void {
+       this.baseUrl = environment.baseUrl;
+       this.getJob();
+   }
 
-  ngOnInit(
-    baseUrl = environment.baseUrl
-  ) {
-    this.getJobs();
-  }
+    getJob(): void {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.companyService.getJob(id)
+            .subscribe(job => this.joblisting = job);
+    }
 
   goBack(): void {
     this.location.back();
