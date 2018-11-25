@@ -22,7 +22,7 @@ export class CompanyService {
       );
   }
   getJob(id: number): Observable<JobListing> {
-    const url = `${this.baseUrl}/joblisting/private/${id}`;
+    const url = `${this.baseUrl}/joblisting/${id}`;
     return this.http.get<JobListing>(url)
       .pipe(
         tap(jobs => console.log(`fetched job id=${id}`))
@@ -33,7 +33,7 @@ export class CompanyService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.baseUrl}/company-edit-job/${joblisting.id}`, joblisting, httpOptions) // UPDATE /company-edit-job/ID
+    return this.http.put(`${this.baseUrl}/joblisting/${joblisting.id}`, joblisting, httpOptions) // UPDATE /company-edit-job/ID
       .pipe(tap(jobs => console.log(`updated job id=${joblisting.id}`)));
   }
 
@@ -41,7 +41,7 @@ export class CompanyService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    const url = `${this.baseUrl}/${id}`; // DELETE /company-edit-job/ID
+    const url = `${this.baseUrl}/joblisting/${id}`; // DELETE /company-edit-job/ID
     return this.http.delete(url, httpOptions);
   }
 }

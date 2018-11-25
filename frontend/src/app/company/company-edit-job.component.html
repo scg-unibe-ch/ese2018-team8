@@ -3,41 +3,42 @@
   <h3>Jobdetails</h3>
   <div>
 
-    <div *ngFor="let jobs of jobListingList" class="well well-sm">
-        <h5 class="badge"> {{jobs.title}}</h5>
+    <div *ngIf="joblisting" class="well well-sm">
+        <h5 class="badge"> {{joblisting.title}}</h5>
       <div>
 
         <label>Titel:
-          <input [(ngModel)]="jobs.title" placeholder="title"/>
+          <input [(ngModel)]="joblisting.title" placeholder="Titel"/>
         </label>
       </div>
       <div>
         <label>Beschreibung:
-          <input [(ngModel)]="jobs.description" placeholder="description"/>
+          <input [(ngModel)]="joblisting.description" placeholder="Beschreibung"/>
         </label>
       </div>
       <div>
         <label>Pensum:
-          <input [(ngModel)]="jobs.jobPensumTo" placeholder="pensum"/>
+          <input [(ngModel)]="joblisting.jobPensumFrom" placeholder="Von"/>
+          <input [(ngModel)]="joblisting.jobPensumTo" placeholder="Bis"/>
         </label>
       </div>
       <div>
         <label>Bezahlung:
-          <input [(ngModel)]="jobs.payment" placeholder="payment"/>
+          <input [(ngModel)]="joblisting.payment" placeholder="payment"/>
         </label>
       </div>
       <div>
         <label>Kontakt Person:
-          <input [(ngModel)]="jobs.contactPerson" placeholder="contactPerson"/>
+          <input [(ngModel)]="joblisting.contactPerson" placeholder="contactPerson"/>
         </label>
       </div>
       <div>
         <label>Telefon:
-          <input [(ngModel)]="jobs.contactPhone" placeholder="contactPhone"/>
+          <input [(ngModel)]="joblisting.contactPhone" placeholder="contactPhone"/>
         </label>
       </div>
       <div>
-        <label>Email: <input [(ngModel)]="jobs.contactEmail" placeholder="contactEmail"/></label>
+        <label>Email: <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/></label>
       </div>
     </div>
   </div>
