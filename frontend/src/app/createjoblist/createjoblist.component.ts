@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobListing} from '../models/joblisting';
 import {environment} from '../../environments/environment';
-import {first, map} from 'rxjs/operators';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Skill} from '../models/skill';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService} from '../alert/alert.alertservice';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AlertService} from '../alert/alert.alertservice';
+import {AuthenticationService} from '../login/login.authservice';
+import {Token} from '../models/token';
 
 @Component({
   selector: 'app-createjoblist',
@@ -16,6 +16,7 @@ export class CreatejoblistComponent implements OnInit {
   createJoblistForm: FormGroup;
   loading = false;
   submitted = false;
+  token: Token = new Token(null, '', null);
   joblisting: JobListing = new JobListing(
       null,
       '',
@@ -38,7 +39,10 @@ export class CreatejoblistComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
               private formBuilder: FormBuilder,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private alertService: AlertService,
+              private router: Router,
+              private authService: AuthenticationService) {}
 
 
   ngOnInit() {
@@ -58,6 +62,9 @@ export class CreatejoblistComponent implements OnInit {
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
+    this.token = this.authService.getVerifiedToken();
+    console.log(this.token);
+
   }
 
   // convenience getter for easy access to form fields
@@ -74,38 +81,34 @@ export class CreatejoblistComponent implements OnInit {
 
     this.loading = true;
 
-    this.joblisting = new JobListing(
-        this.joblisting.id,
-        this.f.title.value,
-        this.f.description.value,
-        this.f.skills.value,
-        this.joblisting.isVerified,
-        this.f.branche.value,
-        this.f.pensumFrom.value,
-        this.f.pensumTo.value,
-        this.f.payment.value,
-        this.f.deadline.value,
-        this.joblisting.companyId,
-        this.f.contactPerson.value,
-        this.f.contactPhone.value,
-        this.f.contactEmail.value);
-    console.log(JSON.stringify(this.joblisting));
-    this.httpClient.post<any>(this.baseUrl + '/joblisting', this.joblisting)
-        .subscribe( (instance: any) => {
-                  // this.router.navigate([this.returnUrl]);
+    this.createJoblisting();
+
+    this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
+        .subscribe((instance: any) => {
+              this.router.navigate([this.returnUrl]);
               this.loading = false;
-
             },
-                error => {
-                  // this.alertService.error(error);
-                  this.loading = false;
-                });
+            error => {
+              this.alertService.error(error);
+              this.loading = false;
+            });
+  }
 
-    /*
-    onJobListingDestroy(jobListing: JobListing) {
-      // this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
-    }
-      this.jobListingList.splice(this.jobListingList.indexOf(jobListing), 1);
-    }*/
+  createJoblisting() {
+    this.joblisting.id = 0;
+    this.joblisting.title = this.f.title.value;
+    this.joblisting.description = this.f.description.value;
+      this.joblisting.skills = this.f.skills.value;
+
+          this.joblisting.isVerified = false;
+    this.joblisting.branche = this.f.branche.value;
+    this.joblisting.jobPensumFrom = this.f.pensumFrom.value;
+    this.joblisting.jobPensumTo = this.f.pensumTo.value;
+    this.joblisting.payment = this.f.payment.value;
+    this.joblisting.deadline = this.f.deadline.value;
+    this.joblisting.companyId = this.token.companyId;
+    this.joblisting.contactPerson = this.f.contactPerson.value;
+    this.joblisting.contactPhone = this.f.contactPhone.value;
+    this.joblisting.contactEmail = this.f.contactEmail.value;
   }
 }
