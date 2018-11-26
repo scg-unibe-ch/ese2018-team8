@@ -7,6 +7,16 @@ import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
 
 
+interface Alert {
+  type: string;
+  message: string;
+}
+
+const ALERTS: Alert[] = [{
+  type: 'success',
+  message: 'This is an success alert',
+}];
+
 @Component({
   selector: 'app-company-edit-job',
   templateUrl: './company-edit-job.component.html',
@@ -15,6 +25,7 @@ import { environment} from '../../environments/environment';
 export class CompanyEditJobComponent implements OnInit {
   jobListingList: JobListing[];
   baseUrl;
+  alerts: Alert[];
   @Input() joblisting: JobListing;
 
   constructor(private companyService: CompanyService,
@@ -41,6 +52,18 @@ export class CompanyEditJobComponent implements OnInit {
   save(): void {
     this.companyService.updateJob(this.joblisting)
       .subscribe(() => this.goBack());
+    this.alerts = Array.from(ALERTS);
   }
 
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+
+  /* Notifications
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!', {
+      closeButton: false,
+      timeOut: 4000
+    });
+  }*/
 }

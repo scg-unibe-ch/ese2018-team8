@@ -1,12 +1,14 @@
 // Our modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { LayoutComponent} from './layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule} from '@angular/common';
 // Our components
 import { AppComponent} from './app.component';
 import { AdminVerifyComponent} from './adminpage/adminverify.component';
@@ -21,20 +23,20 @@ import { PageNotFoundComponent } from './alert/page-not-found.component';
 import { CompanyJoblistComponent} from './company/company-joblist.component';
 import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import { CompanyComponent} from './company/company.component';
+import {AlertComponent} from './alert/alert.component';
+import {AdminAllComponent} from './adminpage/adminall.component';
+import {UpdateJobComponent} from './adminpage/updatejob.component';
+import { UpdateuserComponent } from './adminpage/updateuser.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
 import { AlertService } from './alert/alert.alertservice';
 import { UserService } from './login/user.service';
 import {AdminService} from './adminpage/admin.service';
+
 // Our providers
 import { httpInterceptorProviders } from './helpers/interceptors.index';
 // Our guards
 import {AuthGuard} from './login/login.authguard';
-import {UiModule} from './ui/ui.module';
-import {LayoutComponent} from './ui/layout/layout.component';
-import {AdminAllComponent} from './adminpage/adminall.component';
-import {UpdateJobComponent} from './adminpage/updatejob.component';
-import { UpdateuserComponent } from './adminpage/updateuser.component';
 
 
 
@@ -55,12 +57,13 @@ import { UpdateuserComponent } from './adminpage/updateuser.component';
     CompanyComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
-    UpdateuserComponent
+    UpdateuserComponent,
+    LayoutComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    UiModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
@@ -69,14 +72,16 @@ import { UpdateuserComponent } from './adminpage/updateuser.component';
     MatCheckboxModule,
     MatCardModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     httpInterceptorProviders,
     AuthGuard,
     UserService,
     AuthenticationService,
-    AdminService
+    AdminService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

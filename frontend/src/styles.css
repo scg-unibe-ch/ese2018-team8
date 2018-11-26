@@ -7,11 +7,12 @@ html, body {
   /* height: 100%; */
 }
 
-body {
+/*body {
   color: #323232;
   @font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-}
+  background-color: #ffffff;
+
+}/*
 
 /*everywhere else*/
 *{
