@@ -7,7 +7,8 @@ export class Company {
     public companyZIP,
     public companyCity,
     public companyPhone,
-    public companyPerson
+    public companyPerson,
+    public companyWebpage
   ) {
 
   }

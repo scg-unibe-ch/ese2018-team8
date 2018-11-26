@@ -37,8 +37,10 @@ export class RegisterComponent implements OnInit {
             companyZIP: ['', Validators.required],
             companyCity: ['', Validators.required],
             companyPhone: ['', Validators.required],
-            companyPerson: ['', Validators.required]
-        // }, {
+            companyPerson: ['', Validators.required],
+            companyWebpage: ['', Validators.required]
+
+          // }, {
         //    validator: PasswordValidation.MatchPassword // your validation method
         });
     }
@@ -61,7 +63,8 @@ export class RegisterComponent implements OnInit {
                 'companyZIP': this.f.companyZIP.value,
                 'companyCity': this.f.companyCity.value,
                 'companyPhone': this.f.companyPhone.value,
-                'companyPerson': this.f.companyPerson.value
+                'companyPerson': this.f.companyPerson.value,
+                'companyWebpage': this.f.companyWebpage.value
             }
         }).pipe(first()).subscribe(
             data => {

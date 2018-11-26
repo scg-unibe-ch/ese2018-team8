@@ -3,17 +3,16 @@ import {Routes, RouterModule} from '@angular/router';
 import {ViewjoblistingComponent} from './joblisting/viewjoblisting/viewjoblisting.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CreatejoblistComponent} from './createjoblist/createjoblist.component';
-import {JoblistdetailComponent} from './joblistdetail/joblistdetail.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AdminVerifyComponent} from './adminpage/adminverify.component';
 import {PageNotFoundComponent} from './alert/page-not-found.component';
 import {JoblistingComponent} from './joblisting/joblisting.component';
-import {UserService} from './login/user.service';
 import {AdminAllComponent} from './adminpage/adminall.component';
 import { CompanyJoblistComponent} from './company/company-joblist.component';
 import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import {AuthGuard} from './login/login.authguard';
+import {UpdateUserComponent} from './adminpage/updateuser.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
@@ -25,6 +24,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent },
   {path: 'adminverify', component: AdminVerifyComponent },
   {path: 'adminall', component: AdminAllComponent},
+  {path: 'updateuser/:id', component: UpdateUserComponent},
   {path: 'company-joblist', component: CompanyJoblistComponent},
   {path: 'company-edit-job', component: CompanyEditJobComponent},
   {path: '**', component: PageNotFoundComponent }

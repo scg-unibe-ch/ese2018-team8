@@ -13,7 +13,6 @@ import { AdminVerifyComponent} from './adminpage/adminverify.component';
 import { JoblistingComponent } from './joblisting/joblisting.component';
 import { SkillComponent } from './skill/skill.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { JoblistdetailComponent } from './joblistdetail/joblistdetail.component';
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -24,19 +23,21 @@ import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import { CompanyComponent} from './company/company.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
-import { AlertService } from './alert/alert.alertservice';
 import { UserService } from './login/user.service';
+import {AdminService} from './adminpage/admin.service';
+
 
 // Our providers
 import { httpInterceptorProviders } from './helpers/interceptors.index';
 
 // Our guards
 import {AuthGuard} from './login/login.authguard';
+
 import {UiModule} from './ui/ui.module';
-import {LayoutComponent} from './ui/layout/layout.component';
-import {AdminService} from './adminpage/admin.service';
+
+// Admin Components
 import {AdminAllComponent} from './adminpage/adminall.component';
-import {UpdateJobComponent} from './adminpage/updatejob.component';
+import {UpdateUserComponent} from './adminpage/updateuser.component';
 
 
 
@@ -46,7 +47,6 @@ import {UpdateJobComponent} from './adminpage/updatejob.component';
     JoblistingComponent,
     SkillComponent,
     DashboardComponent,
-    JoblistdetailComponent,
     CreatejoblistComponent,
     LoginComponent,
     RegisterComponent,
@@ -54,10 +54,10 @@ import {UpdateJobComponent} from './adminpage/updatejob.component';
     PageNotFoundComponent,
     AdminVerifyComponent,
     AdminAllComponent,
-    UpdateJobComponent,
     CompanyComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
+    UpdateUserComponent,
   ],
   imports: [
     BrowserModule,
