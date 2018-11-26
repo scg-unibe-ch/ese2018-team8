@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+    <label for="name">Vorname</label>
+    <input id="prename" type="text" formControlName="prename" class="form-control" value="{{user.prename}}" />
+</div>
+<div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name" class="form-control" value="{{user.name}}" />
+</div>
+<div class="form-group">
+    <label for="email">Benutzername (Email)</label>
+    <input id="email" type="text" formControlName="email" class="form-control" value="{{user.email}}" />
+</div>
+<div class="form-group">
+    <label for="companyName">Firma</label>
+    <input id="companyName" type="text" formControlName="companyName" class="form-control" value="{{company.companyName}}" />
+</div>
+<div class="form-group">
+    <label for="companyStreet">Strasse</label>
+    <input id="companyStreet" type="text" formControlName="companyStreet" class="form-control" value="{{company.companyStreet}}" />
+</div>
+<div class="form-group">
+    <label for="companyPLZ">PLZ</label>
+    <input id="companyPLZ" type="text" formControlName="companyPLZ" class="form-control" value="{{company.companyZIP}}" />
+</div>
+<div class="form-group">
+    <label for="companyCity">Stadt</label>
+    <input id="companyCity" type="text" formControlName="companyCity" class="form-control" value="{{company.companyCity}}" />
+</div>
+<div class="form-group">
+    <label for="companyPerson">Kontaktperson</label>
+    <input id="companyPerson" type="text" formControlName="companyPerson" class="form-control" value="{{company.companyPerson}}" />
+</div>
+<div class="form-group">
+    <label for="companyPhone">Telefon</label>
+    <input id="companyPhone" type="text" formControlName="companyPhone" class="form-control" value="{{company.companyPhone}}" />
+</div>
+<div class="form-group">
+    <label for="companyWebpage">Webseite</label>
+    <input id="companyWebpage" type="text" formControlName="companyWebpage" class="form-control" value="{{company.companyWebpage}}" />
+</div>
+</form>

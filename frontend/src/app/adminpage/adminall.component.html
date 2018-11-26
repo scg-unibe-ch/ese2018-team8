@@ -12,7 +12,6 @@
                     <li> Titel: {{job.title}}</li>
                     <li> Beschreibung: {{job.description}}</li>
                     <div>
-                        <button class="btn btn-info" (click)="updateJob(job)">Bearbeiten</button>
                         <button class="btn btn-danger" (click)="deleteJob(job)">Löschen</button>
                     </div>
                 </ul>
@@ -24,15 +23,15 @@
         <div>
             <div *ngFor="let user of userList" class="well well-sm">
                 <div>
-                    <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
+                    <a class="nav-item nav-link active" routerLink="/updateuser/{{user.id}}">
                         <span class="badge"> {{user.email}}</span>
                     </a>
                 </div>
                 <ul>
                     <li> Name: {{user.email}}</li>
-                    <li> Firma:</li>
+                    <li> Firma: {{company.companyName}}</li>
                     <div>
-                        <button class="btn btn-info" (click)="updateUser(user)">Bearbeiten</button>
+                        <a class="btn btn-info" role="button" routerLinkActive="active" routerLink="/updateuser/{{user.id}}">Bearbeiten</a>
                         <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>
                     </div>
                 </ul>
