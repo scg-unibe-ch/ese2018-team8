@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -59,20 +58,4 @@ export class UpdateUserComponent implements OnInit {
     this.companyService.getJob(parseInt(this.route.snapshot.paramMap.get('id')))
         .subscribe( company => this.company = company);
   }
-=======
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-updaetuser',
-  templateUrl: './updateuser.component.html',
-  styleUrls: ['./updateuser.component.css']
-})
-export class UpdateuserComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
->>>>>>> 976e89098db772ae345f57686e9b89bd65df9cdc
 }

@@ -8,7 +8,7 @@ export class Company {
     public companyCity,
     public companyPhone,
     public companyPerson,
-    public companyWebpage
+    public companyWebsite
   ) {
 
   }
