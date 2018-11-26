@@ -62,9 +62,10 @@ router.get('/private/', verifyToken, async (req: Request, res: Response, next: N
 
 router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     const instance = new JobListing();
+
     instance.fromSimplification(req.body);
     if (res.locals.verifiedToken.role === 'admin' ||
-        (res.locals.verifiedToken.role === 'business' && res.locals.verifiedToken.companyId === instance.companyId )) {
+        (res.locals.verifiedToken.role === 'business')) { // && res.locals.verifiedToken.companyId === instance.companyId )) {
         instance.isVerified = false;
         await instance.save();
         res.statusCode = 201;

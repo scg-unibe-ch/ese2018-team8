@@ -26,6 +26,9 @@ export class Company extends Model<Company> {
     @Column
     companyPerson!: string;
 
+    @Column
+    companyWebsite!: string;
+
     @BelongsTo(() => User, {onDelete: 'cascade'})
     user!: User;
 
@@ -38,7 +41,8 @@ export class Company extends Model<Company> {
             'companyZIP': this.companyZIP,
             'companyCity': this.companyCity,
             'companyPhone': this.companyPhone,
-            'companyPerson': this.companyPerson
+            'companyPerson': this.companyPerson,
+            'companyWebsite': this.companyWebsite
         };
     }
 
@@ -50,6 +54,7 @@ export class Company extends Model<Company> {
         this.companyCity = simplification['companyCity'];
         this.companyPhone = simplification['companyPhone'];
         this.companyPerson = simplification['companyPerson'];
+        this.companyWebsite = simplification['companyWebsite'];
     }
 
 }

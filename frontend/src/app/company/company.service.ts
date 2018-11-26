@@ -5,20 +5,18 @@ import { environment} from '../../environments/environment';
 import { Observable} from 'rxjs';
 import { tap} from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
-
+  joblisting: JobListing;
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
   getJobs(): Observable<JobListing[]> {
-    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
+    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting/private')
       .pipe(
         tap(jobs => console.log('fetched jobs'))
       );
@@ -31,10 +29,19 @@ export class CompanyService {
       );
   }
 
-  updateJob(job: JobListing): Observable<any> {
-    return this.http.put(this.baseUrl, job, httpOptions).pipe(
-      tap(_ => console.log(`updated hero id=${job.id}`)),
-    );
+  updateJob(joblisting: JobListing): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(`${this.baseUrl}/joblisting/${joblisting.id}`, joblisting, httpOptions) // UPDATE /company-edit-job/ID
+      .pipe(tap(jobs => console.log(`updated job id=${joblisting.id}`)));
   }
 
+  deleteJob (id: number): Observable<{}> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    const url = `${this.baseUrl}/joblisting/${id}`; // DELETE /company-edit-job/ID
+    return this.http.delete(url, httpOptions);
+  }
 }

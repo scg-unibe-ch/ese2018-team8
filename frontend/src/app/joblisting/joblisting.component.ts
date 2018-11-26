@@ -31,13 +31,14 @@ export class JoblistingComponent implements OnInit {
               private location: Location,
               private route: ActivatedRoute) {
     this.baseUrl = environment.baseUrl;
-    this.route.params.subscribe( params => this.jobListingList = params.id);
+    this.route.params.subscribe(params => this.jobListingList = params.id);
   }
 
   ngOnInit(): void {
     this.getJob();
 
   }
+
   getJob(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.joblistingService.getJob(id)
@@ -47,22 +48,23 @@ export class JoblistingComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-    /*this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
-      this.jobListingList = instances.map((instance) => new JobListing(
-        instance.id,
-        instance.title,
-        instance.description,
-        instance.isVerified,
-        instance.brancheId,
-        instance.jobPensumFrom,
-        instance.jobPensumTo,
-        instance.payment,
-        instance.companyId,
-        instance.contactPerson,
-        instance.contactPhone,
-        instance.contactEmail)
-      );
-    });*/
+
+  /*this.httpClient.get(this.baseUrl + '/joblisting').subscribe((instances: any) => {
+       this.jobListingList = instances.map((instance) => new JobListing(
+         instance.id,
+         instance.title,
+         instance.description,
+         instance.isVerified,
+         instance.brancheId,
+         instance.jobPensumFrom,
+         instance.jobPensumTo,
+         instance.payment,
+         instance.companyId,
+         instance.contactPerson,
+         instance.contactPhone,
+         instance.contactEmail)
+       );
+     });*/
 
     // this.httpClient.get(this.baseUrl + '/skill', {
     //    params:  new HttpParams().set('jobListingId', '' + this.joblisting.id)

@@ -7,7 +7,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../alert/alert.alertservice';
 import {AuthenticationService} from '../login/login.authservice';
 import {Token} from '../models/token';
-import {first, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-createjoblist',
@@ -18,8 +17,22 @@ export class CreatejoblistComponent implements OnInit {
   loading = false;
   submitted = false;
   token: Token = new Token(null, '', null);
-  joblisting: JobListing = new JobListing(0, '', '', false, '', 0,
-      0, 0, 0, '', '', '');
+  joblisting: JobListing = new JobListing(
+      null,
+      '',
+      '',
+      '',
+      false,
+      '',
+      0,
+      0,
+      0,
+      null,
+      null,
+      '',
+      '',
+      ''
+  );
 
   baseUrl = environment.baseUrl;
   returnUrl: string;
@@ -36,10 +49,12 @@ export class CreatejoblistComponent implements OnInit {
     this.createJoblistForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+        skills: ['', Validators.required],
       branche: ['', Validators.required],
       pensumFrom: ['', Validators.required],
       pensumTo: ['', Validators.required],
       payment: ['', Validators.required],
+        deadline: ['', Validators.required],
       contactPerson: ['', Validators.required],
       contactPhone: ['', Validators.required],
       contactEmail: ['', Validators.required]
@@ -68,9 +83,6 @@ export class CreatejoblistComponent implements OnInit {
 
     this.createJoblisting();
 
-    console.log(this.joblisting.title, this.joblisting.description, this.joblisting.jobPensumFrom,
-        this.joblisting.jobPensumTo, this.joblisting.payment, this.joblisting.companyId);
-
     this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
         .subscribe((instance: any) => {
               this.router.navigate([this.returnUrl]);
@@ -86,11 +98,14 @@ export class CreatejoblistComponent implements OnInit {
     this.joblisting.id = 0;
     this.joblisting.title = this.f.title.value;
     this.joblisting.description = this.f.description.value;
-    this.joblisting.isVerified = false;
+      this.joblisting.skills = this.f.skills.value;
+
+          this.joblisting.isVerified = false;
     this.joblisting.branche = this.f.branche.value;
     this.joblisting.jobPensumFrom = this.f.pensumFrom.value;
     this.joblisting.jobPensumTo = this.f.pensumTo.value;
     this.joblisting.payment = this.f.payment.value;
+    this.joblisting.deadline = this.f.deadline.value;
     this.joblisting.companyId = this.token.companyId;
     this.joblisting.contactPerson = this.f.contactPerson.value;
     this.joblisting.contactPhone = this.f.contactPhone.value;
