@@ -5,7 +5,6 @@ import {map, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user';
-import {AlertService} from '../alert/alert.alertservice';
 
 @Injectable({
   providedIn: 'root'
@@ -13,33 +12,32 @@ import {AlertService} from '../alert/alert.alertservice';
 export class AdminService {
 
   baseUrl = environment.baseUrl;
-
-  constructor(private httpClient: HttpClient,
-              private alertService: AlertService) { }
+  token = JSON.parse(sessionStorage.getItem('currentUser'));
+  constructor(private http: HttpClient) { }
 
   getInValidatedJoblistings(): Observable<JobListing[]> {
-    return this.httpClient.get<JobListing[]>(this.baseUrl + '/joblisting')
+    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
         .pipe(
             tap(jobs => console.log('fetched jobs'))
         );
   }
 
   getInValidatedUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl + '/user')
+    return this.http.get<User[]>(this.baseUrl + '/user')
         .pipe(
             tap(users => console.log('fetched users'))
         );
   }
 
   getAllJoblistings(): Observable<JobListing[]> {
-    return this.httpClient.get<JobListing[]>(this.baseUrl + '/joblisting')
+    return this.http.get<JobListing[]>(this.baseUrl + '/joblisting')
         .pipe(
             tap(jobs => console.log('fetched jobs'))
         );
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl + '/user')
+    return this.http.get<User[]>(this.baseUrl + '/user')
         .pipe(
             tap(users => console.log('fetched users'))
         );
@@ -47,7 +45,7 @@ export class AdminService {
 
   setJobVerified(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
-    return this.httpClient.put<JobListing>(url, {'isVerified': true})
+    return this.http.put<JobListing>(url, {'isVerified': true})
           .pipe(
               tap(user => console.log('job ' + id + ' is Verified'))
           );
@@ -58,8 +56,9 @@ export class AdminService {
   }
 
   setUserVerified(id: number): Observable<User> {
+    console.log(id);
     const url = `${this.baseUrl}/user/setIsVerified/${id}`;
-    return this.httpClient.put<User>(url, {'isVerified': true})
+    return this.http.put<User>(url, {'isVerified': true})
         .pipe(
             tap(user => console.log('user ' + id + ' is Verified'))
         );
@@ -69,20 +68,20 @@ export class AdminService {
 
   }
 
-  deleteJob(id: number): Observable<JobListing> {
-    const url = `${this.baseUrl}/joblisting/${id}`;
-    return this.httpClient.delete<JobListing>(url)
-        .pipe(
-            tap(job => console.log('job ' + job.id + ' is deleted'))
-        );
+  updateJob(job: JobListing): Observable<JobListing> {
+    return null;
   }
 
-  deleteUser(id: number): Observable<User> {
-    const url = `${this.baseUrl}/user/${id}`;
-    return this.httpClient.delete<User>(url)
-        .pipe(
-            tap(user => console.log('user ' + user.id + ' is deleted'))
-        );
+  deleteJob(job: JobListing): Observable<JobListing> {
+    return null;
+  }
+
+  updateUser(user: User): Observable<User> {
+    return null;
+  }
+
+  deleteUser(user: User): Observable<User> {
+    return null;
   }
 
 }

@@ -19,7 +19,7 @@ export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
 
-  baseUrl = environment.baseUrl;
+  baseUrl;
 
   @Input()
   joblisting: JobListing;
@@ -34,6 +34,7 @@ export class AdminAllComponent implements OnInit {
               private httpClient: HttpClient,
               private location: Location,
               private route: ActivatedRoute) {
+    this.baseUrl = environment.baseUrl;
     this.route.params.subscribe(params => this.jobListingList = params.id);
   }
 
@@ -54,15 +55,25 @@ export class AdminAllComponent implements OnInit {
             this.userList = users);
   }
 
+  updateJob(job: JobListing) {
+    this.joblistingService.getJob(job.id)
+        .subscribe(job =>
+            this.jobListingList);
+  }
+
   deleteJob(job: JobListing) {
-    this.adminService.deleteJob(job.id);
+    this.adminService.setJobRefused(job.id);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
 
+  updateUser(user: User) {
+    this.userService.getById(user.id)
+        .subscribe(job => this.userList);
+  }
 
   deleteUser(user: User) {
-    this.adminService.deleteUser(user.id);
+    this.adminService.setJobRefused(user.id);
     const index = this.userList.indexOf(user, 0);
     this.jobListingList.splice(index, 1);
   }

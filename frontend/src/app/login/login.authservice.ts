@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import {BehaviorSubject, from, Observable} from 'rxjs';
-import {Token} from '../models/token';
-
-import * as jwt_decode from 'jwt-decode';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {User} from '../models/user';
 
 
 @Injectable()
@@ -14,7 +12,7 @@ export class AuthenticationService {
   baseUrl;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
   isAdminSubject = new BehaviorSubject<boolean>(this.userIsAdmin());
-  token: Token = new Token(0, '', 0);
+  user = new User( 0, '', '', '', false);
 
   constructor(private httpClient: HttpClient) {
     this.baseUrl = environment.baseUrl;
@@ -31,35 +29,32 @@ export class AuthenticationService {
               sessionStorage.setItem('currentUser', JSON.stringify(user));
               // send the next status to subscribers
               this.isLoginSubject.next(true);
+              console.log('role at login: ' + this.userIsAdmin());
               if (this.userIsAdmin()) {
                 this.isAdminSubject.next(true);
               }
               return user;
           }
         }));
+
+
   }
 
-  // get verified Token
-  getVerifiedToken(): any {
-    if (this.hasToken()) {
-      try {
-        return jwt_decode(JSON.parse(sessionStorage.getItem('currentUser'))['token']);
-      } catch (error) {
-        return null;
-      }
-    } return null;
-  }
 
-  // get userRole from verified Token
-  private userIsAdmin() {
+  userIsAdmin() {
+    let userIsAdmin;
     if (this.hasToken()) {
-      console.log(this.hasToken());
-      this.token = this.getVerifiedToken();
-      if (this.token !== null && this.token.role === 'admin') {
-        return true;
-      }
+      userIsAdmin = this.httpClient.get(this.baseUrl + '/auth/me', JSON.parse(sessionStorage.getItem('currentUser')).token)
+          .pipe(map(data => {
+            console.log(data['role']);
+            if (data['role'] === 'admin') {
+              return true;
+            } else {
+              return false;
+            }
+          }));
     }
-    return false;
+    return userIsAdmin;
   }
 
   logout() {

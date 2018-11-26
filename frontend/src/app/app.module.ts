@@ -24,8 +24,9 @@ import { CompanyJoblistComponent} from './company/company-joblist.component';
 import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import { CompanyComponent} from './company/company.component';
 import {AlertComponent} from './alert/alert.component';
+import {AdminAllComponent} from './adminpage/adminall.component';
 import {UpdateJobComponent} from './adminpage/updatejob.component';
-
+import { UpdateuserComponent } from './adminpage/updateuser.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
 import { AlertService } from './alert/alert.alertservice';
@@ -37,9 +38,7 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
 // Our guards
 import {AuthGuard} from './login/login.authguard';
 
-// Admin Components
-import {AdminAllComponent} from './adminpage/adminall.component';
-import {UpdateUserComponent} from './adminpage/updateuser.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +57,7 @@ import {UpdateUserComponent} from './adminpage/updateuser.component';
     CompanyComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
-    UpdateUserComponent,
+    UpdateuserComponent,
     LayoutComponent,
     AlertComponent
   ],
