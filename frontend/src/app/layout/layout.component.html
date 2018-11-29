@@ -21,6 +21,9 @@
       <a class="nav-link text-light" routerLinkActive="active" routerLink="/createjoblist"
          *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
 
+      <a class="nav-link text-light" routerLinkActive="active" routerLink="/company-edit"
+         *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
+
       <div class="dropdown">
         <a class="nav-link dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false" *ngIf="(isAdmin | async)">Admin</a>

@@ -37,6 +37,7 @@ import {AuthGuard} from './login/login.authguard';
 // Admin Components
 import {AdminAllComponent} from './adminpage/adminall.component';
 import {UpdateUserComponent} from './adminpage/updateuser.component';
+import {CompanyEditComponent} from './company/company-edit.component';
 
 
 
@@ -55,6 +56,7 @@ import {UpdateUserComponent} from './adminpage/updateuser.component';
     AdminVerifyComponent,
     AdminAllComponent,
     CompanyComponent,
+      CompanyEditComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
     UpdateUserComponent,

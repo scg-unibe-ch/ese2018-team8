@@ -14,6 +14,7 @@ import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import {CompanyComponent} from './company/company.component';
 import {AuthGuard} from './login/login.authguard';
 import {UpdateUserComponent} from './adminpage/updateuser.component';
+import {CompanyEditComponent} from './company/company-edit.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'adminall', component: AdminAllComponent},
   {path: 'updateuser/:id', component: UpdateUserComponent},
   {path: 'company-joblist', component: CompanyJoblistComponent},
+    {path: 'company-edit', component: CompanyEditComponent, canActivate: [AuthGuard] },
   {path: 'company-edit-job/:id', component: CompanyEditJobComponent},
   {path: 'company.component', component: CompanyComponent},
   {path: '**', component: PageNotFoundComponent }
