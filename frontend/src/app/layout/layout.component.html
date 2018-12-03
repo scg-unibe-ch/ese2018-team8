@@ -1,52 +1,48 @@
 <!--Website layout-->
 
 <!--HEADER-->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <div class="navbar-collapse w-100 order-1 order-md-0 dual-collapse2">
 
-    <ul class="navbar-nav mr-auto">
-      <!--Logo-->
-      <img src="assets/images/MIB_logo.jpg" width="30" height="30" alt="">
-      <!--Links-->
-      <a class="nav-link active text-light" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
-
-      <span class="sr-only">(current)</span>
-
-      <!--Links. Link to "Eigene Inserate" and "Neues Inserat" appears when logged in.-->
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
-
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/company-joblist"
-         *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
-
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/createjoblist"
-         *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
-
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/company-edit"
-         *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
-
-      <div class="dropdown">
-        <a class="nav-link dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" *ngIf="(isAdmin | async)">Admin</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/adminverify">Inserate/Benutzer validieren</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/adminall">Inserate/Benutzer bearbeiten</a>
-        </div>
-      </div>
-    </ul>
+<div class="topnav">
+  <div id="logo">
+  <!--Logo-->
+  <img src="assets/images/MIB_logo.jpg" width="43" height="43" alt="logo">
   </div>
+  <!--Links-->
+  <a class="!active" routerLinkActive="active" routerLink="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard
+    <span class="sr-only">(current)</span></a>
+
+  <a class="!active" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
+
+  <!--Links. Link to "Eigene Inserate" and "Neues Inserat" appears when logged in.-->
+  <a class="!active" routerLinkActive="active" routerLink="/company-joblist"
+     *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
+
+  <a class="!active" routerLinkActive="active" routerLink="/createjoblist"
+     *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
+
+  <a class="!active" routerLinkActive="active" routerLink="/company-edit"
+     *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
+
+  <div class="dropdown">
+    <button class="dropbtn" *ngIf="(isAdmin | async)">Admin <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+      <a routerLinkActive="active" routerLink="/adminverify">Inserate/Benutzer validieren</a>
+      <a routerLinkActive="active" routerLink="/adminall">Inserate/Benutzer bearbeiten</a>
+    </div>
+  </div>
+
   <!-- show 'login' link if user is logged out, and 'logout' link otherwise -->
-  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-    <ul class="navbar-nav ml-auto">
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/login"
-         *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Login</a>
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/login"
-         *ngIf="(isLoggedIn | async)" (click)="authService.logout()">Logout</a>
-    </ul>
-  </div>
-</nav>
+  <div id="login">
+  <a class="!active" routerLinkActive="active" routerLink="/login"
+     *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Login / Registrieren</a>
+  <a class="!active" routerLinkActive="active" routerLink="/login"
+     *ngIf="(isLoggedIn | async)" (click)="authService.logout()">Logout</a>
+</div>
+</div>
+
 
 <!--BODY-->
-<div id="body">
+<main>
   <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <!--where to display alert messages-->
@@ -55,7 +51,7 @@
         <router-outlet></router-outlet>
       </div>
   </div>
-</div>
+</main>
 
 <!--FOOTER CONTENT-->
 <footer class="footer-distributed">
@@ -91,8 +87,8 @@
 
   <div class="footer-right">
     <p class="footer-company-about">
-      <span>About us</span>
-      We are Team 8.
+      <span>Über uns</span>
+      Wir sind Team 8.
     </p>
   </div>
 
