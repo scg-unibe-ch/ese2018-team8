@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
   providers: [JoblistingService]
 })
 export class ViewjoblistingComponent implements OnInit {
+  searchString: string;
   jobListingList: JobListing[];
   baseUrl;
   constructor(private http: HttpClient,
@@ -31,5 +32,11 @@ export class ViewjoblistingComponent implements OnInit {
   ) {
     this.getJobs();
   }
-
+    onChange() {
+        this.joblistingService.getJobsSearch(this.searchString)
+            .subscribe( jobs => {
+                this.jobListingList = jobs;
+                console.log('Data from joblistingService:' + this.jobListingList);
+            });
+    }
 }

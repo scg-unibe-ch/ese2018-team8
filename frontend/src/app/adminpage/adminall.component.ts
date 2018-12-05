@@ -18,8 +18,8 @@ import {Company} from '../models/company';
 export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
-  company = new Company(null, '', '', '', '',
-      '', '', '');
+  company = new Company(null, null, '', '', '',
+      '', '', '', '');
 
   baseUrl = environment.baseUrl;
 

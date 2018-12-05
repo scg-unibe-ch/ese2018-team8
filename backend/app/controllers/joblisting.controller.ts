@@ -1,6 +1,7 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import {JobListing} from '../models/joblisting.model';
 import {Company} from '../models/company.model';
+import * as sequelize from 'sequelize';
 
 
 const router: Router = Router();
@@ -11,7 +12,7 @@ router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunct
     if (res.locals.verifiedToken.role === 'admin') {
         const instances = await JobListing.findAll();
         res.statusCode = 200;
-        res.send(instances.map(e => e.toSimplification()));
+        res.send(instances.map(e => e.toPrivateSimplification()));
     } else {
         res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
@@ -19,16 +20,37 @@ router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunct
 });
 
 router.get('/public/', async (req: Request, res: Response) => {
+    const Op = sequelize.Op;
+    let search = req.query.search;
+    const  whereClause: { [key: string]: any } = {};
+    whereClause['isVerified'] = true;
 
+
+    if (search !=  null) {
+
+        search = decodeURIComponent(search).trim();
+        search.split(' ').forEach(function (keyword: string) {
+            keyword = keyword.trim();
+            if (keyword !== '') {
+                if (whereClause[Op.or] == null){
+                    whereClause[Op.or] = [];
+                }
+                whereClause[Op.or].push( { title: { [Op.like]: '%' + keyword + '%' } } );
+                whereClause[Op.or].push( { description: { [Op.like]: '%' + keyword + '%' } } );
+                whereClause[Op.or].push( { skills: { [Op.like]: '%' + keyword + '%' } } );
+                whereClause[Op.or].push( { branche: { [Op.like]: '%' + keyword + '%' } } );
+            }
+        });
+
+    }
     const options = {
-        where: {
-            isVerified: true
-        }
+        where: whereClause
     };
+
     const instances = await JobListing.findAll(options);
     if (instances !== null) {
         res.statusCode = 200;
-        res.send(instances.map(e => e.toSimplification()));
+        res.send(instances.map(e => e.toPublicSimplification()));
     } else {
         res.statusCode = 200;
         res.send([]);
@@ -47,7 +69,7 @@ router.get('/private/', verifyToken, async (req: Request, res: Response, next: N
         const instances = await JobListing.findAll(options);
         if (instances !== null) {
             res.statusCode = 200;
-            res.send(instances.map(e => e.toSimplification()));
+            res.send(instances.map(e => e.toPrivateSimplification()));
         } else {
             res.statusCode = 200;
             res.send([]);
@@ -65,11 +87,11 @@ router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunc
 
     instance.fromSimplification(req.body);
     if (res.locals.verifiedToken.role === 'admin' ||
-        (res.locals.verifiedToken.role === 'business')) { // && res.locals.verifiedToken.companyId === instance.companyId )) {
+        (res.locals.verifiedToken.role === 'business' && res.locals.verifiedToken.companyId === instance.companyId )) {
         instance.isVerified = false;
         await instance.save();
         res.statusCode = 201;
-        res.send(instance.toSimplification());
+        res.send(instance.toPrivateSimplification());
     }  else {
         res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
@@ -90,7 +112,7 @@ router.get('/:id', [isPublicRecord, verifyToken], async (req: Request, res: Resp
     if (res.locals.verifiedToken.role === 'admin' ||
         (res.locals.verifiedToken.role === 'business' && res.locals.verifiedToken.companyId === instance.companyId )) {
         res.statusCode = 200;
-        res.send(instance.toSimplification());
+        res.send(instance.toPrivateSimplification());
     }  else {
         res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
@@ -115,7 +137,7 @@ router.put('/:id', verifyToken, async (req: Request, res: Response, next: NextFu
             instance.isVerified = false;
             await instance.save();
             res.statusCode = 200;
-            res.send(instance.toSimplification());
+            res.send(instance.toPrivateSimplification());
         } else {
             res.status(500).send({ auth: false, message: 'CompanyID can not be changed!'});
         }
@@ -138,9 +160,10 @@ router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response
             return;
         }
         instance.isVerified = req.body['isVerified'];
-        await instance.save({fields: ['isVerified']});
+        instance.comment = req.body['comment'];
+        await instance.save({fields: ['isVerified', 'comment']});
         res.statusCode = 200;
-        res.send(instance.toSimplification());
+        res.send(instance.toPrivateSimplification());
     } else {
         res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
@@ -182,7 +205,7 @@ async function  isPublicRecord(req: Request, res: Response, next: NextFunction) 
     } else {
         if ( instance.isVerified) {
             res.statusCode = 200;
-            res.send(instance.toSimplification());
+            res.send(instance.toPrivateSimplification());
         } else {
             next();
         }

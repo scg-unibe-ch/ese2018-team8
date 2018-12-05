@@ -60,7 +60,31 @@ export class JobListing extends Model<JobListing> {
     @Column
     contactEmail!: string;
 
-    toSimplification(): any {
+    @Column
+    comment!: string;
+
+    toPrivateSimplification(): any {
+        return {
+            'id': this.id,
+            'title': this.title,
+            'description': this.description,
+            'creationDate': this.creationDate.toISOString(),
+            'updateDate': this.updateDate.toISOString(),
+            'payment': this.payment,
+            'skills': this.skills,
+            'deadline': this.deadline.toISOString(),
+            'isVerified': this.isVerified,
+            'branche': this.branche,
+            'jobPensumFrom': this.jobPensumFrom,
+            'jobPensumTo': this.jobPensumTo,
+            'companyId': this.companyId,
+            'contactPerson': this.contactPerson,
+            'contactPhone': this.contactPhone,
+            'contactEmail': this.contactEmail,
+        };
+    }
+
+    toPublicSimplification(): any {
         return {
             'id': this.id,
             'title': this.title,
@@ -95,6 +119,7 @@ export class JobListing extends Model<JobListing> {
         this.contactPerson = simplification['contactPerson'];
         this.contactPhone = simplification['contactPhone'];
         this.contactEmail = simplification['contactEmail'];
+        this.comment = simplification['comment'];
     }
 
 }
