@@ -29,9 +29,10 @@
                 </div>
                 <ul>
                     <li> Name: {{user.email}}</li>
-                    <!-- <li> Firma: {{company.companyName}}</li> -->
+                    <ng-container *ngIf="getUsersCompany(user.id)">
+                        <li> Firma: {{companyList[user.id].companyName}}</li>
+                    </ng-container>
                     <div style="margin-top: 15px">
-                        <a class="btn btn-info" role="button" routerLinkActive="active" routerLink="/updateuser/{{user.id}}">Bearbeiten</a>
                         <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>
                     </div>
                 </ul>

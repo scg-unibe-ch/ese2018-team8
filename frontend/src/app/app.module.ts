@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule} from '@angular/common';
+import { ModalModule } from 'ngb-modal';
+
 // Our components
 import { AppComponent} from './app.component';
 import { AdminVerifyComponent} from './adminpage/adminverify.component';
@@ -36,7 +38,6 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
 import {AuthGuard} from './login/login.authguard';
 // Admin Components
 import {AdminAllComponent} from './adminpage/adminall.component';
-import {UpdateUserComponent} from './adminpage/updateuser.component';
 import {AdminRefuseComponent} from './adminpage/adminrefuse.component';
 import {CompanyEditComponent} from './company/company-edit.component';
 
@@ -57,10 +58,9 @@ import {CompanyEditComponent} from './company/company-edit.component';
     AdminVerifyComponent,
     AdminAllComponent,
     CompanyComponent,
-      CompanyEditComponent,
+    CompanyEditComponent,
     CompanyJoblistComponent,
     CompanyEditJobComponent,
-    UpdateUserComponent,
     LayoutComponent,
     AlertComponent,
     AdminRefuseComponent,
@@ -77,7 +77,8 @@ import {CompanyEditComponent} from './company/company-edit.component';
     MatCardModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    ModalModule
   ],
   providers: [
     httpInterceptorProviders,

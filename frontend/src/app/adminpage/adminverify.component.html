@@ -1,8 +1,18 @@
-
-<div class="container">
+<div class="container" [hidden]="refuseWhat === '' || refuseWhat === 'user'">
+    <h5>Bitte begründen Sie die Zurückweisung dieses Inserats:</h5>
+    <textarea class="form-control" rows="5" id="refuseJoblistingReason" #refuseJoblistingReason></textarea>
+    <button class="btn-danger" (click)="cancelRefusingJob()">Abbrechen</button>
+    <button class="btn-success" (click)="setJoblistingRefused(job, refuseJoblistingReason.value)">Ok</button>
+</div>
+<div class="container" [hidden]="refuseWhat === '' || refuseWhat === 'joblisting'">
+    <h5>Bitte begründen Sie die Zurückweisung dieses Benutzers:</h5>
+    <textarea class="form-control" rows="5" id="refuseUserReason" #refuseUserReason></textarea>
+    <button class="btn-danger" (click)="cancelRefusingUser()">Abbrechen</button>
+    <button class="btn-success" (click)="setUserRefused(user, refuseUserReason.value)">Ok</button>
+</div>
+<div class="container" [hidden]="refuseWhat === 'user' || refuseWhat === 'joblisting'">
     <h3>Zu verifizierende Jobs</h3>
     <div class="table-bordered">
-        <div>
             <div *ngFor="let job of jobListingList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
@@ -13,16 +23,14 @@
                     <li> Titel: {{job.title}}</li>
                     <li> Beschreibung: {{job.description}}</li>
                     <div>
-                        <button class="btn btn-success" (click)="setJobVerified(job)">Bestätigen</button>
-                        <button class="btn btn-danger" routerLinkActive="active" routerLink="/adminrefuse">Ablehnen</button>
+                        <button class="btn btn-success" (click)="setJoblistingVerified(job)">Bestätigen</button>
+                        <button class="btn btn-danger" (click)="setJoblistingRefusedDialog(job)">Ablehnen</button>
                     </div>
                 </ul>
             </div>
-        </div>
     </div>
     <h3>Zu verifizierende Benutzer</h3>
     <div class="table-bordered">
-        <div>
             <div *ngFor="let user of userList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
@@ -32,15 +40,15 @@
                 <ul>
                     <li> Name: {{user.email}}</li>
                     <ng-container *ngIf="getUsersCompany(user.id)">
-                    <li> Firma: </li>
+                    <li> Firma: {{companyList[user.id].companyName}}</li>
                     </ng-container>
                     <div>
                         <button class="btn btn-success" (click)="setUserVerified(user)">Bestätigen</button>
-                        <button class="btn btn-danger" routerLinkActive="active" routerLink="/adminrefuse">Ablehnen</button>
+                        <button class="btn btn-danger" (click)="setUserRefusedDialog()">Ablehnen</button>
                     </div>
                 </ul>
             </div>
-        </div>
     </div>
 </div>
+
 
