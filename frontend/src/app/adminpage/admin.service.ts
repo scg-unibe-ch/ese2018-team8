@@ -60,7 +60,7 @@ export class AdminService {
       'isVerified': false,
       'comment': reason})
         .pipe(
-            tap(user => console.log('user ' + id + ' is Verified'))
+            tap(user => console.log('joblisting ' + id + ' is refused'))
         );
 
   }
@@ -86,7 +86,7 @@ export class AdminService {
       'isVerified': false,
       'comment': reason})
         .pipe(
-            tap(user => console.log('user ' + id + ' is Verified'))
+            tap(user => console.log('user ' + id + ' is refused'))
         );
   }
 

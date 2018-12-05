@@ -1,14 +1,18 @@
 <div class="container" [hidden]="refuseWhat === '' || refuseWhat === 'user'">
     <h5>Bitte begründen Sie die Zurückweisung dieses Inserats:</h5>
-    <textarea class="form-control" rows="5" id="refuseJoblistingReason" #refuseJoblistingReason></textarea>
-    <button class="btn-danger" (click)="cancelRefusingJob()">Abbrechen</button>
-    <button class="btn-success" (click)="setJoblistingRefused(job, refuseJoblistingReason.value)">Ok</button>
+    <p><textarea #refuseJoblistingReason rows="5" (keyup.enter)="setJoblistingRefused(job, refuseJoblistingReason.value)"></textarea></p>
+    <p>
+        <button class="btn-danger" (click)="cancelRefusingJob()">Abbrechen</button>
+        <button class="btn-success" (click)="setJoblistingRefused(refuseJoblistingReason.value)">Ok</button>
+    </p>
 </div>
 <div class="container" [hidden]="refuseWhat === '' || refuseWhat === 'joblisting'">
     <h5>Bitte begründen Sie die Zurückweisung dieses Benutzers:</h5>
-    <textarea class="form-control" rows="5" id="refuseUserReason" #refuseUserReason></textarea>
-    <button class="btn-danger" (click)="cancelRefusingUser()">Abbrechen</button>
-    <button class="btn-success" (click)="setUserRefused(user, refuseUserReason.value)">Ok</button>
+    <p><textarea  #refuseUserReason rows="5" (keyup.enter)="setUserRefused(user, refuseUserReason.value)"></textarea></p>
+    <p>
+        <button class="btn-danger" (click)="cancelRefusingUser()">Abbrechen</button>
+        <button class="btn-success" (click)="setUserRefused(refuseUserReason.value)">Ok</button>
+    </p>
 </div>
 <div class="container" [hidden]="refuseWhat === 'user' || refuseWhat === 'joblisting'">
     <h3>Zu verifizierende Jobs</h3>
