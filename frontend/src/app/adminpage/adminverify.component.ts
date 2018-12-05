@@ -59,7 +59,7 @@ export class AdminVerifyComponent implements OnInit {
   }
 
   getUsersCompany(id: number) {
-    return this.companyList.find(company => company['userId'] === id);
+    return this.companyList.find(company => company.userId === id);
   }
 
   setJoblistingVerified(job: JobListing) {
@@ -76,8 +76,9 @@ export class AdminVerifyComponent implements OnInit {
   }
 
   setJoblistingRefused(reason: string) {
-    console.log(this.joblisting);
-    this.adminService.setJobRefused(this.joblisting.id, reason);
+    this.refuseWhat = '';
+    this.adminService.setJobRefused(this.joblisting.id, reason)
+        .subscribe(job => this.jobListingList);
     const index = this.jobListingList.indexOf(this.joblisting, 0);
     this.jobListingList.splice(index, 1);
   }
@@ -95,19 +96,20 @@ export class AdminVerifyComponent implements OnInit {
   }
 
   setUserRefused(reason: string) {
-    this.adminService.setUserRefused(this.user.id, reason);
+    console.log(this.user);
+    this.refuseWhat = '';
+    this.adminService.setUserRefused(this.user.id, reason)
+        .subscribe(user => this.userList);
     const index = this.userList.indexOf(this.user, 0);
     this.userList.splice(index, 1);
   }
 
   cancelRefusingJob() {
     this.refuseWhat = '';
-    // this.ngOnInit();
   }
 
   cancelRefusingUser() {
     this.refuseWhat = '';
-    // this.ngOnInit();
   }
 
   isNotVerified(item, index, array) {

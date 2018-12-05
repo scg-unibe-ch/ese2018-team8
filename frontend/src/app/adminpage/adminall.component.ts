@@ -62,11 +62,12 @@ export class AdminAllComponent implements OnInit {
   getCompanies() {
     this.adminService.getCompanyData()
         .subscribe( company =>
-            this.companyList = company);
+          this.companyList = company
+        );
   }
 
   getUsersCompany(id: number) {
-    return this.companyList.find(company => company['userId'] === id);
+    return this.companyList.find(company => company.userId === id);
   }
 
   deleteJob(job: JobListing) {
