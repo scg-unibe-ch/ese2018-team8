@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {JobListing} from '../models/joblisting';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
@@ -20,6 +20,14 @@ export class JoblistingService {
         tap(jobs => console.log('fetched jobs'))
       );
   }
+    getJobsSearch(searchString: string): Observable<JobListing[]> {
+        return this.http.get<JobListing[]>(this.baseUrl + '/joblisting/public', {
+            params:  new HttpParams().set('search', '' + encodeURI(searchString))
+        })
+            .pipe(
+                tap(jobs => console.log('fetched jobs'))
+            );
+    }
   getJob(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/${id}`;
     return this.http.get<JobListing>(url)

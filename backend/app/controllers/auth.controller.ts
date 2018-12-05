@@ -77,6 +77,24 @@ router.post('/login', async function (req: Request, res: Response) {
         res.status(500).send('Error on the server.');
     });
 });
+/*
+router.put('/changePassword', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+    const oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+    newPassword = bcrypt.hashSync(newPassword, 8);
+
+
+
+    await instanceUser.save().then( async () => {
+
+        res.statusCode = 201;
+        res.send('Password changed');
+    }).catch( () => {
+        res.statusCode = 500;
+        res.send('There was a problem with changing the password');
+    });
+
+});*/
 
 router.get('/logout', async function (req: Request, res: Response)  {
     res.status(200).send({ auth: false, token: null });

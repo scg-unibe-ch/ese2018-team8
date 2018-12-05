@@ -1,4 +1,9 @@
-<h3>Joblistings:</h3>
+<h3>Suche:</h3>
+<mat-form-field>
+  <input matInput placeholder="Suche" [(ngModel)]="searchString" name="search" (ngModelChange)="onChange()">
+</mat-form-field>
+
+<h3>Jobinserate:</h3>
 
 <div class="grid grid-pad">
   <div *ngFor="let jobs of jobListingList" class="well well-sm">

@@ -22,12 +22,16 @@ export class User extends Model<User> {
     @HasOne(() => Company)
     company!: Company;
 
+    @Column
+    comment!: string;
+
     toSimplification(): any {
         return {
             'id': this.id,
             'email': this.email,
             'role': this.role,
-            'isVerified': this.isVerified
+            'isVerified': this.isVerified,
+            'comment': this.comment
         };
     }
 
@@ -36,5 +40,6 @@ export class User extends Model<User> {
         this.password = simplification['password'];
         this.role = simplification['role'];
         this.isVerified = simplification['isVerified'];
+        this.comment = simplification['comment'];
     }
 }
