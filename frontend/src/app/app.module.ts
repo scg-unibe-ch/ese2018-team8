@@ -40,6 +40,7 @@ import {AuthGuard} from './login/login.authguard';
 import {AdminAllComponent} from './adminpage/adminall.component';
 import {AdminRefuseComponent} from './adminpage/adminrefuse.component';
 import {CompanyEditComponent} from './company/company-edit.component';
+import {ChangePasswordComponent} from './changePassword/change-password.component';
 
 
 
@@ -64,6 +65,7 @@ import {CompanyEditComponent} from './company/company-edit.component';
     LayoutComponent,
     AlertComponent,
     AdminRefuseComponent,
+      ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

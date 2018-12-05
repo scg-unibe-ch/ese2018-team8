@@ -14,6 +14,7 @@ import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import {CompanyComponent} from './company/company.component';
 import {AuthGuard} from './login/login.authguard';
 import {CompanyEditComponent} from './company/company-edit.component';
+import {ChangePasswordComponent} from './changePassword/change-password.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'company-edit', component: CompanyEditComponent, canActivate: [AuthGuard] },
   {path: 'company-edit-job/:id', component: CompanyEditJobComponent},
   {path: 'company.component', component: CompanyComponent},
+    {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
   {path: '**', component: PageNotFoundComponent }
 
 ];
