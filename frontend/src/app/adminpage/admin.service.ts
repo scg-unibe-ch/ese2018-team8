@@ -54,7 +54,14 @@ export class AdminService {
           );
   }
 
-  setJobRefused(id: number) {
+  setJobRefused(id: number, reason: string) {
+    const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
+    return this.httpClient.put<JobListing>(url, {
+      'isVerified': false,
+      'comment': reason})
+        .pipe(
+            tap(user => console.log('user ' + id + ' is Verified'))
+        );
 
   }
 
@@ -73,8 +80,14 @@ export class AdminService {
         );
   }
 
-  setUserRefused(id: number) {
-
+  setUserRefused(id: number, reason: string) {
+    const url = `${this.baseUrl}/user/setIsVerified/${id}`;
+    return this.httpClient.put<User>(url, {
+      'isVerified': false,
+      'comment': reason})
+        .pipe(
+            tap(user => console.log('user ' + id + ' is Verified'))
+        );
   }
 
   deleteJob(id: number): Observable<JobListing> {

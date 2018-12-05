@@ -51,6 +51,7 @@ export class CompanyEditComponent implements OnInit {
             params:  new HttpParams().set('userId', '' + this.token.id)
         }).subscribe((instance: any) => {
             this.company =  new Company(instance.id,
+                instance.userId,
                 instance.companyName,
                 instance.companyStreet,
                 instance.companyZIP,

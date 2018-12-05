@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-adminrefuse',
-  templateUrl: 'adminrefuse.component.html'
+  templateUrl: './adminrefuse.component.html'
 })
 
-export class AdminRefuseComponent implements OnInit {
+export class AdminRefuseComponent {
 
-  constructor() {}
-
-  ngOnInit(): void {
-  }
 }

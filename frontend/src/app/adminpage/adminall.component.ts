@@ -18,8 +18,9 @@ import {Company} from '../models/company';
 export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
+  companyList: Company[] = [];
   company = new Company(null, '', '', '', '',
-      '', '', '');
+      '', '', '', '');
 
   baseUrl = environment.baseUrl;
 
@@ -42,6 +43,7 @@ export class AdminAllComponent implements OnInit {
   ngOnInit(): void {
     this.getJobs();
     this.getUsers();
+    this.getCompanies();
   }
 
   getJobs() {
@@ -55,6 +57,16 @@ export class AdminAllComponent implements OnInit {
         .subscribe(users =>
             this.userList = users);
     this.getJobs();
+  }
+
+  getCompanies() {
+    this.adminService.getCompanyData()
+        .subscribe( company =>
+            this.companyList = company);
+  }
+
+  getUsersCompany(id: number) {
+    return this.companyList.find(company => company['userId'] === id);
   }
 
   deleteJob(job: JobListing) {

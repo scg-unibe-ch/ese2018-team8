@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {JobListing} from '../models/joblisting';
@@ -9,6 +9,7 @@ import {AdminService} from './admin.service';
 import {UserService} from '../login/user.service';
 import {CompanyService} from '../company/company.service';
 import {Company} from '../models/company';
+import {ModalManager} from 'ngb-modal';
 
 @Component({
   selector: 'app-adminverify',
@@ -16,23 +17,21 @@ import {Company} from '../models/company';
   providers: [AdminService]
 })
 export class AdminVerifyComponent implements OnInit {
+
+  refuseWhat = '';
+
   jobListingList: JobListing[] = [];
   userList: User[] = [];
   companyList: Company[] = [];
 
-
-
-  @Input()
-  joblisting: JobListing;
-  user: User;
+  joblisting = new JobListing(null, '', '', '', false, '', 0,
+      0, 0, null, 0, '', '', '');
+  user = new User(null, '', '', '', '', false);
 
   @Output()
   destroy = new EventEmitter<JobListing>();
 
-  constructor(private adminService: AdminService,
-              private companyService: CompanyService,
-              private router: Router,
-              private _location: Location) {
+  constructor(private adminService: AdminService) {
   }
 
   ngOnInit(): void {
@@ -60,22 +59,26 @@ export class AdminVerifyComponent implements OnInit {
   }
 
   getUsersCompany(id: number) {
-    return this.companyList.find(user => user['id'] === userId);
+    return this.companyList.find(company => company['userId'] === id);
   }
 
-  setJobVerified(job: JobListing) {
+  setJoblistingVerified(job: JobListing) {
     this.adminService.setJobVerified(job.id)
         .subscribe(job => this.jobListingList);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
 
-  setJobRefusedReason(job: JobListing) {
+
+  setJoblistingRefusedDialog(job: JobListing) {
+    this.joblisting = job;
+    this.refuseWhat = 'joblisting';
   }
 
-  setJobRefused(job: JobListing) {
-    this.adminService.setJobRefused(job.id);
-    const index = this.jobListingList.indexOf(job, 0);
+  setJoblistingRefused(reason: string) {
+    console.log(this.joblisting);
+    this.adminService.setJobRefused(this.joblisting.id, reason);
+    const index = this.jobListingList.indexOf(this.joblisting, 0);
     this.jobListingList.splice(index, 1);
   }
 
@@ -86,24 +89,30 @@ export class AdminVerifyComponent implements OnInit {
     this.userList.splice(index, 1);
   }
 
-  setUserRefusedReason(user: User) {
+  setUserRefusedDialog(user: User) {
+    this.user = user;
+    this.refuseWhat = 'user';
   }
 
-  setUserRefused(user: User) {
-    this.adminService.setUserRefused(user.id);
-    const index = this.userList.indexOf(user, 0);
+  setUserRefused(reason: string) {
+    this.adminService.setUserRefused(this.user.id, reason);
+    const index = this.userList.indexOf(this.user, 0);
     this.userList.splice(index, 1);
   }
 
   cancelRefusingJob() {
+    this.refuseWhat = '';
+    // this.ngOnInit();
   }
 
   cancelRefusingUser() {
+    this.refuseWhat = '';
+    // this.ngOnInit();
   }
 
-  isNotVerified(job, index, array) {
-    if (! job.isVerified) {
-      return job;
+  isNotVerified(item, index, array) {
+    if (! item.isVerified && ! item.isUpdatedByAdmin) {
+      return item;
     }
   }
 }
