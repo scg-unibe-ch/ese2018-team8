@@ -89,6 +89,7 @@ router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunc
     if (res.locals.verifiedToken.role === 'admin' ||
         (res.locals.verifiedToken.role === 'business' && res.locals.verifiedToken.companyId === instance.companyId )) {
         instance.isVerified = false;
+        instance.isUpdatedByAdmin = false;
         await instance.save();
         res.statusCode = 201;
         res.send(instance.toPrivateSimplification());
@@ -135,6 +136,7 @@ router.put('/:id', verifyToken, async (req: Request, res: Response, next: NextFu
         instance.fromSimplification(req.body);
         if ( previousCompanyId === instance.companyId) {
             instance.isVerified = false;
+            instance.isUpdatedByAdmin = false;
             await instance.save();
             res.statusCode = 200;
             res.send(instance.toPrivateSimplification());
@@ -161,6 +163,7 @@ router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response
         }
         instance.isVerified = req.body['isVerified'];
         instance.comment = req.body['comment'];
+        instance.isUpdatedByAdmin = true;
         await instance.save({fields: ['isVerified', 'comment']});
         res.statusCode = 200;
         res.send(instance.toPrivateSimplification());

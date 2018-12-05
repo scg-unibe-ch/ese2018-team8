@@ -19,7 +19,7 @@ router.post('/register', async (req: Request, res: Response) => {
     instanceUser.password = bcrypt.hashSync(instanceUser.password, 8);
     instanceUser.role = 'business';
     instanceUser.isVerified = false;
-
+    instanceUser.isUpdatedByAdmin = true;
     instanceCompany.fromSimplification(req.body['company']);
 
     await instanceUser.save().then( async () => {
@@ -83,19 +83,41 @@ router.put('/changePassword', verifyToken, async (req: Request, res: Response, n
     let newPassword = req.body.newPassword;
     newPassword = bcrypt.hashSync(newPassword, 8);
 
+    const instance = new User();
+    instance.fromSimplification(req.body);
+    const options = {
+        where: {
+            id: res.locals.verifiedToken.id
+        }
+    };
+
+    await User.findOne(options).then( async user => {
+
+        if (!user) { return res.status(404).send('No user found.'); }
+
+        const passwordIsValid = bcrypt.compareSync(oldPassword, user.password);
+
+        if (!passwordIsValid || !user.isVerified) {
+            return res.status(401).send('Password not valid');
+        }
+        user.password = newPassword;
+        await user.save({fields: ['password']}).then( async () => {
+            res.statusCode = 201;
+            res.send('Password changed');
+        }).catch( () => {
+            res.statusCode = 500;
+            res.send('There was a problem with changing the password');
+        });
 
 
-    await instanceUser.save().then( async () => {
-
-        res.statusCode = 201;
-        res.send('Password changed');
-    }).catch( () => {
-        res.statusCode = 500;
-        res.send('There was a problem with changing the password');
+    }).catch(() => {
+        res.status(500).send('Error on the server.');
     });
 
-});*/
 
+
+});
+*/
 router.get('/logout', async function (req: Request, res: Response)  {
     res.status(200).send({ auth: false, token: null });
 });

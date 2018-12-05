@@ -63,6 +63,9 @@ export class JobListing extends Model<JobListing> {
     @Column
     comment!: string;
 
+    @Column
+    isUpdatedByAdmin!: boolean;
+
     toPrivateSimplification(): any {
         return {
             'id': this.id,
@@ -81,6 +84,8 @@ export class JobListing extends Model<JobListing> {
             'contactPerson': this.contactPerson,
             'contactPhone': this.contactPhone,
             'contactEmail': this.contactEmail,
+            'comment': this.comment,
+            'isUpdatedByAdmin': this.isUpdatedByAdmin,
         };
     }
 
@@ -120,6 +125,7 @@ export class JobListing extends Model<JobListing> {
         this.contactPhone = simplification['contactPhone'];
         this.contactEmail = simplification['contactEmail'];
         this.comment = simplification['comment'];
+        this.isUpdatedByAdmin = simplification['isUpdatedByAdmin'];
     }
 
 }

@@ -25,13 +25,17 @@ export class User extends Model<User> {
     @Column
     comment!: string;
 
+    @Column
+    isUpdatedByAdmin!: boolean;
+
     toSimplification(): any {
         return {
             'id': this.id,
             'email': this.email,
             'role': this.role,
             'isVerified': this.isVerified,
-            'comment': this.comment
+            'comment': this.comment,
+            'isUpdatedByAdmin': this.isUpdatedByAdmin
         };
     }
 
@@ -41,5 +45,6 @@ export class User extends Model<User> {
         this.role = simplification['role'];
         this.isVerified = simplification['isVerified'];
         this.comment = simplification['comment'];
+        this.isUpdatedByAdmin = simplification['isUpdatedByAdmin'];
     }
 }
