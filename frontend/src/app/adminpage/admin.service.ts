@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user';
 import {AlertService} from '../alert/alert.alertservice';
+import {Company} from '../models/company';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,13 @@ export class AdminService {
     return this.httpClient.put<User>(url, {'isVerified': true})
         .pipe(
             tap(user => console.log('user ' + id + ' is Verified'))
+        );
+  }
+
+  getCompanyData(): Observable<Company[]> {
+    return this.httpClient.get<Company[]>(this.baseUrl + '/company')
+        .pipe(
+            tap(company => console.log('companies fetched'))
         );
   }
 

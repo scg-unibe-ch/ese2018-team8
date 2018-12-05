@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   baseUrl: string;
   loading = false;
-
+  submitted = false;
+  registered = false;
 
   constructor(private formBuilder: FormBuilder,
               private httpClient: HttpClient,
@@ -37,8 +38,7 @@ export class RegisterComponent implements OnInit {
             companyZIP: ['', Validators.required],
             companyCity: ['', Validators.required],
             companyPhone: ['', Validators.required],
-            companyPerson: ['', Validators.required],
-            companyWebsite: ['', Validators.required]
+            companyPerson: ['', Validators.required]
         // }, {
         //    validator: PasswordValidation.MatchPassword // your validation method
         });
@@ -48,12 +48,15 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         // this.registerForm = this.formBuilder.group( {validator: PasswordValidation.MatchPassword});
+      this.submitted = true;
 
         // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-        this.httpClient.post(this.baseUrl + '/auth/register', {
+      if (this.registerForm.invalid) {
+        return;
+      }
+      this.registered = true;
+
+      this.httpClient.post(this.baseUrl + '/auth/register', {
             'email': this.f.email.value,
             'password': this.f.password.value,
             'company': {
@@ -62,20 +65,20 @@ export class RegisterComponent implements OnInit {
                 'companyZIP': this.f.companyZIP.value,
                 'companyCity': this.f.companyCity.value,
                 'companyPhone': this.f.companyPhone.value,
-                'companyPerson': this.f.companyPerson.value,
-                'companyWebsite': this.f.companyWebsite.value
+                'companyPerson': this.f.companyPerson.value
             }
         }).pipe(first()).subscribe(
             data => {
-              this.alertService.success('Registration successful', true);
-              this.router.navigate(['/login']);
+              this.alertService.success('Sie sind registriert!', true);
+              // this.router.navigate(['/login']);
             },
             error => {
+              this.registered = false;
               this.alertService.error(error);
-              this.loading = false;
             });
+      this.loading = false;
 
-        this.router.navigate(['']);
+        // this.router.navigate(['']);
     }
 
 }

@@ -2,12 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {JobListing} from '../models/joblisting';
-import {User} from '../models/user';
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
-import {AdminService} from './admin.service';
 import {UserService} from '../login/user.service';
-import {JoblistingService} from '../joblisting/joblisting.service';
 import {CompanyService} from '../company/company.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

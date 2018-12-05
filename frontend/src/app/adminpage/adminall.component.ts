@@ -8,16 +8,18 @@ import {ActivatedRoute} from '@angular/router';
 import {AdminService} from './admin.service';
 import {UserService} from '../login/user.service';
 import {JoblistingService} from '../joblisting/joblisting.service';
+import {Company} from '../models/company';
 
 @Component({
   selector: 'app-adminall',
   templateUrl: './adminall.component.html',
-  styleUrls: ['./admin.component.css'],
   providers: [AdminService]
 })
 export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
+  company = new Company(null, '', '', '', '',
+      '', '', '');
 
   baseUrl = environment.baseUrl;
 
@@ -52,6 +54,7 @@ export class AdminAllComponent implements OnInit {
     this.adminService.getAllUsers()
         .subscribe(users =>
             this.userList = users);
+    this.getJobs();
   }
 
   deleteJob(job: JobListing) {

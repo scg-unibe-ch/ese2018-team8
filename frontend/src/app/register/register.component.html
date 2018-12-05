@@ -1,47 +1,74 @@
 <h2>Registration</h2>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<p></p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" [hidden]="registered">
   <h3>Benutzer</h3>
   <div class="form-group">
-    <label for="email">Email</label>
-    <input id="email" type="text" formControlName="email" class="form-control"  />
+    <label for="email">Email *</label>
+    <input id="email" type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors.required">Bitte geben Sie eine Email-Adresse ein.</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="password">Passwort</label>
-    <input id="password" type="password" formControlName="password" class="form-control" />
+    <label for="password">Passwort *</label>
+    <input id="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Bitte geben Sie ein Passwort ein.</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="passwordConfirm">Passwort bestätigen</label>
-    <input id="passwordConfirm" type="password" formControlName="passwordConfirm" class="form-control" />
+    <label for="passwordConfirm">Passwort bestätigen *</label>
+    <input id="passwordConfirm" type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }" />
+    <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
+      <div *ngIf="f.passwordConfirm.errors.required">Bitte bestätigen Sie Ihr Passwort.</div>
+    </div>
   </div>
   <div class="form-group">
     <h3>Firmen Information</h3>
     <div class="form-group">
-      <label for="companyName">Firma</label>
-      <input id="companyName" type="text" formControlName="companyName" class="form-control"  />
+      <label for="companyName">Firma *</label>
+      <input id="companyName" type="text" formControlName="companyName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" />
+      <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+        <div *ngIf="f.companyName.errors.required">Bitte geben Sie den Namen Ihrer Firma ein.</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="companyStreet">Strasse</label>
-      <input id="companyStreet" type="text" formControlName="companyStreet" class="form-control"  />
+      <label for="companyStreet">Strasse *</label>
+      <input id="companyStreet" type="text" formControlName="companyStreet" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyStreet.errors }" />
+      <div *ngIf="submitted && f.companyStreet.errors" class="invalid-feedback">
+        <div *ngIf="f.companyStreet.errors.required">Bitte geben Sie die Strasse Ihrer Firma ein.</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="companyCity">Ort</label>
-      <input id="companyCity" type="text" formControlName="companyCity" class="form-control"  />
-
-      <label for="companyZIP">PLZ</label>
-      <input id="companyZIP" type="text" formControlName="companyZIP" class="form-control"  />
+      <label for="companyCity">Ort *</label>
+      <input id="companyCity" type="text" formControlName="companyCity" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyCity.errors }" />
+      <div *ngIf="submitted && f.companyCity.errors" class="invalid-feedback">
+        <div *ngIf="f.companyCity.errors.required">Bitte geben Sie den Ort Ihrer Firma ein.</div>
+      </div>
+      <label for="companyZIP">PLZ *</label>
+      <input id="companyZIP" type="text" formControlName="companyZIP" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyZIP.errors }" />
+      <div *ngIf="submitted && f.companyZIP.errors" class="invalid-feedback">
+        <div *ngIf="f.companyZIP.errors.required">Bitte geben Sie die PLZ Ihrer Firma ein.</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="companyPhone">Telefonnummer</label>
-      <input id="companyPhone" type="text" formControlName="companyPhone" class="form-control"  />
+      <label for="companyPhone">Telefonnummer *</label>
+      <input id="companyPhone" type="text" formControlName="companyPhone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }" />
+      <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
+        <div *ngIf="f.companyPhone.errors.required">Bitte geben Sie eine Telefonnummer ein.</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="companyPerson">Kontaktperson</label>
-      <input id="companyPerson" type="text" formControlName="companyPerson" class="form-control"  />
+      <label for="companyPerson">Kontaktperson *</label>
+      <input id="companyPerson" type="text" formControlName="companyPerson" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.companyPerson.errors }" />
+      <div *ngIf="submitted && f.companyPerson.errors" class="invalid-feedback">
+        <div *ngIf="f.companyPerson.errors.required">Bitte geben Sie eine Kontaktperson ein.</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="companyWebsite">Webseite</label>
-      <input id="companyWebsite" type="text" formControlName="companyWebsite" class="form-control"  />
+      <label for="companyWebsite">Webseite (optional)</label>
+      <input id="companyWebsite" type="text" class="form-control"  />
     </div>
-    <button  class="btn btn-primary">Register</button>
+    <button  class="btn btn-primary">Registrieren</button>
   </div>
 </form>

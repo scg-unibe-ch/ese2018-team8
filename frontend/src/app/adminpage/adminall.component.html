@@ -11,7 +11,7 @@
                 <ul>
                     <li> Titel: {{job.title}}</li>
                     <li> Beschreibung: {{job.description}}</li>
-                    <div>
+                    <div style="margin-top: 15px">
                         <button class="btn btn-danger" (click)="deleteJob(job)">Löschen</button>
                     </div>
                 </ul>
@@ -29,8 +29,8 @@
                 </div>
                 <ul>
                     <li> Name: {{user.email}}</li>
-                    <li> Firma: {{company.companyName}}</li>
-                    <div>
+                    <!-- <li> Firma: {{company.companyName}}</li> -->
+                    <div style="margin-top: 15px">
                         <a class="btn btn-info" role="button" routerLinkActive="active" routerLink="/updateuser/{{user.id}}">Bearbeiten</a>
                         <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>
                     </div>
