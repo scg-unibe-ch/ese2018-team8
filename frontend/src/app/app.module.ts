@@ -15,7 +15,6 @@ import { ModalModule } from 'ngb-modal';
 import { AppComponent} from './app.component';
 import { AdminVerifyComponent} from './adminpage/adminverify.component';
 import { JoblistingComponent } from './joblisting/joblisting.component';
-import { SkillComponent } from './skill/skill.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatejoblistComponent } from './createjoblist/createjoblist.component';
 import { LoginComponent } from './login/login.component';
@@ -38,7 +37,6 @@ import { httpInterceptorProviders } from './helpers/interceptors.index';
 import {AuthGuard} from './login/login.authguard';
 // Admin Components
 import {AdminAllComponent} from './adminpage/adminall.component';
-import {AdminRefuseComponent} from './adminpage/adminrefuse.component';
 import {CompanyEditComponent} from './company/company-edit.component';
 
 
@@ -48,7 +46,6 @@ import {CompanyEditComponent} from './company/company-edit.component';
   declarations: [
     AppComponent,
     JoblistingComponent,
-    SkillComponent,
     DashboardComponent,
     CreatejoblistComponent,
     LoginComponent,
@@ -63,7 +60,6 @@ import {CompanyEditComponent} from './company/company-edit.component';
     CompanyEditJobComponent,
     LayoutComponent,
     AlertComponent,
-    AdminRefuseComponent,
   ],
   imports: [
     BrowserModule,

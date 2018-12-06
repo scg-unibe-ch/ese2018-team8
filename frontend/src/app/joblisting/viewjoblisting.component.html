@@ -9,15 +9,15 @@
   <div *ngFor="let jobs of jobListingList" class="well well-sm">
 
     <div class="nav navbar-brand">
-      <a class="nav-item nav-link active" routerLink="/joblisting/{{jobs.id}}">
-        <span class="badge"> {{jobs.title}}</span>
-      </a>
+      <span> {{jobs.title}}</span>
     </div>
 
     <ul>
       <li><strong> Titel:</strong> {{jobs.title}}</li>
-
       <li><strong> Beschreibung:</strong> {{jobs.description}}</li>
+      <li>
+        <a class="nav-item nav-link active" routerLink="/joblisting/{{jobs.id}}">Mehr...</a>
+      </li>
     </ul>
 
   </div>

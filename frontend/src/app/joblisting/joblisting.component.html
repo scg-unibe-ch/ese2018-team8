@@ -20,23 +20,20 @@
 
 -->
 
-<div class="container">
+<div>
   <h3>Jobdetails</h3>
-  <div class="row">
-
-    <div *ngIf="joblisting">
-      <h3>{{ joblisting.title}}</h3>
-      <ul>
-        <li><strong>Titel:</strong> {{ joblisting.title }}</li>
-        <li><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
-        <li><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>
-        <li><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}}</li>
-        <li><strong>Lohn:</strong> {{ joblisting.payment }}</li>
-        <li><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
-        <li><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>
-        <li><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
-      </ul>
+</div>
+  <div class="grid grid-pad" style="width: 30rem">
+    <div class="well well-sm" *ngIf="joblisting">
+      <h5>{{ joblisting.title}}</h5>
+      <p><strong>Titel:</strong> {{ joblisting.title }}</p>
+      <p><strong>Beschreibung:</strong> {{ joblisting.description }}</p>
+      <p><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</p>
+      <p><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}}</p>
+      <p><strong>Lohn:</strong> {{ joblisting.payment }}</p>
+      <p><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</p>
+      <p><strong>Telefon:</strong> {{ joblisting.contactPhone }}</p>
+      <p><strong>Email:</strong> {{ joblisting.contactEmail }}</p>
+      <button class="btn btn-primary" (click)="goBack()" >Zurück</button>
     </div>
   </div>
-  <button class="btn-primary" (click)="goBack()" >Zurück</button>
-</div>
