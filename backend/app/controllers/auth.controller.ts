@@ -77,8 +77,8 @@ router.post('/login', async function (req: Request, res: Response) {
         res.status(500).send('Error on the server.');
     });
 });
-/*
-router.put('/changePassword', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
+
+router.put('/change-password', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     const oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
     newPassword = bcrypt.hashSync(newPassword, 8);
@@ -92,7 +92,7 @@ router.put('/changePassword', verifyToken, async (req: Request, res: Response, n
     };
 
     await User.findOne(options).then( async user => {
-
+        console.log('User found');
         if (!user) { return res.status(404).send('No user found.'); }
 
         const passwordIsValid = bcrypt.compareSync(oldPassword, user.password);
@@ -100,6 +100,7 @@ router.put('/changePassword', verifyToken, async (req: Request, res: Response, n
         if (!passwordIsValid || !user.isVerified) {
             return res.status(401).send('Password not valid');
         }
+        console.log('Password Checked');
         user.password = newPassword;
         await user.save({fields: ['password']}).then( async () => {
             res.statusCode = 201;
@@ -117,7 +118,7 @@ router.put('/changePassword', verifyToken, async (req: Request, res: Response, n
 
 
 });
-*/
+
 router.get('/logout', async function (req: Request, res: Response)  {
     res.status(200).send({ auth: false, token: null });
 });

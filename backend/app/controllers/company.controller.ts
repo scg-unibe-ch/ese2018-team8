@@ -4,7 +4,15 @@ import {Company} from '../models/company.model';
 const router: Router = Router();
 const verifyToken = require('../middleware/verifyToken.middleware');
 
+
 router.get('/', async (req: Request, res: Response) => {
+
+    const instances = await Company.findAll();
+    res.statusCode = 200;
+    res.send(instances.map(e => e.toSimplification()));
+});
+
+router.get('/byUserId', async (req: Request, res: Response) => {
     const userId = parseInt(req.query.userId);
     let options = {};
     if (userId != null) {

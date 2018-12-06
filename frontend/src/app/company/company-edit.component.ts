@@ -47,7 +47,7 @@ export class CompanyEditComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         this.token = this.authService.getVerifiedToken();
-        this.httpClient.get(this.baseUrl + '/company', {
+        this.httpClient.get(this.baseUrl + '/company/byUserId', {
             params:  new HttpParams().set('userId', '' + this.token.id)
         }).subscribe((instance: any) => {
             this.company =  new Company(instance.id,
