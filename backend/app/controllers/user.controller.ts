@@ -66,7 +66,7 @@ router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response
         }
         instance.fromSimplification(req.body);
         instance.isUpdatedByAdmin = true;
-        await instance.save({fields: ['isVerified', 'comment']});
+        await instance.save({fields: ['isVerified', 'comment', 'isUpdatedByAdmin']});
         res.statusCode = 200;
         res.send(instance.toSimplification());
     } else {
