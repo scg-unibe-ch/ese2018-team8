@@ -10,6 +10,13 @@ html {
 .topnav #logo {
    float: left;
  }
+.topnav #title {
+  float: left;
+  margin-top: 10px;
+  margin-left: 5px;
+  font: bold 14px sans-serif;
+  color: darkslategray;
+}
 /* Links */
 .topnav a {
   float: left;
@@ -31,12 +38,8 @@ html {
   background-color: #117a8b;
   color: #ffffff;
 }
-/* Search box */
-.topnav input[type=text] {
-  float: right;
-  border: #117a8b;
-  margin-right: 16px;
-  font-size: 12px;
+.topnav i.fa-sign-in{
+
 }
 .topnav #login {
   float: right;
@@ -97,7 +100,7 @@ html {
 
 }
 /*CSS Body*/
-main {
+#body {
   max-height: 100%;
   min-height: 15cm;
   overflow: hidden; /*prevents bottom scroll bar*/

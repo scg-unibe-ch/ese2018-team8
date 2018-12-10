@@ -5,7 +5,10 @@
 <div class="topnav">
   <div id="logo">
   <!--Logo-->
-  <img src="assets/images/MIB_logo.jpg" width="43" height="43" alt="logo">
+  <img src="../favicon_t8.ico" width="43" height="43" alt="logo">
+  </div>
+  <div id="title">
+    <h1 style="font-family: Arial, Helvetica, sans-serif"> <strong>Jobbly</strong>  </h1>
   </div>
   <!--Links-->
   <a class="!active" routerLinkActive="active" routerLink="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard
@@ -34,7 +37,7 @@
   <!-- show 'login' link if user is logged out, and 'logout' link otherwise -->
   <div id="login">
     <a class="!active" routerLinkActive="active" routerLink="/login"
-     *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Login</a>
+     *ngIf="!(isLoggedIn | async)" (click)="authService.login()"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
     <a class="!active" routerLinkActive="active" routerLink="/register"
        *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Registrieren</a>
     <a class="!active" routerLinkActive="active" routerLink="/login"
@@ -44,16 +47,12 @@
 
 
 <!--BODY-->
-<main>
-
-
-        <!--where to display alert messages-->
+<div id="body">
+   <!--where to display alert messages-->
         <app-alert></app-alert>
         <!-- where to display components-->
         <router-outlet></router-outlet>
-
-
-</main>
+</div>
 
 <!--FOOTER CONTENT-->
 <footer class="footer-distributed">
