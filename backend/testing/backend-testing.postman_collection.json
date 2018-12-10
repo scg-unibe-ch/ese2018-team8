@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "0f9aed33-aeba-4aa2-b5be-2aa2ed217cf0",
+		"name": "backend-testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add-and-verify-new-user",
+			"item": [
+				{
+					"name": "Register new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c668e98-656f-426a-9cda-2363b7911f2e",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"userId\", jsonData.id);",
+									"",
+									"tests[\"POST Register new user - Status code is 201\"] = responseCode.code === 201;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"postman@test.ch\",\n\t\"password\": \"postman\",\n\t\"company\": {\n\t\t\"companyName\": \"Postman AG\",\n\t\t\"companyStreet\": \"Postmanstreet 123\",\n\t\t\"companyZIP\": \"1234\",\n\t\t\"companyCity\": \"PostCity\",\n\t\t\"companyPhone\": \"098 765 43 21\",\n\t\t\"companyPerson\": \"Post Man\",\n\t\t\"companyWebsite\": \"www.postman.org\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-as-admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8913d51c-23fb-46c9-97c2-f3243325c1e6",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"adminToken\", jsonData.token);",
+									"",
+									"tests[\"Login as admin - Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Login as admin - auth was successful\"] = jsonData.auth;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@team8.ch\",\n\t\"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-as-user unverified",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "09a45dba-d5d3-4bd5-a859-94b5ce813d71",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"userToken\", jsonData.token);",
+									"",
+									"tests[\"Login fails because user not verified - auth is false\"] = jsonData.auth === false;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"postman@test.ch\",\n\t\"password\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-user-as-admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "645c7aae-a00d-4f38-9302-0333ba77d244",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"PUT setIsVerified - Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isVerified\": true\n}\t\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/setIsVerified/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"setIsVerified",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-as-user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "09a45dba-d5d3-4bd5-a859-94b5ce813d71",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"userToken\", jsonData.token);",
+									"",
+									"tests[\"Login successful - auth is true\"] = jsonData.auth === true;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"postman@test.ch\",\n\t\"password\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create and verifiy Joblisting",
+			"item": [
+				{
+					"name": "Get companyId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c93ac2bf-752f-47cc-b70f-8efdfe99fce7",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"companyId\", jsonData.companyId);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Joblisting as user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "728ce401-080d-4b34-af45-49fea212f6d0",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"joblistingId\", jsonData.id);",
+									"",
+									"tests[\"POST joblisting as user - Status code is 201\"] = responseCode.code === 201;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n          \"title\": \"Test Listing\",\n          \"description\": \"Test Listing Desc\",\n          \"payment\": 2000,\n          \"skills\": \"Test skills\",\n          \"deadline\": \"2008-09-15T15:53:00\",\n\t\t  \"branche\": \"Test\",\n          \"jobPensumFrom\": 20,\n          \"jobPensumTo\": 30,\n          \"companyId\": {{companyId}},\n          \"contactPerson\": \"Testperson\",\n          \"contactPhone\": \"Testphone\",\n          \"contactEmail\": \"email@test.ch\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select joblisting as student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d735e3-0309-442b-b94c-d358d91386d6",
+								"exec": [
+									"tests[\"GET student should not see the joblisting - Status code is 401\"] = responseCode.code === 401;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select joblisting as user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "024ea77a-c715-4c75-8afb-67971787cb87",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"GET user should see the joblisting - Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin verify joblisting",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isVerified\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/setIsVerified/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"setIsVerified",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "select joblisting as student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d735e3-0309-442b-b94c-d358d91386d6",
+								"exec": [
+									"tests[\"GET student should not see the joblisting - Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "delete Joblisting ",
+			"item": [
+				{
+					"name": "delete joblisting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d81ddf1-07c2-4894-a99a-a88092317208",
+								"exec": [
+									"tests[\"DELETE joblisting as user - Status code is 204\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check if joblisting was deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d735e3-0309-442b-b94c-d358d91386d6",
+								"exec": [
+									"tests[\"GET should have been deleted - Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Joblisting as user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "728ce401-080d-4b34-af45-49fea212f6d0",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"joblistingId\", jsonData.id);",
+									"",
+									"tests[\"POST joblisting as user - Status code is 201\"] = responseCode.code === 201;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{userToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n          \"title\": \"Test Listing\",\n          \"description\": \"Test Listing Desc\",\n          \"payment\": 2000,\n          \"skills\": \"Test skills\",\n          \"deadline\": \"2008-09-15T15:53:00\",\n\t\t  \"branche\": \"Test\",\n          \"jobPensumFrom\": 20,\n          \"jobPensumTo\": 30,\n          \"companyId\": {{companyId}},\n          \"contactPerson\": \"Testperson\",\n          \"contactPhone\": \"Testphone\",\n          \"contactEmail\": \"email@test.ch\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teardown",
+			"item": [
+				{
+					"name": "delete-created-user-as-admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "943e109b-cba5-4ff8-b694-2a71a32fdcbf",
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check if user got deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "188a406b-b94a-4001-943c-4807af977dc2",
+								"exec": [
+									"tests[\"GET user should have been deleted - Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check that company was deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a3cdd35-c2b6-4264-8adc-1781246002a9",
+								"exec": [
+									"tests[\"GET company should have been deleted - Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/company/{{companyId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"company",
+								"{{companyId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check if joblisting was deleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d735e3-0309-442b-b94c-d358d91386d6",
+								"exec": [
+									"tests[\"GET student should not see the joblisting - Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/joblisting/{{joblistingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"joblisting",
+								"{{joblistingId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2faaf7c9-a9b7-43c5-828e-71537f63d541",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "69861ba7-efac-4fa8-b5a0-e690804a1231",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
