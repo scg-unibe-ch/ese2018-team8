@@ -1,0 +1,12 @@
+/*background image*/
+.bg {
+  /* The image used */
+  /* Half height */
+  /* Center and scale the image nicely */
+ /* background: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg") no-repeat center;*/
+  height: 100%;
+}
+
+.row {
+  margin-left: 60px;
+}

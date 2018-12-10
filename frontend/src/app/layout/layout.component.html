@@ -5,7 +5,10 @@
 <div class="topnav">
   <div id="logo">
   <!--Logo-->
-  <img src="assets/images/MIB_logo.jpg" width="43" height="43" alt="logo">
+  <img src="../favicon_t8.ico" width="43" height="43" alt="logo">
+  </div>
+  <div id="title">
+    <h1 style="font-family: Arial, Helvetica, sans-serif"> <strong>Jobbly</strong>  </h1>
   </div>
   <!--Links-->
   <a class="!active" routerLinkActive="active" routerLink="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard
@@ -26,32 +29,30 @@
   <div class="dropdown">
     <button class="dropbtn" *ngIf="(isAdmin | async)">Admin <i class="fa fa-caret-down"></i></button>
     <div class="dropdown-content">
-      <a routerLinkActive="active" routerLink="/adminverify">Inserate/Benutzer validieren</a>
-      <a routerLinkActive="active" routerLink="/adminall">Inserate/Benutzer bearbeiten</a>
+      <a routerLinkActive="active" routerLink="/adminverify">Validieren</a>
+      <a routerLinkActive="active" routerLink="/adminall">Bearbeiten</a>
     </div>
   </div>
 
   <!-- show 'login' link if user is logged out, and 'logout' link otherwise -->
   <div id="login">
-  <a class="!active" routerLinkActive="active" routerLink="/login"
-     *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Login / Registrieren</a>
-  <a class="!active" routerLinkActive="active" routerLink="/login"
+    <a class="!active" routerLinkActive="active" routerLink="/login"
+     *ngIf="!(isLoggedIn | async)" (click)="authService.login()"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+    <a class="!active" routerLinkActive="active" routerLink="/register"
+       *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Registrieren</a>
+    <a class="!active" routerLinkActive="active" routerLink="/login"
      *ngIf="(isLoggedIn | async)" (click)="authService.logout()">Logout</a>
 </div>
 </div>
 
 
 <!--BODY-->
-<main>
-  <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <!--where to display alert messages-->
+<div id="body">
+   <!--where to display alert messages-->
         <app-alert></app-alert>
         <!-- where to display components-->
         <router-outlet></router-outlet>
-      </div>
-  </div>
-</main>
+</div>
 
 <!--FOOTER CONTENT-->
 <footer class="footer-distributed">
@@ -61,11 +62,11 @@
     <img src="assets/images/MIB_logo2.png" width="200" height="90" alt="">
 
     <p class="footer-links">
-      <a class="nav-link active text-light" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/company-joblist"
+      <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
+      <a class="nav-link" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
+      <a class="nav-link" routerLinkActive="active" routerLink="/company-joblist"
          *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
-      <a class="nav-link text-light" routerLinkActive="active" routerLink="/createjoblist"
+      <a class="nav-link" routerLinkActive="active" routerLink="/createjoblist"
          *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
     </p>
     <!--Displays "MIB © 2018"-->

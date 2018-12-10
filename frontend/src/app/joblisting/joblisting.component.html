@@ -1,40 +1,18 @@
-<!--<mat-card>
-  <mat-form-field>
-    <input matInput placeholder="Title" [(ngModel)]="joblisting.title" name="title" (ngModelChange)="onSave()">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Description" [(ngModel)]="joblisting.description" name="description" (ngModelChange)="onSave()">
-  </mat-form-field>
-  <button mat-button (click)="onDestroy()">destroy</button>
-  <br/>
-  <mat-form-field>
-    <input matInput placeholder="Add Skill" [(ngModel)]="skill.name" name="name">
-  </mat-form-field>
-  <button mat-button (click)="onNecessarySkillCreate()">add</button>
-  <mat-list>
-    <mat-list-item *ngFor="let skill of necessarySkillList">
-      <app-skill [skill]="skill" (destroy)="onNecessarySkillDestroy($event)"></app-skill>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
 
--->
-
-<div>
-  <h3>Jobdetails</h3>
-</div>
   <div class="grid grid-pad" style="width: 30rem">
     <div class="well well-sm" *ngIf="joblisting">
       <h5>{{ joblisting.title}}</h5>
-      <p><strong>Titel:</strong> {{ joblisting.title }}</p>
-      <p><strong>Beschreibung:</strong> {{ joblisting.description }}</p>
-      <p><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</p>
-      <p><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}}</p>
-      <p><strong>Lohn:</strong> {{ joblisting.payment }}</p>
-      <p><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</p>
-      <p><strong>Telefon:</strong> {{ joblisting.contactPhone }}</p>
-      <p><strong>Email:</strong> {{ joblisting.contactEmail }}</p>
-      <button class="btn btn-info" (click)="getApplyingForm(joblisting)" >Bewerben</button>
+      <ul class="list-group">
+      <li class="list-group-item"><strong>Titel:</strong> {{ joblisting.title }}</li>
+      <li class="list-group-item"><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
+      <li class="list-group-item"><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>
+      <li class="list-group-item"><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}} %</li>
+      <li class="list-group-item"><strong>Lohn:</strong> {{ joblisting.payment }} CHF</li>
+      <li class="list-group-item"><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
+      <li class="list-group-item"><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
+      </ul>
+      <!-- <button class="btn btn-primary" (click)="goBack()" >Zurück</button> -->
     </div>
     <button class="btn btn-primary" (click)="goBack()" >Zurück</button>
   </div>

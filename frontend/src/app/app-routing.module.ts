@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'company-edit', component: CompanyEditComponent, canActivate: [AuthGuard] },
   {path: 'company-edit-job/:id', component: CompanyEditJobComponent},
   {path: 'company.component', component: CompanyComponent},
-    {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
+  {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
   {path: '**', component: PageNotFoundComponent }
 
 ];

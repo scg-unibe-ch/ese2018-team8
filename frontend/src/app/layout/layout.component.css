@@ -4,17 +4,23 @@ html {
 }
 /* Background of Navbar*/
 .topnav {
-  background-color: #333;
+  background-color:  gainsboro;
   overflow: hidden;
-  margin-bottom: 10px;
 }
 .topnav #logo {
    float: left;
  }
+.topnav #title {
+  float: left;
+  margin-top: 10px;
+  margin-left: 5px;
+  font: bold 14px sans-serif;
+  color: darkslategray;
+}
 /* Links */
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: darkslategray;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -23,21 +29,17 @@ html {
 
 /* Hover over links */
 .topnav a:hover {
-  background-color: #ddd;
-  color: white;
+  background-color: #ffffff;
+  color: #ffffff;
 }
 
 /* Active link */
 .topnav a.active {
   background-color: #117a8b;
-  color: white;
+  color: #ffffff;
 }
-/* Search box */
-.topnav input[type=text] {
-  float: right;
-  border: #117a8b;
-  margin-right: 16px;
-  font-size: 12px;
+.topnav i.fa-sign-in{
+
 }
 .topnav #login {
   float: right;
@@ -48,7 +50,7 @@ html {
   font-size: 12px;
   border: none;
   outline: none;
-  color: white;
+  color: darkslategray;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
@@ -70,7 +72,7 @@ html {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -89,7 +91,7 @@ html {
 
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: #dddddd;
 }
 
 /* Show the dropdown menu on hover */
@@ -98,16 +100,16 @@ html {
 
 }
 /*CSS Body*/
-main {
+#body {
+  max-height: 100%;
   min-height: 15cm;
   overflow: hidden; /*prevents bottom scroll bar*/
+
 }
 
 /*CSS Footer*/
-.clear { clear: both; height: 60px; }
-
 .footer-distributed{
-  background-color: #292c2f;
+  background-color: gainsboro;
   box-sizing: border-box;
   align-self: flex-end;
   bottom: 0;
@@ -115,10 +117,10 @@ main {
   text-align: left;
   font: bold 14px sans-serif;
 
-  padding: 30px 40px;
-  margin-top: 3px;
-}
+  padding: 10px 40px;
 
+}
+/*Footer content alignment by narrow window*/
 .footer-distributed .footer-left,
 .footer-distributed .footer-center,
 .footer-distributed .footer-right{
@@ -135,17 +137,27 @@ main {
 /* Footer links */
 
 .footer-distributed .footer-links{
-  color:  #ffffff;
+  color: darkslategray;
   margin: 18px 0px 12px;
   padding: 0;
 }
 
 .footer-distributed .footer-links a{
   display:inline-block;
-  line-height: 1.8;
+  line-height: 2;
   text-decoration: none;
-  color:  inherit;
+  color:  darkslategray;
 }
+.footer-distributed .footer-links a:hover {
+  text-decoration-line: underline;
+  }
+/*shows which link is currently active*/
+.footer-distributed .footer-links a.active {
+  text-decoration-line: underline;
+}
+
+
+
 
 .footer-distributed .footer-company-name{
   color:  #8f9296;
@@ -159,10 +171,10 @@ main {
 .footer-distributed .footer-center{
   width: 35%;
 }
-
+/*Footer icons*/
 .footer-distributed .footer-center i{
-  background-color:  #33383b;
-  color: #ffffff;
+  background-color: white;
+  color: darkslategray;
   font-size: 25px;
   width: 38px;
   height: 38px;
@@ -180,7 +192,7 @@ main {
 
 .footer-distributed .footer-center p{
   display: inline-block;
-  color: #ffffff;
+  color: darkslategray;
   vertical-align: middle;
   margin:0;
 }
@@ -192,11 +204,6 @@ main {
   line-height:2;
 }
 
-.footer-distributed .footer-center p a{
-  color:  #5383d3;
-  text-decoration: none;;
-}
-
 /* Footer Right */
 
 .footer-distributed .footer-right{
@@ -205,7 +212,7 @@ main {
 
 .footer-distributed .footer-company-about{
   line-height: 20px;
-  color:  #92999f;
+  color:  darkslategray;
   font-size: 13px;
   font-weight: normal;
   margin: 0;
@@ -213,52 +220,10 @@ main {
 
 .footer-distributed .footer-company-about span{
   display: block;
-  color:  #ffffff;
+  color: darkslategray;
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.footer-distributed .footer-icons{
-  margin-top: 25px;
-}
-
-.footer-distributed .footer-icons a{
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  background-color:  #33383b;
-  border-radius: 2px;
-
-  font-size: 20px;
-  color: #ffffff;
-  text-align: center;
-  line-height: 35px;
-
-  margin-right: 3px;
-  margin-bottom: 5px;
-}
-
-/* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 880px) {
-
-  .footer-distributed{
-    font: bold 14px sans-serif;
-  }
-
-  .footer-distributed .footer-left,
-  .footer-distributed .footer-center,
-  .footer-distributed .footer-right{
-    display: block;
-    width: 100%;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-
-  .footer-distributed .footer-center i{
-    margin-left: 0;
-  }
-
-}
 

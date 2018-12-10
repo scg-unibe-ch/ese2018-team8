@@ -2,14 +2,10 @@
 import express from 'express';
 
 // import all the controllers. If you add a new controller, make sure to import it here as well.
-import {JobListingController, SkillController, CompanyController, JobPensumController,
-    SectorController, UserController, AuthController} from './controllers';
+import {JobListingController, CompanyController, UserController, AuthController} from './controllers';
 import {Sequelize} from 'sequelize-typescript';
 import {JobListing} from './models/joblisting.model';
-import {Skill} from './models/skill.model';
 import {Company} from './models/company.model';
-import {JobPensum} from './models/jobPensum.model';
-import {Sector} from './models/sector.model';
 import {User} from './models/user.model';
 
 const sequelize =  new Sequelize({
@@ -19,7 +15,7 @@ const sequelize =  new Sequelize({
   password: '',
   storage: 'db.sqlite'
 });
-sequelize.addModels([JobListing, Skill, Company, JobPensum, Sector, User]);
+sequelize.addModels([JobListing, Company, User]);
 
 // create a new express application instance
 const app: express.Application = express();
@@ -40,10 +36,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/joblisting', JobListingController);
-app.use('/skill', SkillController);
 app.use('/company', CompanyController);
-app.use('/jobPensum', JobPensumController);
-app.use('/sector', SectorController);
 app.use('/user', UserController);
 app.use('/auth', AuthController);
 
