@@ -1,5 +1,4 @@
 import {Table, Column, Model, HasMany, CreatedAt, DataType, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
-import {Skill} from './skill.model';
 import {Company} from './company.model';
 
 
@@ -22,9 +21,6 @@ export class JobListing extends Model<JobListing> {
 
     @Column
     isVerified!: boolean;
-
-    @HasMany(() => Skill)
-    necessarySkills!: Skill[];
 
     @Column
     branche!: number;

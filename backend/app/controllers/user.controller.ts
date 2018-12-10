@@ -6,6 +6,26 @@ const router: Router = Router();
 
 const verifyToken = require('../middleware/verifyToken.middleware');
 
+/**
+ * Interface for the admin to get the data of all users
+ * Request Type: GET
+ * Path: baseUrl + /user/
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ * none
+ *  return:
+ *      201:
+ *      [
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ *      ]
+ */
 router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     if (res.locals.verifiedToken.role === 'admin'){
         const instances = await User.findAll();
@@ -16,8 +36,34 @@ router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunct
     }
 });
 
+/**
+ * Interface for the admin to create a new user without the limitations of the /auth/register interface.
+ * This interface could be used to add a new admin user.
+ * Request Type: POT
+ * Path: baseUrl + /user/
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ *  return:
+ *      201:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ */
 router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
-    if (res.locals.verifiedToken.role === 'admin'){
+    if (res.locals.verifiedToken.role === 'admin') {
         const instance = new User();
         instance.fromSimplification(req.body);
         instance.password = bcrypt.hashSync(instance.password, 8);
@@ -29,6 +75,28 @@ router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunc
     }
 });
 
+/**
+ * Interface get the user date of the user with the given id.
+ * Users are only authorized to request their own data, while an admin user can request the data of all users.
+ * Request Type: GET
+ * Path: baseUrl + /user/:id
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ *      {
+ *          'isVerified': boolean
+ *          'comment': string
+ *      }
+ *  return:
+ *      200:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ */
 router.get('/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
 
     const id = parseInt(req.params.id);
@@ -52,6 +120,27 @@ router.get('/:id', verifyToken, async (req: Request, res: Response, next: NextFu
 
 });
 
+/**
+ * Interface for the admin to verify a user and leave a comment for the user if needed
+ * Request Type: PUT
+ * Path: baseUrl + /user/setIsVerified/:id
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ *      {
+ *          'isVerified': boolean
+ *          'comment': string
+ *      }
+ *  return:
+ *      200:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ */
 router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     const id = parseInt(req.params.id);
     if (res.locals.verifiedToken.role === 'admin') {
@@ -64,6 +153,7 @@ router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response
             });
             return;
         }
+        // only isVerified, comment, isUpdatedByAdmin fields are updated
         instance.fromSimplification(req.body);
         instance.isUpdatedByAdmin = true;
         await instance.save({fields: ['isVerified', 'comment', 'isUpdatedByAdmin']});
@@ -75,6 +165,17 @@ router.put('/setIsVerified/:id', verifyToken, async (req: Request, res: Response
 
 });
 
+/**
+ * Interface to delete a user with the given id and the company and joblisting data linked to the user
+ * Only an admin user may delete a user
+ * Request Type: DELETE
+ * Path: baseUrl + /user/:id
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ * none
+ *  return:
+ *      204:
+ */
 router.delete('/:id', verifyToken, async (req: Request, res: Response, next: NextFunction) => {
     if (res.locals.verifiedToken.role === 'admin') {
 
@@ -87,6 +188,8 @@ router.delete('/:id', verifyToken, async (req: Request, res: Response, next: Nex
             });
             return;
         }
+        // the models were defined so that the destroy query cascades
+        // and deletes not only the user put all company and joblisting data associated to the user
         await instance.destroy();
         res.statusCode = 204;
         res.send();
