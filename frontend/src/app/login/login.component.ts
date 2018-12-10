@@ -5,6 +5,16 @@ import {AuthenticationService} from './login.authservice';
 import {AlertService} from '../alert/alert.alertservice';
 import {first} from 'rxjs/operators';
 
+/**
+ * Login component provides a login form to the user where he/she can log in to his/her account.
+ * Authentication is handled by using JSON web token (JWT), which has to be present in request header (jwt
+ * interceptor adds jwt automatically to request header if user is logged in).
+ * There are three different user roles for authorization purposes:
+ * - Student (does not have an account)
+ * - Business (has an account, can create own joblistings and delete them)
+ * - Admin (has an account, cannot create joblistings but can verify and delete them as well as
+ * verify and delete users).
+ */
 
 @Component({
   selector: 'app-login',
@@ -23,6 +33,9 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private alertService: AlertService) {}
 
+  /**
+   * Create form FormBuilder object and corresponding form validator for checking input data.
+   */
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -39,6 +52,10 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
+  /**
+   * If login data is valid, send it to authenticationService which will handle get request
+   * to the server.
+   */
   onSubmit() {
     this.submitted = true;
 

@@ -19,17 +19,11 @@ export class AdminService {
               private alertService: AlertService) { }
 
   getInValidatedJoblistings(): Observable<JobListing[]> {
-    return this.httpClient.get<JobListing[]>(this.baseUrl + '/joblisting')
-        .pipe(
-            tap(jobs => console.log('fetched jobs'))
-        );
+    return this.getAllJoblistings();
   }
 
   getInValidatedUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl + '/user')
-        .pipe(
-            tap(users => console.log('fetched users'))
-        );
+    return this.getAllUsers();
   }
 
   getAllJoblistings(): Observable<JobListing[]> {
@@ -43,6 +37,13 @@ export class AdminService {
     return this.httpClient.get<User[]>(this.baseUrl + '/user')
         .pipe(
             tap(users => console.log('fetched users'))
+        );
+  }
+
+  getCompanyData(): Observable<Company[]> {
+    return this.httpClient.get<Company[]>(this.baseUrl + '/company')
+        .pipe(
+            tap(company => console.log('companies fetched'))
         );
   }
 
@@ -73,12 +74,6 @@ export class AdminService {
         );
   }
 
-  getCompanyData(): Observable<Company[]> {
-    return this.httpClient.get<Company[]>(this.baseUrl + '/company')
-        .pipe(
-            tap(company => console.log('companies fetched'))
-        );
-  }
 
   setUserRefused(id: number, reason: string) {
     const url = `${this.baseUrl}/user/setIsVerified/${id}`;
@@ -105,5 +100,6 @@ export class AdminService {
             tap(user => console.log('user ' + user.id + ' is deleted'))
         );
   }
+
 
 }

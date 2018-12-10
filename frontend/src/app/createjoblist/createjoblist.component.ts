@@ -52,7 +52,7 @@ export class CreatejoblistComponent implements OnInit {
         skills: ['', Validators.required],
       branche: ['', Validators.required],
       pensumFrom: ['', Validators.required],
-      pensumTo: ['', Validators.required],
+      // pensumTo: ['', Validators.required],
       payment: ['', Validators.required],
         deadline: ['', Validators.required],
       contactPerson: ['', Validators.required],

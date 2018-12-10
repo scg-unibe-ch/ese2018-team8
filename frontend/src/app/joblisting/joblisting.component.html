@@ -34,6 +34,7 @@
       <p><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</p>
       <p><strong>Telefon:</strong> {{ joblisting.contactPhone }}</p>
       <p><strong>Email:</strong> {{ joblisting.contactEmail }}</p>
-      <button class="btn btn-primary" (click)="goBack()" >Zurück</button>
+      <button class="btn btn-info" (click)="getApplyingForm(joblisting)" >Bewerben</button>
     </div>
+    <button class="btn btn-primary" (click)="goBack()" >Zurück</button>
   </div>

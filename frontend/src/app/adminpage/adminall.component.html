@@ -5,7 +5,7 @@
             <div *ngFor="let job of jobListingList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
-                        <span class="badge"> {{job.title}}</span>
+                        <span class="nav-link text-dark"> {{job.title}}</span>
                     </a>
                 </div>
                 <ul>
@@ -24,13 +24,13 @@
             <div *ngFor="let user of userList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/updateuser/{{user.id}}">
-                        <span class="badge"> {{user.email}}</span>
+                        <span class="nav-link text-dark"> {{user.email}}</span>
                     </a>
                 </div>
                 <ul>
                     <li> Name: {{user.email}}</li>
                     <ng-container *ngIf="getUsersCompany(user.id)">
-                        <li> Firma: {{companyList[user.id].companyName}}</li>
+                        <li> Firma: {{getUsersCompany(user.id).companyName}}</li>
                     </ng-container>
                     <div style="margin-top: 10px">
                         <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>

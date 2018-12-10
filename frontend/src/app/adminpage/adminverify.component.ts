@@ -27,6 +27,8 @@ export class AdminVerifyComponent implements OnInit {
   joblisting = new JobListing(null, '', '', '', false, '', 0,
       0, 0, null, 0, '', '', '');
   user = new User(null, '', '', '', '', false);
+  company = new Company(null, '', '', '', '',
+      '', '', '', '');
 
   @Output()
   destroy = new EventEmitter<JobListing>();
@@ -35,9 +37,9 @@ export class AdminVerifyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getJobs();
     this.getUsers();
     this.getCompanies();
+    this.getJobs();
   }
 
   getJobs() {
@@ -48,14 +50,14 @@ export class AdminVerifyComponent implements OnInit {
 
   getUsers() {
     this.adminService.getInValidatedUsers()
-        .subscribe(user =>
-            this.userList = user.filter(this.isNotVerified));
+        .subscribe(async user =>
+            this.userList = await user.filter(this.isNotVerified));
   }
 
   getCompanies() {
     this.adminService.getCompanyData()
-        .subscribe( company =>
-            this.companyList = company);
+        .subscribe( companies =>
+            this.companyList = companies);
   }
 
   getUsersCompany(id: number) {
@@ -64,7 +66,7 @@ export class AdminVerifyComponent implements OnInit {
 
   setJoblistingVerified(job: JobListing) {
     this.adminService.setJobVerified(job.id)
-        .subscribe(job => this.jobListingList);
+        .subscribe(jobs => this.jobListingList);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
@@ -85,7 +87,7 @@ export class AdminVerifyComponent implements OnInit {
 
   setUserVerified(user: User) {
     this.adminService.setUserVerified(user.id)
-        .subscribe( user => this.userList);
+        .subscribe( users => this.userList);
     const index = this.userList.indexOf(user, 0);
     this.userList.splice(index, 1);
   }
