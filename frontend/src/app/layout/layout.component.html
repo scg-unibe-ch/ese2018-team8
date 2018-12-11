@@ -10,7 +10,8 @@
   <div id="title">
     <h1 style="font-family: Arial, Helvetica, sans-serif"> <strong>Jobbly</strong>  </h1>
   </div>
-  <!--Links-->
+
+  <!--Links in header-->
   <a class="!active" routerLinkActive="active" routerLink="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard
     <span class="sr-only">(current)</span></a>
 
@@ -26,6 +27,7 @@
   <a class="!active" routerLinkActive="active" routerLink="/company-edit"
      *ngIf="(isLoggedIn && ! isAdmin | async)" >Adresse bearbeiten</a>
 
+  <!--Dropdown for admin-->
   <div class="dropdown">
     <button class="dropbtn" *ngIf="(isAdmin | async)">Admin <i class="fa fa-caret-down"></i></button>
     <div class="dropdown-content">
@@ -41,7 +43,7 @@
     <a class="!active" routerLinkActive="active" routerLink="/register"
        *ngIf="!(isLoggedIn | async)" (click)="authService.login()">Registrieren</a>
     <a class="!active" routerLinkActive="active" routerLink="/login"
-     *ngIf="(isLoggedIn | async)" (click)="authService.logout()">Logout</a>
+     *ngIf="(isLoggedIn | async)" (click)="authService.logout()"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
 </div>
 </div>
 
@@ -57,10 +59,11 @@
 <!--FOOTER CONTENT-->
 <footer class="footer-distributed">
 
+  <!--Content of the left column-->
   <div class="footer-left">
     <!--logo-->
-    <img src="assets/images/MIB_logo2.png" width="200" height="90" alt="">
-
+    <img src="assets/images/MIB_logo2.png" width="200" height="90" alt="logo">
+    <!--Links in footer-->
     <p class="footer-links">
       <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
       <a class="nav-link" routerLinkActive="active" routerLink="/viewjoblisting">Stelleninserate</a>
@@ -73,6 +76,7 @@
     <p class="footer-company-name">MIB &copy; 2018</p>
   </div>
 
+  <!--Content of the center column-->
   <div class="footer-center">
     <!--Location-->
     <div>
@@ -86,12 +90,12 @@
     </div>
   </div>
 
+  <!--Content of the right column-->
   <div class="footer-right">
     <p class="footer-company-about">
       <span>Über uns</span>
       Wir sind Team 8.
     </p>
   </div>
-
 </footer>
 

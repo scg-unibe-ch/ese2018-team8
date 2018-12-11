@@ -1,7 +1,6 @@
 // Our modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LayoutComponent} from './layout/layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
@@ -25,6 +24,7 @@ import { CompanyJoblistComponent} from './company/company-joblist.component';
 import { CompanyEditJobComponent} from './company/company-edit-job.component';
 import { CompanyComponent} from './company/company.component';
 import {AlertComponent} from './alert/alert.component';
+import { LayoutComponent} from './layout/layout.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
 import { AlertService } from './alert/alert.alertservice';

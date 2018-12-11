@@ -13,6 +13,7 @@ import {Company} from '../models/company';
 @Component({
   selector: 'app-adminall',
   templateUrl: './adminall.component.html',
+  styleUrls: ['./adminall.component.css'],
   providers: [AdminService]
 })
 export class AdminAllComponent implements OnInit {

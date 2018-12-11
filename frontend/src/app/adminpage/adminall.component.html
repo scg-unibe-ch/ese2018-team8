@@ -32,9 +32,13 @@
                     <ng-container *ngIf="getUsersCompany(user.id)">
                         <li> Firma: {{companyList[user.id].companyName}}</li>
                     </ng-container>
-                    <div style="margin-top: 10px">
+                  <div id="popup" class="modal">
+                    <div class="modal-content">
+                      <div style="margin-top: 10px">
                         <button class="btn btn-danger" (click)="deleteUser(user)">Löschen</button>
+                      </div>
                     </div>
+                  </div>
                 </ul>
             </div>
         </div>
