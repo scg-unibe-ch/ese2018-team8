@@ -1,9 +1,10 @@
-import {Table, Column, Model, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {Table, Column, Model, ForeignKey, BelongsTo, AllowNull} from 'sequelize-typescript';
 import {User} from './user.model';
 
 @Table
 export class Company extends Model<Company> {
 
+    @AllowNull(false)
     @ForeignKey(() => User)
     @Column
     userId!: number;
