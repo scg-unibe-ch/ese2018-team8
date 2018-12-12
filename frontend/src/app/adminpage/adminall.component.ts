@@ -102,7 +102,7 @@ export class AdminAllComponent implements OnInit {
     this.adminService.deleteUser(user.id)
         .subscribe(users => this.userList);
     const index = this.userList.indexOf(user, 0);
-    this.jobListingList.splice(index, 1);
+    this.userList.splice(index, 1);
   }
 
 }
