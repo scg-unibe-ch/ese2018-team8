@@ -54,7 +54,7 @@ router.post('/register', async (req: Request, res: Response) => {
     // role, isVerified, and isUpdatedByAdmin fields are set to the default values for new business user
     instanceUser.role = 'business';
     instanceUser.isVerified = false;
-    instanceUser.isUpdatedByAdmin = true;
+    instanceUser.isUpdatedByAdmin = false;
     instanceCompany.fromSimplification(req.body['company']);
 
     await instanceUser.save().then( async () => {
