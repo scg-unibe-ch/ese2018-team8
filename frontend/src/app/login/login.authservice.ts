@@ -7,6 +7,11 @@ import {Token} from '../models/token';
 
 import * as jwt_decode from 'jwt-decode';
 
+/**
+ * AuthenticationService handles user login and logout. User profile data is
+ * stored in session storage. This is not a very safe solution and has to be
+ * improved in order to protect user against CSRF (cross side request forgery).
+ */
 
 @Injectable()
 export class AuthenticationService {
@@ -20,6 +25,11 @@ export class AuthenticationService {
     this.baseUrl = environment.baseUrl;
   }
 
+  /**
+   *
+   * @param username - from login.component.ts, which takes username from login form
+   * @param password - from login.component.ts, which takes password from login form
+   */
   login(username: string, password: string) {
     this.httpClient.get(this.baseUrl, { withCredentials: true });
 

@@ -1,6 +1,9 @@
 
 <div class="container">
-  <h3>Jobdetails</h3>
+  <h2>Ihre Inserate</h2>
+  <p>Sehen Sie sich hier Ihre Inserate an.</p>
+  <p>Möchten Sie ein Inserat bearbeiten? Kein Problem: Sie finden den entsprechenden Button am Ende der Detailansicht.
+  Bitte haben Sie Verständnis, wenn ein bearbeitetes Inserat vor der Veröffentlichung durch den Moderator der Seite verifiziert wird.</p>
   <div>
     <div *ngFor="let jobs of jobListingList" class="well well-sm">
 
@@ -17,11 +20,11 @@
         <li><strong>Email:</strong> {{ jobs.contactEmail }}</li>
       </ul>
       <p>
-        <button class="nav-item nav-link active" routerLink="/company-edit-job/{{jobs.id}}">Inserat bearbeiten</button>
-        <button class="nav-item nav-link active" (click)="delete(jobs)" >Inserat löschen</button>
+        <button class="btn btn-info" routerLink="/company-edit-job/{{jobs.id}}" style="margin-right: 10px">Inserat bearbeiten</button>
+        <button class="btn btn-info" (click)="delete(jobs)" >Inserat löschen</button>
 
       </p>
     </div>
   </div>
-  <button class="nav-item nav-link active" (click)="goBack()">Zurück</button>
+  <button class="btn btn-primary" (click)="goBack()">Zurück</button>
 </div>

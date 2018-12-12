@@ -20,6 +20,7 @@ export class AdminAllComponent implements OnInit {
   jobListingList: JobListing[] = [];
   userList: User[] = [];
   companyList: Company[] = [];
+
   company = new Company(null, '', '', '', '',
       '', '', '', '');
 
@@ -42,9 +43,9 @@ export class AdminAllComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getJobs();
     this.getUsers();
     this.getCompanies();
+    this.getJobs();
   }
 
   getJobs() {
@@ -57,14 +58,12 @@ export class AdminAllComponent implements OnInit {
     this.adminService.getAllUsers()
         .subscribe(users =>
             this.userList = users);
-    this.getJobs();
   }
 
   getCompanies() {
     this.adminService.getCompanyData()
         .subscribe( company =>
-          this.companyList = company
-        );
+            this.companyList = company);
   }
 
   getUsersCompany(id: number) {
@@ -72,14 +71,16 @@ export class AdminAllComponent implements OnInit {
   }
 
   deleteJob(job: JobListing) {
-    this.adminService.deleteJob(job.id);
+    this.adminService.deleteJob(job.id)
+        .subscribe(jobs => this.jobListingList);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
 
 
   deleteUser(user: User) {
-    this.adminService.deleteUser(user.id);
+    this.adminService.deleteUser(user.id)
+        .subscribe(users => this.userList);
     const index = this.userList.indexOf(user, 0);
     this.jobListingList.splice(index, 1);
   }

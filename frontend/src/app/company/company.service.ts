@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
 import { Observable} from 'rxjs';
-import { tap} from 'rxjs/operators';
+import {first, map, tap} from 'rxjs/operators';
+import {Company} from '../models/company';
 
 
 
@@ -13,6 +14,7 @@ import { tap} from 'rxjs/operators';
 export class CompanyService {
   joblisting: JobListing;
   baseUrl = environment.baseUrl;
+  private companyList: Company[];
   constructor(private http: HttpClient) { }
 
   getJobs(): Observable<JobListing[]> {
@@ -43,5 +45,11 @@ export class CompanyService {
     };
     const url = `${this.baseUrl}/joblisting/${id}`; // DELETE /company-edit-job/ID
     return this.http.delete(url, httpOptions);
+  }
+  
+  getCompanyData(): Observable<Company[]> {
+    return this.http.get<Company[]>(this.baseUrl + '/company')
+        .pipe(
+            map(company => this.companyList = company));
   }
 }

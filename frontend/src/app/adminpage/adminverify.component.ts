@@ -10,6 +10,8 @@ import {UserService} from '../login/user.service';
 import {CompanyService} from '../company/company.service';
 import {Company} from '../models/company';
 import {ModalManager} from 'ngb-modal';
+import {MatDialog} from '@angular/material';
+import {DialogComponent} from './dialog/dialog.component';
 
 @Component({
   selector: 'app-adminverify',
@@ -24,20 +26,37 @@ export class AdminVerifyComponent implements OnInit {
   userList: User[] = [];
   companyList: Company[] = [];
 
+
   joblisting = new JobListing(null, '', '', '', false, '', 0,
       0, 0, null, 0, '', '', '');
   user = new User(null, '', '', '', '', false);
+  company = new Company(null, '', '', '', '',
+      '', '', '', '');
 
   @Output()
   destroy = new EventEmitter<JobListing>();
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getJobs();
     this.getUsers();
     this.getCompanies();
+    this.getJobs();
+  }
+
+  openDialogdelete() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '600px',
+      data: 'Möchten Sie wirklich diesen Benutzer löschen?'
+    });
+  }
+  openDialogconfirm() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '600px',
+      data: 'Möchten Sie wirklich diesen Benutzer bestätigen?'
+    });
   }
 
   getJobs() {
@@ -48,14 +67,14 @@ export class AdminVerifyComponent implements OnInit {
 
   getUsers() {
     this.adminService.getInValidatedUsers()
-        .subscribe(user =>
-            this.userList = user.filter(this.isNotVerified));
+        .subscribe(async user =>
+            this.userList = await user.filter(this.isNotVerified));
   }
 
   getCompanies() {
     this.adminService.getCompanyData()
-        .subscribe( company =>
-            this.companyList = company);
+        .subscribe( companies =>
+            this.companyList = companies);
   }
 
   getUsersCompany(id: number) {
@@ -64,7 +83,7 @@ export class AdminVerifyComponent implements OnInit {
 
   setJoblistingVerified(job: JobListing) {
     this.adminService.setJobVerified(job.id)
-        .subscribe(job => this.jobListingList);
+        .subscribe(jobs => this.jobListingList);
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
@@ -85,7 +104,7 @@ export class AdminVerifyComponent implements OnInit {
 
   setUserVerified(user: User) {
     this.adminService.setUserVerified(user.id)
-        .subscribe( user => this.userList);
+        .subscribe( users => this.userList);
     const index = this.userList.indexOf(user, 0);
     this.userList.splice(index, 1);
   }

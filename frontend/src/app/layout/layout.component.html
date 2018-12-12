@@ -19,13 +19,13 @@
 
   <!--Links. Link to "Eigene Inserate" and "Neues Inserat" appears when logged in.-->
   <a class="!active" routerLinkActive="active" routerLink="/company-joblist"
-     *ngIf="(isLoggedIn && ! isAdmin | async)" >Eigene Inserate</a>
+     *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
 
   <a class="!active" routerLinkActive="active" routerLink="/createjoblist"
-     *ngIf="(isLoggedIn && ! isAdmin | async)" >Neues Inserat</a>
+     *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
 
   <a class="!active" routerLinkActive="active" routerLink="/company-edit"
-     *ngIf="(isLoggedIn && ! isAdmin | async)" >Adresse bearbeiten</a>
+     *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
 
   <!--Dropdown for admin-->
   <div class="dropdown">

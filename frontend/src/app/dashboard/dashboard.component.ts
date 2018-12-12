@@ -14,14 +14,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(private joblistingService: JoblistingService) {}
 
+  /*Calls getJobs() method automatically when loading this component.*/
   ngOnInit() {
     this.getJobs();
   }
 
+  /*Gets joblistings from database and lists only the first 4 joblistings.*/
   getJobs() {
     this.joblistingService.getJobs()
       .subscribe( jobs => {
-        this.jobListingList = jobs.slice(0, 3);
+        this.jobListingList = jobs.slice(0, 4);
       });
   }
 

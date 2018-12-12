@@ -90,7 +90,7 @@ export class CompanyEditComponent implements OnInit {
                 });
     }
 
-    getCompanyData() {
+  getCompanyData() {
         this.company.companyName = this.f.companyName.value;
         this.company.companyStreet = this.f.companyStreet.value;
         this.company.companyZIP = this.f.companyZIP.value;
@@ -98,7 +98,6 @@ export class CompanyEditComponent implements OnInit {
         this.company.companyPhone = this.f.companyPhone.value;
         this.company.companyPerson = this.f.companyPerson.value;
         this.company.companyWebsite = this.f.companyWebsite.value;
-
     }
 
     setFormData() {

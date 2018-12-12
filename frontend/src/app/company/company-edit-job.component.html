@@ -1,51 +1,46 @@
 
 <div class="container">
   <h3>Jobdetails</h3>
-  <div>
-
-    <div *ngIf="joblisting" class="well well-sm">
-        <h5 class="badge"> {{joblisting.title}}</h5>
-      <div>
-
-        <label>Titel:
-          <input [(ngModel)]="joblisting.title" placeholder="Titel"/>
-        </label>
-      </div>
-      <div>
-        <label>Beschreibung:
-          <input [(ngModel)]="joblisting.description" placeholder="Beschreibung"/>
-        </label>
-      </div>
-      <div>
-        <label>Pensum:
-          <input [(ngModel)]="joblisting.jobPensumFrom" placeholder="Von"/>
-          <input [(ngModel)]="joblisting.jobPensumTo" placeholder="Bis"/>
-        </label>
-      </div>
-      <div>
-        <label>Bezahlung:
-          <input [(ngModel)]="joblisting.payment" placeholder="payment"/>
-        </label>
-      </div>
-      <div>
-        <label>Kontakt Person:
-          <input [(ngModel)]="joblisting.contactPerson" placeholder="contactPerson"/>
-        </label>
-      </div>
-      <div>
-        <label>Telefon:
-          <input [(ngModel)]="joblisting.contactPhone" placeholder="contactPhone"/>
-        </label>
-      </div>
-      <div>
-        <label>Email: <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/></label>
-      </div>
+  <div *ngIf="joblisting" class="well well-sm" style="alignment: left">
+    <h5>{{joblisting.title}}</h5><br>
+    <div>
+      <label>Titel:
+        <input [(ngModel)]="joblisting.title" placeholder="Titel" />
+      </label>
     </div>
-  </div>
+    <div>
+      <label>Beschreibung:
+        <input [(ngModel)]="joblisting.description" placeholder="Beschreibung"/>
+      </label>
+    </div>
+    <div>
+      <label>Pensum:
+        <input [(ngModel)]="joblisting.jobPensumFrom" placeholder="Von"/>
+        <input [(ngModel)]="joblisting.jobPensumTo" placeholder="Bis"/>
+      </label>
+    </div>
+    <div>
+      <label>Bezahlung:
+        <input [(ngModel)]="joblisting.payment" placeholder="payment"/>
+      </label>
+    </div>
+    <div>
+      <label>Kontakt Person:
+        <input [(ngModel)]="joblisting.contactPerson" placeholder="contactPerson"/>
+      </label>
+    </div>
+    <div>
+      <label>Telefon:
+        <input [(ngModel)]="joblisting.contactPhone" placeholder="contactPhone"/>
+      </label>
+    </div>
+    <div>
+      <label>Email: <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/></label>
+    </div>
   <!--Buttons-->
-  <p>
-    <button (click)="save()">Speichern</button>
-    <button (click)="goBack()">Abbrechen</button>
-  </p>
+    <p style="margin-top: 15px">
+      <button class="btn btn-info" (click)="save()" style="margin-right: 10px">Speichern</button>
+      <button class="btn btn-info" (click)="goBack()">Abbrechen</button>
+    </p>
+  </div>
 </div>
-

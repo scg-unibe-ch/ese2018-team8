@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService} from './company.service';
-import { HttpClient} from '@angular/common/http';
 import { Location} from '@angular/common';
-import { ActivatedRoute} from '@angular/router';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
 
@@ -21,6 +19,13 @@ export class CompanyJoblistComponent implements OnInit {
   constructor(private companyService: CompanyService,
               private location: Location) {}
 
+  /*Calls getJob() method automatically when loading this component
+  * Checks indirectly if user is logged in by current location to
+  * baseUrl*/
+  ngOnInit(baseUrl = environment.baseUrl) {
+    this.getJobs();
+  }
+
   getJobs() {
     this.companyService.getJobs()
       .subscribe( jobs => {
@@ -28,21 +33,15 @@ export class CompanyJoblistComponent implements OnInit {
         console.log('Data from companyService:' + this.jobListingList);
       });
   }
-  ngOnInit(
-    baseUrl = environment.baseUrl
-  ) {
-    this.getJobs();
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
 
   delete(job: JobListing): void {
     this.companyService.deleteJob(job.id).subscribe(() => {
         const index = this.jobListingList.indexOf(job, 0);
         this.jobListingList.splice(index, 1);
     });
-
+  }
+  /*Returns to a previously visited subsite*/
+  goBack(): void {
+    this.location.back();
   }
 }

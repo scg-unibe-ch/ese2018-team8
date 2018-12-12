@@ -4,6 +4,11 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {AuthenticationService} from '../login/login.authservice';
 
+/**
+ * Error interceptor is the first component getting server responses. It then
+ * creates messages according to error handling in request or in response respectively,
+ * depending where messages are defined.
+ **/
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -14,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status === 401) {
         // auto logout if 401 response returned from api
         this.authenticationService.logout();
-        //location.reload(true);
+        location.reload(true);
       } else {
         console.log(err.error.message || err.statusText);
       }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatListModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -39,6 +39,7 @@ import {AuthGuard} from './login/login.authguard';
 import {AdminAllComponent} from './adminpage/adminall.component';
 import {CompanyEditComponent} from './company/company-edit.component';
 import {ChangePasswordComponent} from './changePassword/change-password.component';
+import { DialogComponent } from './adminpage/dialog/dialog.component';
 
 
 
@@ -62,6 +63,7 @@ import {ChangePasswordComponent} from './changePassword/change-password.componen
     LayoutComponent,
     AlertComponent,
     ChangePasswordComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,12 +73,15 @@ import {ChangePasswordComponent} from './changePassword/change-password.componen
     MatButtonModule,
     MatListModule,
     MatInputModule,
-    MatCheckboxModule,
+    MatDialogModule,
     MatCardModule,
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
     ModalModule
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [
     httpInterceptorProviders,

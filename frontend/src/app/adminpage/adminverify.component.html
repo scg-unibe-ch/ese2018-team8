@@ -38,21 +38,21 @@
             <div *ngFor="let user of userList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{user.id}}">
-                        <span class="badge"> {{user.email}}</span>
+                        <span class="nav-link text-dark"> {{user.email}}</span>
                     </a>
                 </div>
                 <ul>
                     <li> Name: {{user.email}}</li>
                     <ng-container *ngIf="getUsersCompany(user.id)">
-                    <li> Firma: {{companyList[user.id].companyName}}</li>
+                        <li> Firma: {{getUsersCompany(user.id).companyName}}</li>
                     </ng-container>
                     <div style="margin-top: 10px">
-                        <button class="btn btn-danger" (click)="setUserRefusedDialog()" style="margin-right: 10px">Ablehnen</button>
-                        <button class="btn btn-success" (click)="setUserVerified(user)">Bestätigen</button>
-                    </div>
-                </ul>
-            </div>
-    </div>
+                      <button class="btn btn-danger" (click)="openDialogdelete()" style="margin-right: 10px">Ablehnen</button>
+                      <button class="btn btn-success" (click)="setUserVerified(user)" >Bestätigen</button>
+                   </div>
+               </ul>
+           </div>
+   </div>
 </div>
 
 

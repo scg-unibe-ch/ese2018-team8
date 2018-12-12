@@ -6,17 +6,6 @@ import { ActivatedRoute} from '@angular/router';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
 
-
-interface Alert {
-  type: string;
-  message: string;
-}
-
-const ALERTS: Alert[] = [{
-  type: 'success',
-  message: 'This is an success alert',
-}];
-
 @Component({
   selector: 'app-company-edit-job',
   templateUrl: './company-edit-job.component.html',
@@ -25,13 +14,11 @@ const ALERTS: Alert[] = [{
 export class CompanyEditJobComponent implements OnInit {
   jobListingList: JobListing[];
   baseUrl;
-  alerts: Alert[];
   @Input() joblisting: JobListing;
 
   constructor(private companyService: CompanyService,
               private route: ActivatedRoute,
-              private location: Location,
-              private httpClient: HttpClient) {
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -39,31 +26,19 @@ export class CompanyEditJobComponent implements OnInit {
        this.getJob();
    }
 
-    getJob(): void {
-        const id = +this.route.snapshot.paramMap.get('id');
-        this.companyService.getJob(id)
-            .subscribe(job => this.joblisting = job);
-    }
-
-  goBack(): void {
-    this.location.back();
+   getJob(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.companyService.getJob(id)
+      .subscribe(job => this.joblisting = job);
   }
 
   save(): void {
     this.companyService.updateJob(this.joblisting)
       .subscribe(() => this.goBack());
-    this.alerts = Array.from(ALERTS);
   }
 
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  /*Returns to a previously visited subsite*/
+  goBack(): void {
+    this.location.back();
   }
-
-  /* Notifications
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!', {
-      closeButton: false,
-      timeOut: 4000
-    });
-  }*/
 }

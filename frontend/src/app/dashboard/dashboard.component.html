@@ -8,20 +8,21 @@
       </div>
 
   -->
+<!--Background picture-->
 <div class="bg"> </div>
 
-<div class="row">
-  <div class="col-sm-6">
-<h3>Die neusten Inserate</h3>
-<div class="grid grid-pad" *ngFor="let jobs of jobListingList">
-  <div class=breadcrumb>
-    <a class="col-1-4" routerLink="/joblisting/{{jobs.id}}">
+
+    <h3>Die neusten Inserate</h3>
+
+
+<div class="grid grid-pad">
+  <a *ngFor="let jobs of jobListingList" class="col-1-4"
+     routerLink="/joblisting/{{jobs.id}}">
+    <div class="module hero">
       <h5>{{jobs.title}}</h5>
-    </a>
-  <h5>Beschreibung: {{jobs.description}}</h5>
-  </div>
-</div>
-  </div>
+      <h5> {{jobs.branche}}</h5>
+    </div>
+  </a>
 </div>
 
 
