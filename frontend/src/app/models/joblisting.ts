@@ -14,7 +14,9 @@ export class JobListing {
     public companyId: number,
     public contactPerson: string,
     public contactPhone: string,
-    public contactEmail: string
+    public contactEmail: string,
+    public comment: string,
+    public isUpdatedByAdmin: boolean
 
   ) {
   }

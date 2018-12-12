@@ -21,8 +21,8 @@ export class AdminVerifyComponent implements OnInit {
   companyList: Company[] = [];
 
   joblisting = new JobListing(null, '', '', '', false, '', 0,
-      0, 0, null, 0, '', '', '');
-  user = new User(null, '', '', '', '', false);
+      0, 0, null, 0, '', '', '', '', false);
+  user = new User(null, '', '', false);
   company = new Company(null, '', '', '', '',
       '', '', '', '');
 

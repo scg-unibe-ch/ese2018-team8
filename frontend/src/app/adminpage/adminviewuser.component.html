@@ -1,0 +1,14 @@
+<div class="container" style="margin-top: 20px">
+    <p>Detailinfos zu BenutzerIn:</p>
+    <h4><strong>{{user.email}}</strong></h4>
+    <div class="row well well-sm" style="margin-top: 20px" *ngIf="company">
+        <ul>
+            <li>Firma: {{company.companyName}}</li>
+            <li>Strasse: {{company.companyStreet}}</li>
+            <li>PLZ: {{company.companyZIP}}</li>
+            <li>Ort: {{company.companyCity}}</li>
+            <li>Telefon: {{company.companyPhone}}</li>
+            <li>Kontaktperson: {{company.companyPerson}}</li>
+        </ul>
+    </div>
+</div>

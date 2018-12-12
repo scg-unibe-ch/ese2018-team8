@@ -38,6 +38,7 @@ import { AuthGuard } from './login/login.authguard';
 import { AdminAllComponent } from './adminpage/adminall.component';
 import { CompanyEditComponent } from './company/company-edit.component';
 import { ChangePasswordComponent } from './changePassword/change-password.component';
+import {AdminViewUserComponent} from './adminpage/adminviewuser.component';
 
 
 
@@ -61,6 +62,7 @@ import { ChangePasswordComponent } from './changePassword/change-password.compon
     LayoutComponent,
     AlertComponent,
     ChangePasswordComponent,
+    AdminViewUserComponent,
   ],
   imports: [
     BrowserModule,

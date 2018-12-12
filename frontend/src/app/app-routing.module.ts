@@ -15,6 +15,7 @@ import {CompanyComponent} from './company/company.component';
 import {AuthGuard} from './login/login.authguard';
 import {CompanyEditComponent} from './company/company-edit.component';
 import {ChangePasswordComponent} from './changePassword/change-password.component';
+import {AdminViewUserComponent} from './adminpage/adminviewuser.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'joblisting/:id', component: JoblistingComponent},
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
+  {path: 'adminviewuser/:id', component: AdminViewUserComponent },
   {path: 'adminverify', component: AdminVerifyComponent },
   {path: 'adminall', component: AdminAllComponent},
   {path: 'company-joblist', component: CompanyJoblistComponent},
