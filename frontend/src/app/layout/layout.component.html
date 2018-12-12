@@ -18,19 +18,25 @@
 
   <!--Links. Link to "Eigene Inserate" and "Neues Inserat" appears when logged in.-->
   <a class="!active" routerLinkActive="active" routerLink="/company-joblist"
-     *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
+     *ngIf="(isBusinessUser | async)" >Eigene Inserate</a>
 
   <a class="!active" routerLinkActive="active" routerLink="/createjoblist"
-     *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
+     *ngIf="(isBusinessUser | async)" >Neues Inserat</a>
 
-  <a class="!active" routerLinkActive="active" routerLink="/company-edit"
-     *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
+  <div class="dropdown">
+    <button class="dropbtn" *ngIf="(isBusinessUser | async)">Konto <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+      <a routerLinkActive="active" routerLink="/company-edit">Adresse bearbeiten</a>
+      <a routerLinkActive="active" routerLink="/change-password">Passwort ändern</a>
+    </div>
+  </div>
 
   <div class="dropdown">
     <button class="dropbtn" *ngIf="(isAdmin | async)">Admin <i class="fa fa-caret-down"></i></button>
     <div class="dropdown-content">
       <a routerLinkActive="active" routerLink="/adminverify">Validieren</a>
       <a routerLinkActive="active" routerLink="/adminall">Bearbeiten</a>
+      <a routerLinkActive="active" routerLink="/change-password">Passwort ändern</a>
     </div>
   </div>
 
