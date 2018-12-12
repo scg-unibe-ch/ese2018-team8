@@ -36,8 +36,8 @@
   background-color: #117a8b;
   color: #ffffff;
 }
-.topnav i.fa-sign-in{
-
+.topnav i.fa-sign-in i.fa-home{
+  font-size: 18px;
 }
 .topnav #login {
   float: right;

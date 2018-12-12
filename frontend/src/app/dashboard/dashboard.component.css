@@ -3,7 +3,9 @@
   /* Half height */
   /* Center and scale the image nicely */
  background: url(../../assets/images/bg_dash.jpg);
-  height: 100px;
+  height: 250px;
+  background-size: cover;
+  margin-bottom: 15px;
 }
 
 
@@ -16,10 +18,10 @@
   padding-right: 0;
 }
 
-h3 {
+h2 {
   text-align: center;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 18px;
 }
 h4 {
   position: relative;

@@ -40,8 +40,7 @@ import {AdminAllComponent} from './adminpage/adminall.component';
 import {CompanyEditComponent} from './company/company-edit.component';
 import {ChangePasswordComponent} from './changePassword/change-password.component';
 import { DialogComponent } from './company/dialog/dialog.component';
-
-
+import {AdminViewUserComponent} from './adminpage/adminviewuser.component';
 
 
 @NgModule({
@@ -64,6 +63,7 @@ import { DialogComponent } from './company/dialog/dialog.component';
     AlertComponent,
     ChangePasswordComponent,
     DialogComponent,
+    AdminViewUserComponent
   ],
   imports: [
     BrowserModule,

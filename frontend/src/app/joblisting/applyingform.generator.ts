@@ -7,9 +7,9 @@ import {CompanyService} from '../company/company.service';
 
 export class ApplyingformGenerator {
 
-  joblisting = new JobListing(null, '', '', '', false, '', 0, 0,
+ /* joblisting = new JobListing(null, '', '', '', false, '', 0, 0,
       0, null, 0, '', '', '');
-
+*/
   company = new Company(null, '', '', '', '',
       '', '', '', '');
 
