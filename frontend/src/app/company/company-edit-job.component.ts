@@ -5,6 +5,7 @@ import { Location} from '@angular/common';
 import { ActivatedRoute} from '@angular/router';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
+import {FormGroup} from '@angular/forms';
 
 
 interface Alert {
@@ -26,6 +27,7 @@ export class CompanyEditJobComponent implements OnInit {
   jobListingList: JobListing[];
   baseUrl;
   alerts: Alert[];
+
   @Input() joblisting: JobListing;
 
   constructor(private companyService: CompanyService,
