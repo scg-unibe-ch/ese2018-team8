@@ -1,26 +1,13 @@
-<div class="view">
-<h3>Suche:</h3>
-<mat-form-field>
-  <input matInput placeholder="Suche" [(ngModel)]="searchString" name="search" (ngModelChange)="onChange()">
-</mat-form-field>
-
-<h3>Jobinserate:</h3>
-
 <div class="grid grid-pad">
-  <div *ngFor="let jobs of jobListingList" class="well well-sm">
-
-    <div class="nav navbar-brand">
-      <span> {{jobs.title}}</span>
-    </div>
-
-    <ul>
-      <li><strong> Beschreibung:</strong> {{jobs.description}}</li>
-      <li>
-        <a class="nav-item nav-link active" routerLink="/joblisting/{{jobs.id}}">Mehr...</a>
-      </li>
-    </ul>
-
+  <span id="icon"><i class="glyphicon glyphicon-search"></i></span>
+  <input id="search" placeholder="Suche" [(ngModel)]="searchString" name="search" (ngModelChange)="onChange()">
+  <hr>
+    <a *ngFor="let jobs of jobListingList" class="col-1-4"
+       routerLink="/joblisting/{{jobs.id}}">
+      <div class="module job">
+        <h4><strong>{{jobs.title}}</strong></h4>
+        <h4> {{jobs.branche}}</h4>
+      </div>
+    </a>
   </div>
-</div>
 
-</div>

@@ -1,7 +1,4 @@
 
-html {
-  background: url(../../assets/images/background.jpg);
-}
 /* Background of Navbar*/
 .topnav {
   background-color:  gainsboro;
@@ -14,6 +11,7 @@ html {
   float: left;
   margin-top: 10px;
   margin-left: 5px;
+  margin-right: 5px;
   font: bold 14px sans-serif;
   color: darkslategray;
 }
@@ -47,13 +45,12 @@ html {
 }
 /* Dropdown button */
 .dropdown .dropbtn {
-  font-size: 12px;
   border: none;
   outline: none;
   color: darkslategray;
   padding: 14px 16px;
   background-color: inherit;
-  font-family: inherit;
+  font: 14px sans-serif;
   margin: 0;
 }
 
@@ -101,7 +98,6 @@ html {
 }
 /*CSS Body*/
 #body {
-  max-height: 100%;
   min-height: 15cm;
   overflow: hidden; /*prevents bottom scroll bar*/
 
@@ -155,9 +151,6 @@ html {
 .footer-distributed .footer-links a.active {
   text-decoration-line: underline;
 }
-
-
-
 
 .footer-distributed .footer-company-name{
   color:  #8f9296;

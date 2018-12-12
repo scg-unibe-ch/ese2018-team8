@@ -32,25 +32,36 @@ const verifyToken = require('../middleware/verifyToken.middleware');
  *  }
  *  return:
  *      201:
- *      'Account registration successful'
+ *       {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *       }
  */
 router.post('/register', async (req: Request, res: Response) => {
     const instanceUser = new User();
     const instanceCompany = new Company();
     instanceUser.fromSimplification(req.body);
+    if (instanceUser.email == null || instanceUser.password == null || req.body['company'] == null) {
+        res.statusCode = 500;
+        res.send('There was a problem registering the user.');
+    }
     // password gets hashed before storing it in the database
     instanceUser.password = bcrypt.hashSync(instanceUser.password, 8);
     // role, isVerified, and isUpdatedByAdmin fields are set to the default values for new business user
     instanceUser.role = 'business';
     instanceUser.isVerified = false;
-    instanceUser.isUpdatedByAdmin = true;
+    instanceUser.isUpdatedByAdmin = false;
     instanceCompany.fromSimplification(req.body['company']);
 
     await instanceUser.save().then( async () => {
         instanceCompany.userId = instanceUser.id;
         await instanceCompany.save();
         res.statusCode = 201;
-        res.send('Account registration successful');
+        res.send(instanceUser.toSimplification());
     }).catch( () => {
         res.statusCode = 500;
         res.send('There was a problem registering the user.');
@@ -178,8 +189,8 @@ router.put('/change-password', verifyToken, async (req: Request, res: Response, 
         // replace the current password with newPassword and save it to the database
         user.password = newPassword;
         await user.save({fields: ['password']}).then( async () => {
-            res.statusCode = 201;
-            res.send('Password changed');
+            res.statusCode = 202;
+            res.send();
         }).catch( () => {
             res.statusCode = 500;
             res.send('There was a problem with changing the password');
@@ -211,5 +222,6 @@ router.put('/change-password', verifyToken, async (req: Request, res: Response, 
 router.get('/logout', async function (req: Request, res: Response)  {
     res.status(200).send({ auth: false, token: null });
 });
+
 
 export const AuthController: Router = router;

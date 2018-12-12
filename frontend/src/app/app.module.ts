@@ -39,7 +39,7 @@ import {AuthGuard} from './login/login.authguard';
 import {AdminAllComponent} from './adminpage/adminall.component';
 import {CompanyEditComponent} from './company/company-edit.component';
 import {ChangePasswordComponent} from './changePassword/change-password.component';
-import { DialogComponent } from './adminpage/dialog/dialog.component';
+import { DialogComponent } from './company/dialog/dialog.component';
 
 
 

@@ -1,5 +1,73 @@
+/*Search bar*/
+#search {
+  border: 2px solid darkslategray;
+  border-radius: 0.5em;;
+  font-size: 16px;
+  width: 10em;
+  transition: width 0.3s ease-in-out;
+  margin-right: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+/*Input field becomes wider on click*/
+#search:focus {
+  font-size: 16px;
+  width: 30%;
+  border: 2px solid #117a8b;
+}
 
-#view {
-  padding-left: 20px;
+#icon {
+  margin-right: 5px;
+}
+/*Search icon*/
+.glyphicon-search{
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+h4 {
+  position: relative;
+}
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 25%;
+}
+.module {
+  padding: 20px;
+  text-align: center;
+  color: darkslategray;
+  max-height: 120px;
+  min-width: 120px;
+  background-color: #EEEEEE;
+  border-radius: 2px;
+}
+/*Changes color on hover*/
+.module:hover {
+  background-color: #c9e4da;
+  cursor: pointer;
+  color: darkslategray;
+  border-color: darkblue;
+}
+.grid-pad {
+  padding: 10px 0;
+  margin-left: 20px;
+}
+.grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
 }

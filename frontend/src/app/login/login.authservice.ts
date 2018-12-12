@@ -19,6 +19,7 @@ export class AuthenticationService {
   baseUrl;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
   isAdminSubject = new BehaviorSubject<boolean>(this.userIsAdmin());
+  isBusinessUserSubject = new BehaviorSubject<boolean>(this.userIsBusinessUser());
   token: Token = new Token(0, '', 0);
 
   constructor(private httpClient: HttpClient) {
@@ -26,9 +27,9 @@ export class AuthenticationService {
   }
 
   /**
-   *
-   * @param username - from login.component.ts, which takes username from login form
-   * @param password - from login.component.ts, which takes password from login form
+   * Login-Method is used by login.component.ts:
+   * @param username - from login.component.ts, which takes user name from login form.
+   * @param password - from login.component.ts, which takes password from login form.
    */
   login(username: string, password: string) {
     this.httpClient.get(this.baseUrl, { withCredentials: true });
@@ -43,6 +44,9 @@ export class AuthenticationService {
               this.isLoginSubject.next(true);
               if (this.userIsAdmin()) {
                 this.isAdminSubject.next(true);
+              }
+              if (this.userIsBusinessUser()) {
+                  this.isBusinessUserSubject.next(true);
               }
               return user;
           }
@@ -72,11 +76,27 @@ export class AuthenticationService {
     return false;
   }
 
+  private userIsBusinessUser() {
+      if (this.hasToken()) {
+          console.log(this.hasToken());
+          this.token = this.getVerifiedToken();
+          if (this.token !== null && this.token.role === 'business') {
+              return true;
+          }
+      }
+      return false;
+  }
+
+
+  /**
+   * When user logs out, remove user from session storage and set both BehaviorSubjects
+   * to false.
+   */
   logout() {
-    // remove user from session storage to log user out
     sessionStorage.removeItem('currentUser');
     this.isLoginSubject.next(false);
     this.isAdminSubject.next(false);
+    this.isBusinessUserSubject.next(false);
   }
 
   // if there's a token, user is logged in
@@ -84,18 +104,18 @@ export class AuthenticationService {
     return !!sessionStorage.getItem('currentUser');
   }
 
-  /**
-   * return isLoginSubject as Observable
-   */
+
+  // return isLoginSubject as Observable -> app knows whether user is logged in or not
   isLoggedIn() {
     return this.isLoginSubject.asObservable();
-
-    // share() is needed in order to prevent async pipes from creating
-    //    * multiple subscriptions.
-    //     return this.isLoginSubject.asObservable().share();
   }
 
+  // return isLoginSubject as Observable -> app knows whether user is admin
   isAdmin() {
     return this.isAdminSubject.asObservable();
+  }
+
+  isBusinessUser() {
+    return this.isBusinessUserSubject.asObservable();
   }
 }

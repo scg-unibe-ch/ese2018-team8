@@ -3,6 +3,8 @@ import { CompanyService} from './company.service';
 import { Location} from '@angular/common';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
+import {MatDialog} from '@angular/material';
+import {DialogComponent} from '../company/dialog/dialog.component';
 
 
 @Component({
@@ -17,13 +19,21 @@ export class CompanyJoblistComponent implements OnInit {
 
   @Input() joblisting: JobListing;
   constructor(private companyService: CompanyService,
-              private location: Location) {}
+              private location: Location,
+              private dialog: MatDialog) {}
 
   /*Calls getJob() method automatically when loading this component
   * Checks indirectly if user is logged in by current location to
   * baseUrl*/
   ngOnInit(baseUrl = environment.baseUrl) {
     this.getJobs();
+  }
+
+  openDialogdelete() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '600px',
+      data: 'Möchten Sie dieses Inserat wirklich löschen?'
+    });
   }
 
   getJobs() {

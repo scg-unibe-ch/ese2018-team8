@@ -1,16 +1,12 @@
 /*background image*/
 .bg {
-  /* The image used */
   /* Half height */
   /* Center and scale the image nicely */
- /* background: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg") no-repeat center;*/
-  height: 100%;
+ background: url(../../assets/images/bg_dash.jpg);
+  height: 100px;
 }
 
-.row {
-  margin-left: 60px;
 
-}
 [class*='col-'] {
   float: left;
   padding-right: 20px;
@@ -18,9 +14,6 @@
 }
 [class*='col-']:last-of-type {
   padding-right: 0;
-}
-a {
-  text-decoration: none;
 }
 
 h3 {
@@ -46,10 +39,12 @@ h4 {
   background-color: #EEEEEE;
   border-radius: 2px;
 }
+/*Changes color on hover*/
 .module:hover {
-  background-color: #F7F7F7;
+  background-color: #c9e4da;
   cursor: pointer;
   color: darkslategray;
+  border-color: darkblue;
 }
 .grid-pad {
   padding: 10px 0;
@@ -58,16 +53,4 @@ h4 {
 .grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
 }
-@media (max-width: 600px) {
-  .module {
-    font-size: 10px;
-    max-height: 75px; }
-}
-@media (max-width: 1024px) {
-  .grid {
-    margin: 0;
-  }
-  .module {
-    min-width: 60px;
-  }
-}
+

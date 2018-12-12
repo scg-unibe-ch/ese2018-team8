@@ -1,65 +1,68 @@
-<div class="row">
-
- <form class="form-horizontal" [formGroup]="companyEditForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-   <label for="companyName">Firmenname</label>
-   <input  id="companyName" type="text" formControlName="companyName" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
-   <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-    <div *ngIf="f.companyName.errors.required">Bitte geben Sie einen Firmennamen ein</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyStreet">Strasse</label>
-   <input  id="companyStreet" type="text" formControlName="companyStreet" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.companyStreet.errors }">
-   <div *ngIf="submitted && f.companyStreet.errors" class="invalid-feedback">
-    <div *ngIf="f.companyStreet.errors.required">Bitte geben Sie eine Strasse ein</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyZIP">PLZ</label>
-   <input type="text" class="form-control" formControlName="companyZIP" id="companyZIP"
-           [ngClass]="{ 'is-invalid': submitted && f.companyZIP.errors }">
-   <div *ngIf="submitted && f.companyZIP.errors" class="invalid-feedback">
-    <div *ngIf="f.companyZIP.errors.required">Geben Sie eine PLZ ein</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyCity">Ort</label>
-   <input type="text" class="form-control" formControlName="companyCity" id="companyCity"
-           [ngClass]="{ 'is-invalid': submitted && f.companyCity.errors }">
-   <div *ngIf="submitted && f.companyCity.errors" class="invalid-feedback">
-    <div *ngIf="f.companyCity.errors.required">Bitte geben Sie einen Ort ein</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyPhone">Telefonnummer</label>
-   <input type="text" class="form-control" formControlName="companyPhone" id="companyPhone"
-           [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }">
-   <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
-    <div *ngIf="f.companyPhone.errors.required">Bitte geben Sie eine Telefonnummer ein</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyPerson">Kontaktperson</label>
-   <input type="text" class="form-control" formControlName="companyPerson" id="companyPerson"
-          [ngClass]="{ 'is-invalid': submitted && f.companyPerson.errors }">
-   <div *ngIf="submitted && f.companyPerson.errors" class="invalid-feedback">
-    <div *ngIf="f.companyPerson.errors.required">Bitte geben Sie eine Kontaktperson an</div>
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="companyWebsite">Website</label>
-   <input type="text" class="form-control" formControlName="companyWebsite" id="companyWebsite"
-           [ngClass]="{ 'is-invalid': submitted && f.companyWebsite.errors }">
-   <div *ngIf="submitted && f.companyWebsite.errors" class="invalid-feedback">
-    <div *ngIf="f.companyWebsite.errors.required">Bitte geben Sie eine Website an</div>
-   </div>
-  </div>
-  <div>
-   <button [disabled]="loading" class="btn btn-primary">Speichern</button>
-   <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-  </div>
- </form>
+<div class="container">
+    <h2 style="margin-top: 20px">Benutzerdaten</h2>
+    <p>Bearbeiten Sie hier Ihre Benutzerdaten</p>
+    <div class="well well-sm" style="margin-top: 20px">
+        <form [formGroup]="companyEditForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="companyName">Firmenname</label>
+                <input  id="companyName" type="text" formControlName="companyName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
+                <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyName.errors.required">Bitte geben Sie einen Firmennamen ein</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyStreet">Strasse</label>
+                <input  id="companyStreet" type="text" formControlName="companyStreet" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyStreet.errors }">
+                <div *ngIf="submitted && f.companyStreet.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyStreet.errors.required">Bitte geben Sie eine Strasse ein</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyZIP">PLZ</label>
+                <input type="text" class="form-control" formControlName="companyZIP" id="companyZIP"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyZIP.errors }">
+                <div *ngIf="submitted && f.companyZIP.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyZIP.errors.required">Geben Sie eine PLZ ein</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyCity">Ort</label>
+                <input type="text" class="form-control" formControlName="companyCity" id="companyCity"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyCity.errors }">
+                <div *ngIf="submitted && f.companyCity.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyCity.errors.required">Bitte geben Sie einen Ort ein</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyPhone">Telefonnummer</label>
+                <input type="text" class="form-control" formControlName="companyPhone" id="companyPhone"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }">
+                <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyPhone.errors.required">Bitte geben Sie eine Telefonnummer ein</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyPerson">Kontaktperson</label>
+                <input type="text" class="form-control" formControlName="companyPerson" id="companyPerson"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyPerson.errors }">
+                <div *ngIf="submitted && f.companyPerson.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyPerson.errors.required">Bitte geben Sie eine Kontaktperson an</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyWebsite">Website</label>
+                <input type="text" class="form-control" formControlName="companyWebsite" id="companyWebsite"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyWebsite.errors }">
+                <div *ngIf="submitted && f.companyWebsite.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyWebsite.errors.required">Bitte geben Sie eine Website an</div>
+                </div>
+            </div>
+            <div>
+                <button [disabled]="loading" class="btn btn-primary">Speichern</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+        </form>
+    </div>
 </div>

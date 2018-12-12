@@ -1,46 +1,61 @@
 
 <div class="container">
-  <h3>Jobdetails</h3>
-  <div *ngIf="joblisting" class="well well-sm" style="alignment: left">
-    <h5>{{joblisting.title}}</h5><br>
-    <div>
-      <label>Titel:
-        <input [(ngModel)]="joblisting.title" placeholder="Titel" />
-      </label>
-    </div>
-    <div>
-      <label>Beschreibung:
-        <input [(ngModel)]="joblisting.description" placeholder="Beschreibung"/>
-      </label>
-    </div>
-    <div>
-      <label>Pensum:
-        <input [(ngModel)]="joblisting.jobPensumFrom" placeholder="Von"/>
-        <input [(ngModel)]="joblisting.jobPensumTo" placeholder="Bis"/>
-      </label>
-    </div>
-    <div>
-      <label>Bezahlung:
-        <input [(ngModel)]="joblisting.payment" placeholder="payment"/>
-      </label>
-    </div>
-    <div>
-      <label>Kontakt Person:
-        <input [(ngModel)]="joblisting.contactPerson" placeholder="contactPerson"/>
-      </label>
-    </div>
-    <div>
-      <label>Telefon:
-        <input [(ngModel)]="joblisting.contactPhone" placeholder="contactPhone"/>
-      </label>
-    </div>
-    <div>
-      <label>Email: <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/></label>
-    </div>
+  <h2 style="margin-top: 20px;">Inserat bearbeiten</h2>
+  <form *ngIf="joblisting" class="well well-sm">
+      <h5>{{joblisting.title}}</h5>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Titel: </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.title" [ngModelOptions]="{standalone: true}" placeholder="Titel" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Beschreibung: </label>
+        <div class="col-10">
+          <textarea type="text" [(ngModel)]="joblisting.description" [ngModelOptions]="{standalone: true}" placeholder="Beschreibung"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Erforderliche Fähigkeiten: </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.skills" [ngModelOptions]="{standalone: true}" placeholder="Erforderliche Fähigkeiten"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Pensum:  </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.jobPensumFrom" [ngModelOptions]="{standalone: true}" placeholder="Von"/>
+          <input type="text" [(ngModel)]="joblisting.jobPensumTo" [ngModelOptions]="{standalone: true}" placeholder="Bis"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Bezahlung: </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.payment" [ngModelOptions]="{standalone: true}" placeholder="payment"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Kontaktperson:</label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.contactPerson" [ngModelOptions]="{standalone: true}" placeholder="contactPerson"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Telefon: </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.contactPhone" [ngModelOptions]="{standalone: true}" placeholder="contactPhone"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Email: </label>
+        <div class="col-10">
+          <input type="text" [(ngModel)]="joblisting.contactEmail" [ngModelOptions]="{standalone: true}" placeholder="contactEmail"/>
+        </div>
+      </div>
   <!--Buttons-->
-    <p style="margin-top: 15px">
-      <button class="btn btn-info" (click)="save()" style="margin-right: 10px">Speichern</button>
-      <button class="btn btn-info" (click)="goBack()">Abbrechen</button>
-    </p>
+      <p style="margin-top: 15px">
+        <button class="btn btn-info" (click)="save()" style="margin-right: 10px">Speichern</button>
+        <button class="btn btn-info" (click)="goBack()">Abbrechen</button>
+      </p>
+    </form>
   </div>
-</div>

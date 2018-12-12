@@ -17,6 +17,7 @@ export class ViewjoblistingComponent implements OnInit {
   constructor(private http: HttpClient,
               private joblistingService: JoblistingService) { }
 
+   /*Calls getJob() method in joblistingService*/
   getJobs() {
     this.joblistingService.getJobs()
       .subscribe( jobs => {

@@ -49,21 +49,20 @@ export class ChangePasswordComponent implements OnInit {
       }
 
 
-      this.httpClient.put(this.baseUrl + '/auth/change-password', {
+      this.httpClient.put( this.baseUrl + '/auth/change-password', {
             'oldPassword': this.f.oldPassword.value,
             'newPassword': this.f.password.value,
 
-        }).pipe(first()).subscribe(
-            data => {
-              this.alertService.success('Passwort geändert', true);
-               this.router.navigate(['/dashboard']);
-            },
-            error => {
+      }).subscribe(
+          () => {
+            this.alertService.success('Passwort geändert', true);
+            this.router.navigate(['/dashboard']).then(x => console.log('navigate result: ' + x));
+        },
+         error => {
               this.alertService.error(error);
-            });
-      this.loading = false;
+                this.loading = false;
+         });
 
-        // this.router.navigate(['']);
     }
 
 }

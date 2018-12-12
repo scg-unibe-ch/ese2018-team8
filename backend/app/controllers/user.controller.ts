@@ -39,7 +39,7 @@ router.get('/', verifyToken, async (req: Request, res: Response, next: NextFunct
 /**
  * Interface for the admin to create a new user without the limitations of the /auth/register interface.
  * This interface could be used to add a new admin user.
- * Request Type: POT
+ * Request Type: POST
  * Path: baseUrl + /user/
  * Request Header: {Authorization: Bearer JWT}
  * Request Body:
@@ -74,6 +74,48 @@ router.post('/', verifyToken, async (req: Request, res: Response, next: NextFunc
         res.status(500).send({ auth: false, message: 'Not Authorized!'});
     }
 });
+
+/**
+ * Interface to create initial admin user
+ * Request Type: POST
+ * Path: baseUrl + /user/init/
+ * Request Header: {Authorization: Bearer JWT}
+ * Request Body:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          }
+ *  return:
+ *      201:
+ *          {
+ *          'id': number
+ *          'email': string
+ *          'role': string
+ *          'isVerified': boolean
+ *          'comment': string
+ *          'isUpdatedByAdmin': boolean
+ *          }
+ */
+router.post('/init/', async (req: Request, res: Response) => {
+    const instance = new User(req.body);
+    User.findAll().then(instances => {
+        if (instances.length === 0) {
+            const password = bcrypt.hashSync(instance.password, 8);
+            instance.password = password;
+            instance.role = 'admin';
+            instance.isVerified = true;
+            instance.save().then(user => {
+                res.statusCode = 201;
+                res.send(user.toSimplification());
+            });
+        } else {
+            res.status(500).send({ auth: false, message: 'Not Authorized!'});
+        }
+    });
+});
+
+
+
 
 /**
  * Interface get the user date of the user with the given id.

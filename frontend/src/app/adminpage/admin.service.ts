@@ -18,14 +18,9 @@ export class AdminService {
   constructor(private httpClient: HttpClient,
               private alertService: AlertService) { }
 
-  getInValidatedJoblistings(): Observable<JobListing[]> {
-    return this.getAllJoblistings();
-  }
-
-  getInValidatedUsers(): Observable<User[]> {
-    return this.getAllUsers();
-  }
-
+  /**
+   * Get all joblistings from database and return them as Observable of type JobListing[].
+   */
   getAllJoblistings(): Observable<JobListing[]> {
     return this.httpClient.get<JobListing[]>(this.baseUrl + '/joblisting')
         .pipe(
@@ -33,6 +28,9 @@ export class AdminService {
         );
   }
 
+  /**
+   * Get all users from database and return them as Observable of type User[].
+   */
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.baseUrl + '/user')
         .pipe(
@@ -40,6 +38,9 @@ export class AdminService {
         );
   }
 
+  /**
+   * Get all companies from database and return them as Observable of type Company[].
+   */
   getCompanyData(): Observable<Company[]> {
     return this.httpClient.get<Company[]>(this.baseUrl + '/company')
         .pipe(
@@ -47,6 +48,10 @@ export class AdminService {
         );
   }
 
+  /**
+   * Set joblisting verified as indicated by admin user.
+   * @param id - joblisting id to be verified
+   */
   setJobVerified(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
     return this.httpClient.put<JobListing>(url, {'isVerified': true})
@@ -55,6 +60,11 @@ export class AdminService {
           );
   }
 
+  /**
+   * Set joblisting refused. Refusal needs to be explained in reason.
+   * @param id - joblisting id to be refused
+   * @param reason - reason why a joblisting is refused
+   */
   setJobRefused(id: number, reason: string) {
     const url = `${this.baseUrl}/joblisting/setIsVerified/${id}`;
     return this.httpClient.put<JobListing>(url, {
@@ -66,6 +76,10 @@ export class AdminService {
 
   }
 
+  /**
+   * Set user verified as indicated by admin user.
+   * @param id - user id to be verified
+   */
   setUserVerified(id: number): Observable<User> {
     const url = `${this.baseUrl}/user/setIsVerified/${id}`;
     return this.httpClient.put<User>(url, {'isVerified': true})
@@ -74,7 +88,11 @@ export class AdminService {
         );
   }
 
-
+  /**
+   * Set user refused. Refusal needs to be explained in reason.
+   * @param id - user id to be refused
+   * @param reason - reason, why a user is refused.
+   */
   setUserRefused(id: number, reason: string) {
     const url = `${this.baseUrl}/user/setIsVerified/${id}`;
     return this.httpClient.put<User>(url, {
@@ -85,6 +103,10 @@ export class AdminService {
         );
   }
 
+  /**
+   * Delete joblisting as indicated by admin user.
+   * @param id - joblisting id to be deleted
+   */
   deleteJob(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/${id}`;
     return this.httpClient.delete<JobListing>(url)
@@ -93,6 +115,10 @@ export class AdminService {
         );
   }
 
+  /**
+   * Delete user as indicated by admin user.
+   * @param id - user id to be deleted.
+   */
   deleteUser(id: number): Observable<User> {
     const url = `${this.baseUrl}/user/${id}`;
     return this.httpClient.delete<User>(url)
