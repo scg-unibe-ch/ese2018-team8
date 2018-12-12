@@ -1,16 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {JobListing} from '../models/joblisting';
 import {User} from '../models/user';
-import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
 import {AdminService} from './admin.service';
-import {UserService} from '../login/user.service';
-import {CompanyService} from '../company/company.service';
 import {Company} from '../models/company';
-import {ModalManager} from 'ngb-modal';
 
+/**
+ * AdminVerify Component enables verification of users and joblistings by admin user.
+ */
 @Component({
   selector: 'app-adminverify',
   templateUrl: './adminverify.component.html',
@@ -36,34 +32,58 @@ export class AdminVerifyComponent implements OnInit {
   constructor(private adminService: AdminService) {
   }
 
+  /**
+   * Get users and joblistings. Get companies in order to be able to display company data of
+   * a specific user such that admin user knows to which company a unverified user belongs to.
+   */
   ngOnInit(): void {
     this.getUsers();
     this.getCompanies();
     this.getJobs();
   }
 
+  /**
+   * Get joblistings, get request is handled in admin service.
+   * Filtering function sorts out unverified joblistings.
+   */
   getJobs() {
-    this.adminService.getInValidatedJoblistings()
+    this.adminService.getAllJoblistings()
         .subscribe(job =>
             this.jobListingList = job.filter(this.isNotVerified));
   }
 
+  /**
+   * Get users, get request is handled in admin service.
+   * Filtering function sorts out unverified users.
+   */
   getUsers() {
-    this.adminService.getInValidatedUsers()
+    this.adminService.getAllUsers()
         .subscribe(async user =>
             this.userList = await user.filter(this.isNotVerified));
   }
 
+  /**
+   * Get companies, get request is handled in admin service.
+   * Company name is needed in HTML for information purpose.
+   */
   getCompanies() {
     this.adminService.getCompanyData()
         .subscribe( companies =>
             this.companyList = companies);
   }
 
+  /**
+   * Get company name of a specific user.
+   * @param id - user id
+   */
   getUsersCompany(id: number) {
     return this.companyList.find(company => company.userId === id);
   }
 
+  /**
+   * Set joblisting verified. It will be public afterwards.
+   * @param job - joblisting object, where only id is needed.
+   */
   setJoblistingVerified(job: JobListing) {
     this.adminService.setJobVerified(job.id)
         .subscribe(jobs => this.jobListingList);
@@ -71,12 +91,21 @@ export class AdminVerifyComponent implements OnInit {
     this.jobListingList.splice(index, 1);
   }
 
-
+  /**
+   * Provides dialog for refusing a joblisting. Admin user has then to type in a reason for refusing
+   * a joblisting in a text box.
+   * @param job
+   */
   setJoblistingRefusedDialog(job: JobListing) {
     this.joblisting = job;
     this.refuseWhat = 'joblisting';
   }
 
+  /**
+   * After admin user has typed in a reason for refusing a joblisting, the joblisting is refused.
+   * Put request is handled in admin service.
+   * @param reason
+   */
   setJoblistingRefused(reason: string) {
     this.refuseWhat = '';
     this.adminService.setJobRefused(this.joblisting.id, reason)
@@ -85,6 +114,10 @@ export class AdminVerifyComponent implements OnInit {
     this.jobListingList.splice(index, 1);
   }
 
+  /**
+   * Set user verified. User will be able to use his/her account afterwards.
+   * @param user - user object, where only id is needed.
+   */
   setUserVerified(user: User) {
     this.adminService.setUserVerified(user.id)
         .subscribe( users => this.userList);
@@ -92,11 +125,21 @@ export class AdminVerifyComponent implements OnInit {
     this.userList.splice(index, 1);
   }
 
+  /**
+   * Provides dialog for refusing a user. Admin user has then to type in a reason for refusing
+   * a joblisting in a text box.
+   * @param job
+   */
   setUserRefusedDialog(user: User) {
     this.user = user;
     this.refuseWhat = 'user';
   }
 
+  /**
+   * After admin user has typed in a reason for refusing a user, the user is refused.
+   * Corresponding put request is handled in admin service.
+   * @param reason
+   */
   setUserRefused(reason: string) {
     console.log(this.user);
     this.refuseWhat = '';
@@ -106,6 +149,9 @@ export class AdminVerifyComponent implements OnInit {
     this.userList.splice(index, 1);
   }
 
+  /**
+   * Cancel refusal, dialog is hidden again.
+   */
   cancelRefusingJob() {
     this.refuseWhat = '';
   }
@@ -114,6 +160,9 @@ export class AdminVerifyComponent implements OnInit {
     this.refuseWhat = '';
   }
 
+  /**
+   * Helper function for filtering unverified joblistings and users respectively.
+   */
   isNotVerified(item, index, array) {
     if (! item.isVerified && ! item.isUpdatedByAdmin) {
       return item;

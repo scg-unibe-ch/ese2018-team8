@@ -1,3 +1,4 @@
+<!-- Create a new joblisting. For business users only! -->
 <h2>Neues Inserat</h2>
 <p>Erstellen Sie hier ein neues Jobinserat für Ihre Firma</p>
 <form [formGroup]="createJoblistForm" (ngSubmit)="onSubmit()">
@@ -41,7 +42,11 @@
             <div *ngIf="f.pensumFrom.errors.required">Bitte geben Sie den Anstellungsgrad an</div>
           </div>
           <label for="pensumTo">bis</label>
-          <input type="text" class="form-control" id="pensumTo">
+          <input type="text" class="form-control" formControlName="pensumTo" id="pensumTo"
+                 [ngClass]="{ 'is-invalid': submitted && (f.pensumTo.value < f.pensumFrom.value) }">
+          <div *ngIf="submitted && (f.pensumTo.value < f.pensumFrom.value)" class="invalid-feedback">
+              Pensum 'bis' muss gleich gross oder grösser sein als Pensum 'von'.
+          </div>
       </div>
       <div class="form-group">
         <label for="payment">Bezahlung*</label>

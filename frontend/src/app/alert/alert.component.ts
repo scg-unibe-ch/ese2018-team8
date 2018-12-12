@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertService } from './alert.alertservice';
 
+/**
+ * Alert component provides alert messages for success as well as for error events.
+ * Messages are retrieved from alert service.
+ */
 @Component({
   selector: 'app-alert',
   templateUrl: 'alert.component.html'

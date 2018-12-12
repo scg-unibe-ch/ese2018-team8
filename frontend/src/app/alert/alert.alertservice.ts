@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 
+/**
+ * Alert service subscribes to router events and provides
+ * messages for success as well as for errors for one location.
+ */
 @Injectable()
 export class AlertService {
   private subject = new Subject<any>();
@@ -32,6 +36,9 @@ export class AlertService {
     this.subject.next({ type: 'error', text: message });
   }
 
+  /**
+   * Provide alert messages.
+   */
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   }

@@ -20,14 +20,16 @@ export class JoblistingService {
         tap(jobs => console.log('fetched jobs'))
       );
   }
-    getJobsSearch(searchString: string): Observable<JobListing[]> {
+
+  getJobsSearch(searchString: string): Observable<JobListing[]> {
         return this.http.get<JobListing[]>(this.baseUrl + '/joblisting/public', {
             params:  new HttpParams().set('search', '' + encodeURI(searchString))
         })
             .pipe(
                 tap(jobs => console.log('fetched jobs'))
             );
-    }
+  }
+
   getJob(id: number): Observable<JobListing> {
     const url = `${this.baseUrl}/joblisting/${id}`;
     return this.http.get<JobListing>(url)

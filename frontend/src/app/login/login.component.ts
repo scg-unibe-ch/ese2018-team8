@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       private alertService: AlertService) {}
 
   /**
-   * Create form FormBuilder object and corresponding form validator for checking input data.
+   * Create FormBuilder object and corresponding form validator for checking input data.
    */
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

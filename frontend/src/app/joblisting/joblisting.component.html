@@ -6,7 +6,7 @@
       <li class="list-group-item"><strong>Titel:</strong> {{ joblisting.title }}</li>
       <li class="list-group-item"><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
       <li class="list-group-item"><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>
-      <li class="list-group-item"><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} - {{joblisting.jobPensumTo}} %</li>
+        <li class="list-group-item"><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} <p [hidden]="joblisting.jobPensumTo === 0"> - {{joblisting.jobPensumTo}}</p> %</li>
       <li class="list-group-item"><strong>Lohn:</strong> {{ joblisting.payment }} CHF</li>
       <li class="list-group-item"><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
       <li class="list-group-item"><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>

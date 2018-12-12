@@ -8,6 +8,11 @@ import {AlertService} from '../alert/alert.alertservice';
 import {AuthenticationService} from '../login/login.authservice';
 import {Token} from '../models/token';
 
+/**
+ * Business users can create their own joblistings. Creating joblistings is handled in this
+ * createjoblist component. Data for joblistings is gathered by createjoblist html, where a
+ * form is provided to the user.
+ */
 @Component({
   selector: 'app-createjoblist',
   templateUrl: 'createjoblist.component.html',
@@ -44,17 +49,19 @@ export class CreatejoblistComponent implements OnInit {
               private router: Router,
               private authService: AuthenticationService) {}
 
-
+  /**
+   * Create FormBuilder object and corresponding form validator for checking input data.
+   */
   ngOnInit() {
     this.createJoblistForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-        skills: ['', Validators.required],
+      skills: ['', Validators.required],
       branche: ['', Validators.required],
       pensumFrom: ['', Validators.required],
-      // pensumTo: ['', Validators.required],
+      pensumTo: ['', Validators],
       payment: ['', Validators.required],
-        deadline: ['', Validators.required],
+      deadline: ['', Validators.required],
       contactPerson: ['', Validators.required],
       contactPhone: ['', Validators.required],
       contactEmail: ['', Validators.required]
@@ -70,7 +77,9 @@ export class CreatejoblistComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.createJoblistForm.controls; }
 
-
+  /**
+   * If user clicks 'Erstellen', data is sent to the server via post request (locally created joblisting object).
+   */
   onSubmit() {
     this.submitted = true;
 
@@ -85,25 +94,34 @@ export class CreatejoblistComponent implements OnInit {
 
     this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
         .subscribe((instance: any) => {
+              this.alertService.success('Ihr Inserat wurde erstellt und ist unter "Eigene Inserate" einsehbar. ' +
+                  'Sobald das Inserat verifiziert wurde, ist es öffentlich zugänglich.');
               this.router.navigate([this.returnUrl]);
-              this.loading = false;
             },
             error => {
               this.alertService.error(error);
-              this.loading = false;
             });
+    this.loading = false;
   }
 
+  /**
+   * Fill in joblisting fields with form data. Local object joblisting will then be used in post request.
+   */
   createJoblisting() {
+
+    if (this.f.pensumTo.value === '') {
+      this.joblisting.jobPensumTo = 0;
+    } else {
+      this.joblisting.jobPensumTo = this.f.pensumTo.value;
+    }
     this.joblisting.id = 0;
     this.joblisting.title = this.f.title.value;
     this.joblisting.description = this.f.description.value;
-      this.joblisting.skills = this.f.skills.value;
-
-          this.joblisting.isVerified = false;
+    this.joblisting.skills = this.f.skills.value;
+    this.joblisting.isVerified = false;
     this.joblisting.branche = this.f.branche.value;
     this.joblisting.jobPensumFrom = this.f.pensumFrom.value;
-    this.joblisting.jobPensumTo = this.f.pensumTo.value;
+    // this.joblisting.jobPensumTo = this.f.pensumTo.value;
     this.joblisting.payment = this.f.payment.value;
     this.joblisting.deadline = this.f.deadline.value;
     this.joblisting.companyId = this.token.companyId;
