@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
     const allowedOrigins: string[] = ['http://localhost:4200', 'https://morning-peak-96987.herokuapp.com'];
     if (req.header('host') != null) {
         // @ts-ignore
-        const origin: string = req.header('host');
+        const origin: string = req.header('origin');
         if ( allowedOrigins.indexOf(origin) > -1) {
             res.header('Access-Control-Allow-Origin', origin);
         }
