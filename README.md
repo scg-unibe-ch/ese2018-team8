@@ -1,8 +1,11 @@
 # ESE 2018 Team 8
 
-Heroku links:
+## The latest version was deployed on heroku:
 [frontend](https://morning-peak-96987.herokuapp.com/)
 [backend](https://obscure-waters-56880.herokuapp.com)
+
+## Project Documentation
+All project documents can be found in the [docs](https://github.com/scg-unibe-ch/ese2018-team8/tree/master/docs) folder.
 
 ## Prerequisites
 - You should have [Node.js](https://nodejs.org/en/) and NPM installed (NPM is installed automatically with latest versions of Node.js) which are needed by both [frontend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/frontend) and [backend](https://github.com/SilasBerger/ESE-2018-Scaffolding/tree/master/backend) projects. You can verify whether you have both by running `node -v` and `npm -v` in terminal or command prompt.
