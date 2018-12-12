@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
         // @ts-ignore
         const origin: string = req.header('host');
         if ( allowedOrigins.indexOf(origin) > -1) {
-            res.setHeader('Access-Control-Allow-Origin', origin);
+            res.header('Access-Control-Allow-Origin', origin);
         }
     }
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
