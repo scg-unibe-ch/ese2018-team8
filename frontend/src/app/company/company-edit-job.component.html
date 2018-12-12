@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h3>Jobdetails</h3>
+  <h3>Inserat bearbeiten</h3>
   <div *ngIf="joblisting" class="well well-sm" style="alignment: left">
     <h5>{{joblisting.title}}</h5><br>
     <div>
@@ -14,6 +14,11 @@
       </label>
     </div>
     <div>
+      <label>Erforderliche Fähigkeiten:
+        <input [(ngModel)]="joblisting.skills" placeholder="Erforderliche Fähigkeiten"/>
+      </label>
+    </div>
+    <div>    <div>
       <label>Pensum:
         <input [(ngModel)]="joblisting.jobPensumFrom" placeholder="Von"/>
         <input [(ngModel)]="joblisting.jobPensumTo" placeholder="Bis"/>
@@ -25,7 +30,7 @@
       </label>
     </div>
     <div>
-      <label>Kontakt Person:
+      <label>Kontaktperson:
         <input [(ngModel)]="joblisting.contactPerson" placeholder="contactPerson"/>
       </label>
     </div>
@@ -35,7 +40,9 @@
       </label>
     </div>
     <div>
-      <label>Email: <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/></label>
+      <label>Email:
+        <input [(ngModel)]="joblisting.contactEmail" placeholder="contactEmail"/>
+      </label>
     </div>
   <!--Buttons-->
     <p style="margin-top: 15px">

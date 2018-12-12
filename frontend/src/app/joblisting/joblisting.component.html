@@ -1,18 +1,19 @@
-
+<div class="container">
   <div class="grid grid-pad" style="width: 30rem">
     <div class="well well-sm" *ngIf="joblisting">
       <h5>{{ joblisting.title}}</h5>
       <ul class="list-group">
-      <li class="list-group-item"><strong>Titel:</strong> {{ joblisting.title }}</li>
-      <li class="list-group-item"><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
-      <li class="list-group-item"><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>
-        <li class="list-group-item"><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} <p [hidden]="joblisting.jobPensumTo === 0"> - {{joblisting.jobPensumTo}}</p> %</li>
-      <li class="list-group-item"><strong>Lohn:</strong> {{ joblisting.payment }} CHF</li>
-      <li class="list-group-item"><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
-      <li class="list-group-item"><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>
-      <li class="list-group-item"><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
+        <li class="list-group-item"><strong>Titel:</strong> {{ joblisting.title }}</li>
+        <li class="list-group-item"><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
+        <li class="list-group-item"><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>
+        <li class="list-group-item"><strong>Pensum:</strong> {{ joblisting.jobPensumFrom }} <ng-container *ngIf="joblisting.jobPensumTo > 0"> - {{joblisting.jobPensumTo}}</ng-container> %</li>
+        <li class="list-group-item"><strong>Lohn:</strong> {{ joblisting.payment }} CHF</li>
+        <li class="list-group-item"><strong>Kontaktperson:</strong> {{ joblisting.contactPerson }}</li>
+        <li class="list-group-item"><strong>Telefon:</strong> {{ joblisting.contactPhone }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ joblisting.contactEmail }}</li>
       </ul>
       <!-- <button class="btn btn-primary" (click)="goBack()" >Zurück</button> -->
     </div>
     <button class="btn btn-primary" (click)="goBack()" >Zurück</button>
   </div>
+</div>

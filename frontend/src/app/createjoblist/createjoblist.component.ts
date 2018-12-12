@@ -97,7 +97,7 @@ export class CreatejoblistComponent implements OnInit {
     this.httpClient.post(this.baseUrl + '/joblisting', this.joblisting)
         .subscribe((instance: any) => {
               this.alertService.success('Ihr Inserat wurde erstellt und ist unter "Eigene Inserate" einsehbar. ' +
-                  'Sobald das Inserat verifiziert wurde, ist es öffentlich zugänglich.');
+                  'Sobald das Inserat verifiziert wurde, ist es öffentlich zugänglich.', true);
               this.router.navigate([this.returnUrl]);
             },
             error => {

@@ -3,6 +3,7 @@ import {JobListing} from '../models/joblisting';
 import {User} from '../models/user';
 import {AdminService} from './admin.service';
 import {Company} from '../models/company';
+import {AlertService} from '../alert/alert.alertservice';
 
 /**
  * AdminVerify Component enables verification of users and joblistings by admin user.
@@ -29,7 +30,8 @@ export class AdminVerifyComponent implements OnInit {
   @Output()
   destroy = new EventEmitter<JobListing>();
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService,
+              private alertService: AlertService) {
   }
 
   /**
@@ -86,7 +88,13 @@ export class AdminVerifyComponent implements OnInit {
    */
   setJoblistingVerified(job: JobListing) {
     this.adminService.setJobVerified(job.id)
-        .subscribe(jobs => this.jobListingList);
+        .subscribe(jobs => {
+          this.jobListingList;
+          this.alertService.success('Das Inserat wurde verifiziert.', true);
+        },
+        error => {
+          this.alertService.error(error);
+        });
     const index = this.jobListingList.indexOf(job, 0);
     this.jobListingList.splice(index, 1);
   }
@@ -120,7 +128,14 @@ export class AdminVerifyComponent implements OnInit {
    */
   setUserVerified(user: User) {
     this.adminService.setUserVerified(user.id)
-        .subscribe( users => this.userList);
+        .subscribe( users => {
+          this.userList;
+          this.alertService.success('Der Benutzer wurde verifiziert.', true);
+        },
+        error => {
+            this.alertService.error(error);
+
+          });
     const index = this.userList.indexOf(user, 0);
     this.userList.splice(index, 1);
   }
