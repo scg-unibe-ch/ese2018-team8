@@ -22,13 +22,20 @@ const app: express.Application = express();
 app.use(express.json());
 
 // define the port the express app will listen on
-var port: number = 3000;
+let port = 3000;
 if (process.env.PORT !== undefined) {
   port = parseInt(process.env.PORT);
 }
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200, https://morning-peak-96987.herokuapp.com');
+    const allowedOrigins: string[] = ['http://localhost:4200', 'https://morning-peak-96987.herokuapp.com'];
+    if (req.header('host') != null) {
+        // @ts-ignore
+        const origin: string = req.header('host');
+        if ( allowedOrigins.indexOf(origin) > -1) {
+            res.setHeader('Access-Control-Allow-Origin', origin);
+        }
+    }
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
