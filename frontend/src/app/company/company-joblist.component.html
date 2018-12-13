@@ -1,13 +1,16 @@
 
 <div class="container">
-  <h2 style="margin-top: 20px">Ihre Inserate</h2>
-  <p>Sehen Sie sich hier Ihre Inserate an.</p>
-  <p>Möchten Sie ein Inserat bearbeiten? Kein Problem: Sie finden den entsprechenden Button am Ende der Detailansicht.
-  Bitte haben Sie Verständnis, wenn ein bearbeitetes Inserat vor der Veröffentlichung durch den Moderator der Seite verifiziert wird.</p>
+   <h2 style="margin-top: 20px; color: darkslategrey">Ihre Inserate</h2>
+  <p style="font-size: 15px">
+    Für die Bearbeitung eines Inserates klicken Sie auf dem Feld <strong>"Inserat Bearbeiten"</strong>.
+    <br><strong> Bitte gedulden Sie sich bis Ihr neuerstelltes oder bearbeitetes Inserat vor der Veröffentlichung
+    <br>durch den Moderator verifiziert wird.</strong></p>
   <div>
     <div *ngFor="let jobs of jobListingList" class="well well-sm">
 
-      <h4> {{jobs.title}} <div *ngIf="jobs.isVerified">(verifiziert)</div><div *ngIf="! jobs.isVerified">(nicht verifiziert)</div> </h4>
+      <h4> {{jobs.title}}
+        <div *ngIf="jobs.isVerified"><span style="color: darkgreen">(verifiziert)</span></div>
+        <div *ngIf="! jobs.isVerified"><span style="color: burlywood">(nicht verifiziert)</span></div> </h4>
 
       <ul>
           <li><strong>Titel:</strong> {{ jobs.title }}</li>
@@ -22,9 +25,8 @@
       <p>
         <button class="btn btn-info" routerLink="/company-edit-job/{{jobs.id}}" style="margin-right: 10px">Inserat bearbeiten</button>
         <button class="btn btn-info" (click)="openDialogdelete()" >Inserat löschen</button>
-
       </p>
     </div>
+    <button class="btn btn-primary" (click)="goBack()">Zurück</button>
   </div>
-  <button class="btn btn-primary" (click)="goBack()">Zurück</button>
 </div>

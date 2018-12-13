@@ -3,8 +3,8 @@ import { CompanyService} from './company.service';
 import { Location} from '@angular/common';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
-import {MatDialog} from '@angular/material';
-import {DialogComponent} from '../company/dialog/dialog.component';
+import { MatDialog} from '@angular/material';
+import { DialogComponent} from './dialog/dialog.component';
 
 
 @Component({
