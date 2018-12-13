@@ -38,13 +38,13 @@ export class AdminViewUserComponent implements OnInit {
    * a specific user such that admin user can see user's data.
    */
   ngOnInit(): void {
-   /* this.getUser();*/
+    this.getUser();
     this.getUserData();
   }
 
   /**
    * Get user from database for detailed view.
-
+   */
 
   getUser() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -56,7 +56,7 @@ export class AdminViewUserComponent implements OnInit {
             instance.role,
             instance.isVerified);
         });
-  }  */
+  }
 
   getUserData() {
     const id = +this.route.snapshot.paramMap.get('id');

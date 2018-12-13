@@ -1,23 +1,23 @@
 
 <div class="container">
-  <h2>Ihre Inserate</h2>
+  <h2 style="margin-top: 20px">Ihre Inserate</h2>
   <p>Sehen Sie sich hier Ihre Inserate an.</p>
   <p>Möchten Sie ein Inserat bearbeiten? Kein Problem: Sie finden den entsprechenden Button am Ende der Detailansicht.
   Bitte haben Sie Verständnis, wenn ein bearbeitetes Inserat vor der Veröffentlichung durch den Moderator der Seite verifiziert wird.</p>
   <div>
     <div *ngFor="let jobs of jobListingList" class="well well-sm">
 
-      <h4> {{jobs.title}}</h4>
+      <h4> {{jobs.title}} <div *ngIf="jobs.isVerified">(verifiziert)</div><div *ngIf="! jobs.isVerified">(nicht verifiziert)</div> </h4>
 
       <ul>
-        <li><strong>Titel:</strong> {{ jobs.title }}</li>
-        <li><strong>Beschreibung:</strong> {{ jobs.description }}</li>
-        <li><strong>Pensum:</strong> {{ jobs.jobPensumFrom }} - {{jobs.jobPensumTo}}</li>
-        <li><strong>Verifiziert:</strong> {{ jobs.isVerified }}</li>
-        <li><strong>Lohn:</strong> {{ jobs.payment }}</li>
-        <li><strong>Kontaktperson:</strong> {{ jobs.contactPerson }}</li>
-        <li><strong>Telefon:</strong> {{ jobs.contactPhone }}</li>
-        <li><strong>Email:</strong> {{ jobs.contactEmail }}</li>
+          <li><strong>Titel:</strong> {{ jobs.title }}</li>
+          <li><strong>Beschreibung:</strong> {{ jobs.description }}</li>
+          <li><strong>Pensum:</strong> {{ jobs.jobPensumFrom }} - {{jobs.jobPensumTo}} %</li>
+          <li><strong>Lohn:</strong> {{ jobs.payment }}</li>
+          <li><strong>Kontaktperson:</strong> {{ jobs.contactPerson }}</li>
+          <li><strong>Telefon:</strong> {{ jobs.contactPhone }}</li>
+          <li><strong>Email:</strong> {{ jobs.contactEmail }}</li>
+          <li *ngIf="! jobs.isVerified && jobs.isUpdatedByAdmin"><strong>Begründung für Zurückweisung:</strong> {{jobs.comment}}</li>
       </ul>
       <p>
         <button class="btn btn-info" routerLink="/company-edit-job/{{jobs.id}}" style="margin-right: 10px">Inserat bearbeiten</button>

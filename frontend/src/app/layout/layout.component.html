@@ -8,7 +8,7 @@
   <img src="../favicon_t8.ico" width="43" height="43" alt="logo">
   </div>
   <div id="title">
-    <h1 style="font-family: Arial, Helvetica, sans-serif"> <strong>Jobbly</strong>  </h1>
+    <h1 style="font-family: Arial, Helvetica, sans-serif"> <strong>Jobble</strong>  </h1>
   </div>
 
   <!--Links in header-->
@@ -19,13 +19,18 @@
 
   <!--Links. Link to "Eigene Inserate" and "Neues Inserat" appears when logged in.-->
   <a class="!active" routerLinkActive="active" routerLink="/company-joblist"
-     *ngIf="(isLoggedIn | async)" >Eigene Inserate</a>
+     *ngIf="(isBusinessUser | async)" >Eigene Inserate</a>
 
   <a class="!active" routerLinkActive="active" routerLink="/createjoblist"
-     *ngIf="(isLoggedIn | async)" >Neues Inserat</a>
+     *ngIf="(isBusinessUser | async)" >Neues Inserat</a>
 
-  <a class="!active" routerLinkActive="active" routerLink="/company-edit"
-     *ngIf="(isLoggedIn | async)" >Adresse bearbeiten</a>
+  <div class="dropdown">
+    <button class="dropbtn" *ngIf="(isBusinessUser | async)">Konto <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+      <a routerLinkActive="active" routerLink="/company-edit">Adresse bearbeiten</a>
+      <a routerLinkActive="active" routerLink="/change-password">Passwort ändern</a>
+    </div>
+  </div>
 
   <!--Dropdown for admin-->
   <div class="dropdown">
@@ -33,6 +38,7 @@
     <div class="dropdown-content">
       <a routerLinkActive="active" routerLink="/adminverify">Validieren</a>
       <a routerLinkActive="active" routerLink="/adminall">Bearbeiten</a>
+      <a routerLinkActive="active" routerLink="/change-password">Passwort ändern</a>
     </div>
   </div>
 

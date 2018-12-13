@@ -5,7 +5,7 @@
             <div *ngFor="let job of jobListingList" class="well well-sm">
                 <div>
                     <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
-                        <span class="nav-link text-dark"> {{job.title}}</span>
+                        <span class="nav-link font-weight-bold"> {{job.title}}</span>
                     </a>
                 </div>
                 <ul>
@@ -20,11 +20,11 @@
     </div>
     <h3>Benutzer</h3>
     <div>
-        <div>
-            <div *ngFor="let user of userList" class="well well-sm">
+        <div *ngFor="let user of userList">
+            <div *ngIf="user.role !== 'admin'" class="well well-sm">
                 <div>
-                    <a class="nav-item nav-link active" routerLink="/updateuser/{{user.id}}">
-                        <span class="nav-link text-dark"> {{user.email}}</span>
+                    <a class="nav-item nav-link active" routerLink="/adminviewuser/{{user.id}}">
+                        <span class="nav-link font-weight-bold"> {{user.email}}</span>
                     </a>
                 </div>
                 <ul>

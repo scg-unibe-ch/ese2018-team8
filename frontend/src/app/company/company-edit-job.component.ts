@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService} from './company.service';
-import { HttpClient} from '@angular/common/http';
 import { Location} from '@angular/common';
 import { ActivatedRoute} from '@angular/router';
 import { JobListing} from '../models/joblisting';
 import { environment} from '../../environments/environment';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-company-edit-job',

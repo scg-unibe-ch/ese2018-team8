@@ -28,19 +28,18 @@ import { LayoutComponent} from './layout/layout.component';
 // Our services
 import { AuthenticationService } from './login/login.authservice';
 import { AlertService } from './alert/alert.alertservice';
-import { UserService } from './login/user.service';
-import {AdminService} from './adminpage/admin.service';
+import { AdminService } from './adminpage/admin.service';
 
 // Our providers
 import { httpInterceptorProviders } from './helpers/interceptors.index';
 // Our guards
-import {AuthGuard} from './login/login.authguard';
+import { AuthGuard } from './login/login.authguard';
 // Admin Components
-import {AdminAllComponent} from './adminpage/adminall.component';
-import {CompanyEditComponent} from './company/company-edit.component';
-import {ChangePasswordComponent} from './changePassword/change-password.component';
-import { DialogComponent } from './company/dialog/dialog.component';
+import { AdminAllComponent } from './adminpage/adminall.component';
+import { CompanyEditComponent } from './company/company-edit.component';
+import { ChangePasswordComponent } from './changePassword/change-password.component';
 import {AdminViewUserComponent} from './adminpage/adminviewuser.component';
+import { DialogComponent } from './company/dialog/dialog.component';
 
 
 @NgModule({
@@ -86,7 +85,6 @@ import {AdminViewUserComponent} from './adminpage/adminviewuser.component';
   providers: [
     httpInterceptorProviders,
     AuthGuard,
-    UserService,
     AuthenticationService,
     AdminService,
     AlertService

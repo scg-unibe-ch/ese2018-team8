@@ -9,7 +9,8 @@ import {tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class JoblistingService {
-
+// Here in this class we can create an instance
+// from httpClient
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
