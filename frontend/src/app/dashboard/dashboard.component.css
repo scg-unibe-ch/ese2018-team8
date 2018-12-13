@@ -1,13 +1,13 @@
 /*background image*/
 .bg {
-  /* Half height */
   /* Center and scale the image nicely */
- background: url(../../assets/images/bg_dash.jpg);
+  background: url(../../assets/images/bg_dash.jpg);
   height: 250px;
   background-size: cover;
   margin-bottom: 15px;
+  color: white;
+  font-size: 16px;
 }
-
 
 [class*='col-'] {
   float: left;
