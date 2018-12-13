@@ -42,6 +42,7 @@ export class DialogComponent implements OnInit {
       const index = this.jobListingList.indexOf(job, 0);
       this.jobListingList.splice(index, 1);
       this.onClosed();
+      location.reload();
     });
   }
 }

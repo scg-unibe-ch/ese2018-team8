@@ -6,19 +6,19 @@
       <div class="form-group row">
         <label class="col-2 col-form-label">Titel: </label>
         <div class="col-10">
-          <input type="text" [(ngModel)]="joblisting.title" [ngModelOptions]="{standalone: true}" placeholder="Titel" />
+          <input type="text" class="form-control" [(ngModel)]="joblisting.title" [ngModelOptions]="{standalone: true}" placeholder="Titel" />
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label">Beschreibung: </label>
         <div class="col-10">
-          <textarea type="text" [(ngModel)]="joblisting.description" [ngModelOptions]="{standalone: true}" placeholder="Beschreibung"></textarea>
+          <textarea type="text"  class="form-control" [(ngModel)]="joblisting.description" [ngModelOptions]="{standalone: true}" placeholder="Beschreibung"></textarea>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-2 col-form-label">Erforderliche Fähigkeiten: </label>
         <div class="col-10">
-          <input type="text" [(ngModel)]="joblisting.skills" [ngModelOptions]="{standalone: true}" placeholder="Erforderliche Fähigkeiten"/>
+          <textarea type="text" class="form-control" [(ngModel)]="joblisting.skills" [ngModelOptions]="{standalone: true}" placeholder="Erforderliche Fähigkeiten"></textarea>
         </div>
       </div>
       <div class="form-group row">
