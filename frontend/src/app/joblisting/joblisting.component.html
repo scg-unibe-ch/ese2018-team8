@@ -1,9 +1,9 @@
 <!--Joblisting with all attributes-->
 <div class="container">
-  <div class="grid grid-pad" style="width: 30rem">
+  <div class="grid grid-pad" style="width: 40rem">
     <div class="well well-sm" *ngIf="joblisting">
-      <h5>{{ joblisting.title}}</h5>
-      <ul class="list-group">
+      <h3><strong>{{ joblisting.title}}</strong></h3>
+      <ul style="font-size: 16px;" class="list-group">
         <li class="list-group-item"><strong>Titel:</strong> {{ joblisting.title }}</li>
         <li class="list-group-item"><strong>Beschreibung:</strong> {{ joblisting.description }}</li>
         <li class="list-group-item"><strong>Erforderliche Fähigkeiten:</strong> {{joblisting.skills}}</li>

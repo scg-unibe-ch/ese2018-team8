@@ -5,11 +5,11 @@
   <hr>
   <mat-dialog-content>
     <h4>{{data}}</h4>
-    <h4><span style="color:darkblue"> <strong>Warnung!</strong> Diese Handlung kann nicht rückgängig gemacht werden!'</span></h4>
+    <h4><span style="color:darkblue"> <strong>Warnung!</strong> Diese Handlung kann nicht rückgängig gemacht werden!
+      <br>Bitte laden Sie die Seite neu.'</span></h4>
   </mat-dialog-content>
   <hr>
 
-  <button class="btn btn-info" (click)="delete(jobs)" style="margin-right: 10px">Ja</button>
+  <button *ngFor="let jobs of jobListingList" class="btn btn-info" (click)="delete(jobs)" style="margin-right: 10px">Ja</button>
   <button class="btn btn-default" (click)="onClosed()">Abbrechen</button>
-
 </div>

@@ -98,7 +98,7 @@
 }
 /*CSS Body*/
 #body {
-  min-height: 15cm;
+  min-height: 100vh;
   overflow: hidden; /*prevents bottom scroll bar*/
 
 }
@@ -204,11 +204,11 @@
 }
 
 .footer-distributed .footer-company-about{
-  line-height: 20px;
+  line-height: 10px;
   color:  darkslategray;
   font-size: 13px;
   font-weight: normal;
-  margin: 0;
+  margin-top: 10px;
 }
 
 .footer-distributed .footer-company-about span{

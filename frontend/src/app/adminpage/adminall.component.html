@@ -1,14 +1,14 @@
-<div class="container">
-    <h3>Stellen</h3>
+<div class="container" style="margin-top: 20px">
+    <h2 style="color: darkslategray">Stellen</h2>
     <div>
         <div>
             <div *ngFor="let job of jobListingList" class="well well-sm">
                 <div>
-                    <a class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
+                    <a style="color: #3bbfbf; font-size: 17px;" class="nav-item nav-link active" routerLink="/joblisting/{{job.id}}">
                         <span class="nav-link font-weight-bold"> {{job.title}}</span>
                     </a>
                 </div>
-                <ul>
+                <ul style="font-size: 15px">
                     <li> Titel: {{job.title}}</li>
                     <li> Beschreibung: {{job.description}}</li>
                     <div style="margin-top: 10px">
@@ -18,17 +18,17 @@
             </div>
         </div>
     </div>
-    <h3>Benutzer</h3>
+    <h2 style="color: darkslategray">Benutzer</h2>
     <div>
         <div *ngFor="let user of userList">
             <div *ngIf="user.role !== 'admin'" class="well well-sm">
                 <div>
-                    <a class="nav-item nav-link active" routerLink="/adminviewuser/{{user.id}}">
+                    <a style="color: #3bbfbf; font-size: 18px;" class="nav-item nav-link active" routerLink="/adminviewuser/{{user.id}}">
                         <span class="nav-link font-weight-bold"> {{user.email}}</span>
                     </a>
                 </div>
-                <ul>
-                    <li> Name: {{user.email}}</li>
+                <ul style="font-size: 15px">
+                    <li>Name: {{user.email}}</li>
                     <ng-container *ngIf="getUsersCompany(user.id)">
                         <li> Firma: {{getUsersCompany(user.id).companyName}}</li>
                     </ng-container>
